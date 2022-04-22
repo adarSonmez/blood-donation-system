@@ -1,0 +1,10 @@
+footer {
+  width: 100%;
+  background: var(--secondary-theme);
+  height: var(--secondary-height);
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

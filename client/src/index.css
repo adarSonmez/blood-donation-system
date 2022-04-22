@@ -1,0 +1,17 @@
+:root {
+  --font-color: rgb(238, 238, 238);
+  --main-theme: rgb(116, 0, 0);
+  --main-height: calc(80vh);
+  --secondary-theme: rgb(80, 0, 0);
+  --secondary-height: 10vh;
+  --third-theme: rgb(143, 0, 0);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: var(--font-color);
+  font-family: Arial, Helvetica, sans-serif;
+  text-decoration: none;
+}

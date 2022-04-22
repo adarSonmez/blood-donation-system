@@ -1,0 +1,7 @@
+header {
+  width: 100%;
+  height: var(--secondary-height);
+  background: var(--secondary-theme);
+  display: flex;
+  align-items: center;
+}

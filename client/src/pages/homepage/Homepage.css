@@ -1,0 +1,29 @@
+main {
+  height: var(--main-height);
+  padding: 2vh 7vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.data-header {
+  margin-top: 4vh;
+}
+
+.stats {
+  max-width: 800px;
+  margin: 3vh 0;
+  background-color: var(--third-theme);
+  padding: 20px;
+  box-shadow: 3px 3px 9px rgba(44, 0, 0, 0.884);
+}
+
+.stats p {
+  margin: 12px 0;
+  font-size: 18px;
+}
+
+.stats p span {
+  font-weight: bold;
+  color: rgb(255, 253, 155);
+}

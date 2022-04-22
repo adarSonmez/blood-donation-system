@@ -1,15 +1,16 @@
 import { NavLink, useNavigate } from 'react-router-dom';
+import './Navbar.css';
 
 function Navbar() {
   const navigate = useNavigate();
 
   return (
     <nav>
-      <NavLink to="/">Home</NavLink>
-      <NavLink className="log-buttons" to="/login">
+      <NavLink className="nav-items" to="/">Home</NavLink>
+      <NavLink className="nav-items" to="/login">
         Login
       </NavLink>
-      <span className="log-buttons" onClick={() => navigate('logout')}>
+      <span className="nav-items" onClick={() => navigate('logout')}>
         Logout
       </span>
     </nav>
