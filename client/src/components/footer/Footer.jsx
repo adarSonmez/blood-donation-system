@@ -1,7 +1,11 @@
 import './Footer.css';
 
 function Footer() {
-  return <footer>Footer</footer>;
+  return (
+    <footer>
+      <address>© {new Date().getFullYear()}. All Rights Reserved.</address>
+    </footer>
+  );
 }
 
 export default Footer;

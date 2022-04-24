@@ -2,9 +2,9 @@ footer {
   width: 100%;
   background: var(--secondary-theme);
   height: var(--secondary-height);
-  position: absolute;
-  bottom: 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  color: rgb(230, 230, 230);
+  font-size: 15px;
 }
