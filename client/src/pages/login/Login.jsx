@@ -23,7 +23,7 @@ function Login() {
   };
 
   return (
-    <div className="login-page">
+    <main className="login-page">
       <p className="contact-message">
         If you are unable to login as a receptionist, hospital or system
         administrator, <br />
@@ -52,7 +52,7 @@ function Login() {
           </button>
         </form>
       </div>
-    </div>
+    </main>
   );
 }
 

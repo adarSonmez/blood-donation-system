@@ -1,10 +1,12 @@
+@import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css');
+
 :root {
   --font-color: rgb(255, 255, 255);
-  --main-theme: rgb(90, 0, 0);
+  --header-font-color: rgb(255, 145, 163);
+  --main-theme: rgb(0, 0, 0);
   --main-height: calc(80vh);
-  --secondary-theme: rgb(131, 0, 0);
+  --secondary-theme: rgb(43, 43, 43);
   --secondary-height: 10vh;
-  --third-theme: rgb(44, 0, 0);
 }
 
 * {
@@ -13,6 +15,7 @@
   box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
   text-decoration: none;
+  color: var(--font-color);
 }
 
 body {
@@ -20,6 +23,39 @@ body {
   background-color: var(--main-theme);
 }
 
+main {
+  padding: 2vh 7vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: var(--main-height);
+  justify-content: center;
+  padding-top: 5vh;
+}
+
+h2 {
+  color: var(--header-font-color);
+}
+
 a {
   color: aqua;
+}
+
+button {
+  margin: 1vh 0;
+  width: 170px;
+  padding: 13px;
+  font-weight: bold;
+  background-color: var(--main-theme);
+  cursor: pointer;
+  border: 1px solid rgb(255, 255, 255);
+  border-radius: 10px;
+  transition: all 0.2s;
+  text-transform: uppercase;
+  color: var(--font-color);
+}
+
+button:hover {
+  color: black;
+  background-color: rgb(46, 231, 255);
 }

@@ -1,12 +1,7 @@
 .login-page {
   width: 370px;
-  height: var(--main-height);
   margin: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 0 15px;
+  padding: 0 10px;
 }
 
 .form {

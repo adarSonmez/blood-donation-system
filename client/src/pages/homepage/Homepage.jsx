@@ -3,11 +3,12 @@ import './Homepage.css';
 
 function Homepage() {
   const navigate = useNavigate();
-  const onNavigateHandler = () => navigate('/how-to-donate');
 
   return (
     <main>
-      <h2 className="data-header">Statistics</h2>
+      <h2 className="data-header">
+        Give <i class="bi bi-activity"></i> Blood
+      </h2>
       <div className="stats">
         <ul>
           <li>
@@ -22,8 +23,8 @@ function Homepage() {
             %.
           </li>
           <li>
-            The blood donation champion of 2022 is <span>Yusuf Mert Ülgen</span>.{' '}
-            <a href="/">Click here</a> to see the top 10.
+            The blood donation champion of 2022 is <span>Yusuf Mert Ülgen</span>
+            . <a href="/">Click here</a> to see the top 10.
           </li>
           <li>
             Our receptionist that registers the most donors is{' '}
@@ -36,9 +37,12 @@ function Homepage() {
         </ul>
       </div>
 
-      <button onClick={onNavigateHandler} className="donate-btn">
-        Donate blood now!
-      </button>
+      <div className="buttons">
+        <button onClick={() => navigate('/how-to-donate')}>
+          How to Donate
+        </button>
+        <button onClick={() => navigate('/top-tens')}>See Top Tens</button>
+      </div>
     </main>
   );
 }

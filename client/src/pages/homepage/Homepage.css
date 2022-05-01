@@ -1,20 +1,7 @@
-main {
-  padding: 2vh 7vw;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: var(--main-height);
-}
-
-.data-header {
-  margin: 3vh 0 -1vh 0;
-  color: var(--font-color);
-}
-
 .stats {
   max-width: 600px;
-  margin: 4vh 0;
-  background-color: var(--third-theme);
+  margin: 3vh 0;
+  background-color: var(--main-theme);
   padding: 20px;
   color: var(--font-color);
 }
@@ -30,7 +17,7 @@ main {
 .stats li {
   margin: 15px 0;
   padding: 0 0 0 28px;
-  font-size: 17px;
+  font-size: 16px;
   background-image: url("../../assets/list-star.png");
 	background-repeat: no-repeat;
 	background-position: left center;
@@ -42,20 +29,11 @@ main {
   color: rgb(255, 253, 155);
 }
 
-.donate-btn {
-  margin: 1vh 0;
-  padding: 13px;
-  font-weight: bold;
-  background-color: var(--third-theme);
-  cursor: pointer;
-  border: 1px solid rgb(255, 255, 255);
-  border-radius: 10px;
-  transition: all .2s;
-  text-transform: uppercase;
-  color: var(--font-color);
-}
-
-.donate-btn:hover {
-  color: black;
-  background-color: rgb(252, 255, 85);
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  width: 100%;
+  max-width: 355px;
+  margin-top: -1vh;
 }
