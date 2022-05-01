@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 import Homepage from './pages/homepage/Homepage';
@@ -7,9 +8,19 @@ import Register from './pages/register/Register';
 import Footer from './components/footer/Footer';
 import Header from './components/header/Header';
 
-import './App.css';
+const API_URL = 'http://localhost:8000';
 
 function App() {
+  const getAllHospitals = () => {
+    fetch(`${API_URL}/hospitals`)
+      .then((response) => response.json())
+      .then((data) => console.log(data));
+  };
+
+  useEffect(() => {
+    getAllHospitals();
+  }, []);
+
   return (
     <div className="App">
       <Header />
