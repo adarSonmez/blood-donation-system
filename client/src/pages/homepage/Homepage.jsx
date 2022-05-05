@@ -7,7 +7,7 @@ function Homepage() {
   return (
     <main>
       <h2 className="data-header">
-        Give <i class="bi bi-activity"></i> Blood
+        Give <i className="bi bi-activity"></i> Blood
       </h2>
       <div className="stats">
         <ul>

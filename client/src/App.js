@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 import Homepage from './pages/homepage/Homepage';
@@ -12,16 +12,16 @@ import TopTens from './pages/top-tens/TopTens';
 const API_URL = 'http://localhost:8000';
 
 function App() {
-  const getAllHospitals = () => {
-    fetch(`${API_URL}/hospitals`)
-      .then((response) => response.json())
-      .then((data) => console.log(data))
-      .catch(() => console.log('server is not running!'));
+  const getAllHospitals = async () => {
+    const res = await fetch(`${API_URL}/users`);
+    const data = await res.json();
+
+    setNum(data);
   };
 
-  useEffect(() => {
-    getAllHospitals();
-  }, []);
+  const [num, setNum] = useState(0);
+
+  getAllHospitals();
 
   return (
     <div className="App">
@@ -35,6 +35,7 @@ function App() {
         {/** No match route approach */}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
+      {num}
       <Footer />
     </div>
   );
