@@ -1,8 +1,17 @@
 const db = require('../config/db');
-const Blood = require('../models/banks.model');
+const Bank = require('../models/banks.model');
+
+function getBankAddresses(req, res) {
+  const sql = Bank.selectBankAddresses;
+
+  db.query(sql, (err, data) => {
+    if (err) throw err;
+    res.json(data);
+  });
+}
 
 function getTotalDonatedBlood(req, res) {
-  const sql = Blood.totalDonatedBlood;
+  const sql = Bank.selectTotalDonatedBlood;
 
   db.query(sql, (err, data) => {
     if (err) throw err;
@@ -11,7 +20,7 @@ function getTotalDonatedBlood(req, res) {
 }
 
 function getLeastAvailableBloodType(req, res) {
-  const sql = Blood.leastAvailableBloodType;
+  const sql = Bank.selectLeastAvailableBloodType;
 
   db.query(sql, (err, data) => {
     if (err) throw err;
@@ -20,7 +29,7 @@ function getLeastAvailableBloodType(req, res) {
 }
 
 function getMostAvailableBloodType(req, res) {
-  const sql = Blood.mostAvailableBloodType;
+  const sql = Bank.selectMostAvailableBloodType;
 
   db.query(sql, (err, data) => {
     if (err) throw err;
@@ -29,6 +38,7 @@ function getMostAvailableBloodType(req, res) {
 }
 
 module.exports = {
+  getBankAddresses,
   getTotalDonatedBlood,
   getLeastAvailableBloodType,
   getMostAvailableBloodType,

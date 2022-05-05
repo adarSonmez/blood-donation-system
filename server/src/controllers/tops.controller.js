@@ -2,7 +2,7 @@ const db = require('../config/db');
 const Top = require('../models/tops.model');
 
 function getTopTenReceptionists(req, res) {
-  const sql = Top.topTenReceptionists;
+  const sql = Top.selectTopTenReceptionists;
 
   db.query(sql, (err, data) => {
     if (err) throw err;
@@ -11,7 +11,7 @@ function getTopTenReceptionists(req, res) {
 }
 
 function getTopTenHospitals(req, res) {
-  const sql = Top.topTenHospitals;
+  const sql = Top.selectTopTenHospitals;
 
   db.query(sql, (err, data) => {
     if (err) throw err;
@@ -20,7 +20,7 @@ function getTopTenHospitals(req, res) {
 }
 
 function getTopTenDonors(req, res) {
-  const sql = Top.topTenDonors;
+  const sql = Top.selectTopTenDonors;
 
   db.query(sql, (err, data) => {
     if (err) throw err;
