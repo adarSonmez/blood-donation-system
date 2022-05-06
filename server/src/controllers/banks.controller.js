@@ -1,8 +1,8 @@
 const db = require('../config/db');
 const Bank = require('../models/banks.model');
 
-function getBankAddresses(req, res) {
-  const sql = Bank.selectBankAddresses;
+function getBanks(req, res) {
+  const sql = Bank.selectBanks;
 
   db.query(sql, (err, data) => {
     if (err) throw err;
@@ -38,7 +38,7 @@ function getMostAvailableBloodType(req, res) {
 }
 
 module.exports = {
-  getBankAddresses,
+  getBanks,
   getTotalDonatedBlood,
   getLeastAvailableBloodType,
   getMostAvailableBloodType,

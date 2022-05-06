@@ -35,7 +35,6 @@ function App() {
         {/** No match route approach */}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
-      {num}
       <Footer />
     </div>
   );

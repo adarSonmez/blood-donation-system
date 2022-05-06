@@ -1,6 +1,11 @@
 const Bank = {
-  selectBankAddresses: `
-    SELECT address FROM blood_bank
+  selectBanks: `
+    SELECT blood_bank.bank_id, sys_user.full_name AS manager,
+    blood_bank.address, blood_bank.capacity, COUNT(blood_id) AS size
+    FROM blood_bank LEFT JOIN sys_user 
+    ON blood_bank.man_id = sys_user.user_id
+    RIGHT JOIN blood ON blood.bank_id = blood_bank.bank_id
+    GROUP BY bank_id
   `,
 
   selectTotalDonatedBlood: `
