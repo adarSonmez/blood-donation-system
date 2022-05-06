@@ -1,4 +1,4 @@
-const db = require('../config/db');
+const db = require('../config/db.config');
 const Donation = require('../models/donations.model');
 
 function donation(req, res) {

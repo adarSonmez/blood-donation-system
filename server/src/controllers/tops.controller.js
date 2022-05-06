@@ -1,4 +1,4 @@
-const db = require('../config/db');
+const db = require('../config/db.config');
 const Top = require('../models/tops.model');
 
 function getTopTenReceptionists(req, res) {

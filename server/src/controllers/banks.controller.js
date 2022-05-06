@@ -1,4 +1,4 @@
-const db = require('../config/db');
+const db = require('../config/db.config');
 const Bank = require('../models/banks.model');
 
 function getBanks(req, res) {
