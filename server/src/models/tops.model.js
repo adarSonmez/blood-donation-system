@@ -1,6 +1,7 @@
 const Top = {
   selectTopTenReceptionists: `
-    SELECT sys_user.full_name, COUNT(donor.recep_id) AS num_of_registration
+    SELECT sys_user.user_id, sys_user.full_name, 
+    COUNT(donor.recep_id) AS num_of_registration
     FROM sys_user RIGHT JOIN donor 
     ON sys_user.user_id = donor.recep_id 
     GROUP BY full_name
@@ -9,7 +10,7 @@ const Top = {
   `,
 
   selectTopTenHospitals: `
-    SELECT sys_user.full_name, 
+    SELECT sys_user.user_id, sys_user.full_name, 
     COUNT(orders.order_id) AS num_of_orders, 
     SUM(orders.amount) AS amount_of_blood
     FROM sys_user RIGHT JOIN orders 

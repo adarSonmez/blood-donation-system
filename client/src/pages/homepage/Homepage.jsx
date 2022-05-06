@@ -27,10 +27,10 @@ function Homepage() {
   const [topHospital, setTopHospital] = useState('Loading...');
 
   useEffect(() => {
-    getStats();
+    setStats();
   }, []);
 
-  const getStats = () => {
+  const setStats = () => {
     getTotalDonatedBlood()
       .then((r) => setTotalBlood(r.data.total_donated_blood))
       .catch((err) => console.error(err.message));

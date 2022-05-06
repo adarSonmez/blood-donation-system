@@ -1,6 +1,17 @@
+import { useState, useEffect } from 'react';
+import { getBanks } from '../../api/banks.api';
+
 import './HowToDonate.css';
 
 function HowToDonate() {
+  const [banks, setBanks] = useState([]);
+
+  useEffect(() => {
+    getBanks()
+      .then((r) => setBanks(r.data))
+      .catch((err) => console.error(err.message));
+  }, []);
+
   return (
     <main className="how-to-donate-page">
       <h2>How to Donate</h2>
@@ -10,14 +21,7 @@ function HowToDonate() {
         <i className="bi bi-heart"></i>
       </p>
       <ul className="blood-banks">
-        <li>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry
-        </li>
-        <li>
-          Letraset sheets containing Lorem Ipsum passages, and
-          more recently with desktop.
-        </li>
+        {banks.map(({ bank_id, address }) => <li key={bank_id}>{address}</li>)}
       </ul>
     </main>
   );
