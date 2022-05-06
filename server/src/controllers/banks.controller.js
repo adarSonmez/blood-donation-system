@@ -19,12 +19,21 @@ function getTotalDonatedBlood(req, res) {
   });
 }
 
+function getNumAvailableBlood(req, res) {
+  const sql = Bank.selectNumAvailableBlood;
+
+  db.query(sql, (err, data) => {
+    if (err) throw err;
+    res.json(data[0]);
+  });
+}
+
 function getLeastAvailableBloodType(req, res) {
   const sql = Bank.selectLeastAvailableBloodType;
 
   db.query(sql, (err, data) => {
     if (err) throw err;
-    res.json(data)[0];
+    res.json(data[0]);
   });
 }
 
@@ -33,13 +42,14 @@ function getMostAvailableBloodType(req, res) {
 
   db.query(sql, (err, data) => {
     if (err) throw err;
-    res.json(data)[0];
+    res.json(data[0]);
   });
 }
 
 module.exports = {
   getBanks,
   getTotalDonatedBlood,
+  getNumAvailableBlood,
   getLeastAvailableBloodType,
   getMostAvailableBloodType,
 };

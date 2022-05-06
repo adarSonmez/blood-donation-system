@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 import Homepage from './pages/homepage/Homepage';
@@ -9,20 +8,7 @@ import Footer from './components/footer/Footer';
 import Header from './components/header/Header';
 import TopTens from './pages/top-tens/TopTens';
 
-const API_URL = 'http://localhost:8000';
-
 function App() {
-  const getAllHospitals = async () => {
-    const res = await fetch(`${API_URL}/users`);
-    const data = await res.json();
-
-    setNum(data);
-  };
-
-  const [num, setNum] = useState(0);
-
-  getAllHospitals();
-
   return (
     <div className="App">
       <Header />

@@ -12,6 +12,11 @@ const Bank = {
     SELECT COUNT(*) as total_donated_blood FROM blood
   `,
 
+  selectNumAvailableBlood: `
+    SELECT COUNT(*) as total_available FROM blood
+    WHERE expires_in <> 0
+  `,
+
   selectLeastAvailableBloodType: `
     SELECT donor.blood_type, COUNT(blood.blood_id) AS num_of_blood
     FROM donor LEFT JOIN blood 

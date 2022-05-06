@@ -1,8 +1,64 @@
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import {
+  getLeastAvailableBloodType,
+  getMostAvailableBloodType,
+  getNumOfTotalAvailableBlood,
+  getTotalDonatedBlood,
+} from '../../api/banks.api';
+import {
+  getTopTenDonors,
+  getTopTenHospitals,
+  getTopTenReceptionists,
+} from '../../api/tops.api';
+
 import './Homepage.css';
 
 function Homepage() {
   const navigate = useNavigate();
+
+  const [totalBlood, setTotalBlood] = useState(0);
+  const [numOfAvailable, setNumOfAvailable] = useState(0);
+  const [mostAvailable, setMostAvailable] = useState({});
+  const [leastAvailable, setLeastAvailable] = useState({});
+  const [topDonor, setTopDonor] = useState('Loading...');
+  const [topRecep, setTopRecep] = useState('Loading...');
+  const [topHospital, setTopHospital] = useState('Loading...');
+
+  useEffect(() => {
+    getStats();
+  }, []);
+
+  const getStats = () => {
+    getTotalDonatedBlood()
+      .then((r) => setTotalBlood(r.data.total_donated_blood))
+      .catch((err) => console.error(err.message));
+
+    getNumOfTotalAvailableBlood()
+      .then((r) => setNumOfAvailable(r.data.total_available))
+      .catch((err) => console.error(err.message));
+
+    getMostAvailableBloodType()
+      .then((r) => setMostAvailable(r.data))
+      .catch((err) => console.error(err.message));
+
+    getLeastAvailableBloodType()
+      .then((r) => setLeastAvailable(r.data))
+      .catch((err) => console.error(err.message));
+
+    getTopTenDonors()
+      .then((r) => setTopDonor(r.data[0]))
+      .catch((err) => console.error(err.message));
+
+    getTopTenHospitals()
+      .then((r) => setTopHospital(r.data[0]))
+      .catch((err) => console.error(err.message));
+
+    getTopTenReceptionists()
+      .then((r) => setTopRecep(r.data[0]))
+      .catch((err) => console.error(err.message));
+  };
 
   return (
     <main>
@@ -12,27 +68,36 @@ function Homepage() {
       <div className="stats">
         <ul>
           <li>
-            <span>15240</span> liters of blood have been donated so far.
+            <span>{totalBlood / 2}</span> liters of blood have been donated so
+            far.
           </li>
           <li>
-            The most donated blood type is <span>AB+</span> with <span>30</span>
+            The most available blood type is{' '}
+            <span>{mostAvailable.blood_type}</span> with{' '}
+            <span>{(mostAvailable.num_of_blood / numOfAvailable) * 100}</span>
             %.
           </li>
           <li>
-            The least donated blood type is <span>0-</span> with <span>2</span>
+            The least available blood type is{' '}
+            <span>{leastAvailable.blood_type}</span> with{' '}
+            <span>{(leastAvailable.num_of_blood / numOfAvailable) * 100}</span>
             %.
           </li>
           <li>
-            The blood donation champion of 2022 is <span>Yusuf Mert Ülgen</span>
-            . <a href="/">Click here</a> to see the top 10.
+            The donor who donated the most blood so far is{' '}
+            <span>{topDonor.name}</span> with{' '}
+            <span>{topDonor.num_of_blood}</span> donations (
+            {topDonor.num_of_blood / 2} litters).
           </li>
           <li>
             Our receptionist that registers the most donors is{' '}
-            <span>Ekrem Yıldızhan</span>.
+            <span>{topRecep.full_name}</span> with{' '}
+            <span>{topRecep.num_of_registration}</span> registrations.
           </li>
           <li>
-            The hospital we supply the most blood is{' '}
-            <span>the World hospital</span> with <span>300</span> liters.
+            The hospital we supply the most blood so far is{' '}
+            <span>{topHospital.full_name}</span> with{' '}
+            <span>{topHospital.amount_of_blood / 2}</span> liters.
           </li>
         </ul>
       </div>
