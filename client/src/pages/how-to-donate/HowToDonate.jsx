@@ -8,7 +8,7 @@ function HowToDonate() {
 
   useEffect(() => {
     getBanks()
-      .then((r) => setBanks(r.data))
+      .then((r) => {setBanks(r.data)})
       .catch((err) => console.error(err.message));
   }, []);
 

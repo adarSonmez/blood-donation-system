@@ -10,6 +10,11 @@ const Donation = {
     (donor_id, bank_id)
     VALUES (?,?)
   `,
+
+  selectDonor: `
+    SELECT donor_id, name, blood_type from donor
+    WHERE donor_id = (?) 
+  `
 };
 
 module.exports = Donation;
