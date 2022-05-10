@@ -49,13 +49,11 @@ button {
   background-color: var(--main-theme);
   cursor: pointer;
   border: 1px solid rgb(255, 255, 255);
-  border-radius: 10px;
   transition: all 0.2s;
   text-transform: uppercase;
   color: var(--font-color);
 }
 
 button:hover {
-  color: black;
-  background-color: rgb(46, 231, 255);
+  background-color: rgb(175, 0, 0);
 }

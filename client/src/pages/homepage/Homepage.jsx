@@ -18,13 +18,28 @@ import './Homepage.css';
 function Homepage() {
   const navigate = useNavigate();
 
-  const [totalBlood, setTotalBlood] = useState(0);
-  const [numOfAvailable, setNumOfAvailable] = useState(0);
-  const [mostAvailable, setMostAvailable] = useState({});
-  const [leastAvailable, setLeastAvailable] = useState({});
-  const [topDonor, setTopDonor] = useState('Loading...');
-  const [topRecep, setTopRecep] = useState('Loading...');
-  const [topHospital, setTopHospital] = useState('Loading...');
+  const [totalBlood, setTotalBlood] = useState(1);
+  const [numOfAvailable, setNumOfAvailable] = useState(1);
+  const [mostAvailable, setMostAvailable] = useState({
+    num_of_blood: 1,
+    blood_type: '0+',
+  });
+  const [leastAvailable, setLeastAvailable] = useState({
+    num_of_blood: 1,
+    blood_type: '0-',
+  });
+  const [topDonor, setTopDonor] = useState({
+    name: 'Loading...',
+    num_of_blood: 1,
+  });
+  const [topRecep, setTopRecep] = useState({
+    name: 'Loading...',
+    num_of_registration: 1,
+  });
+  const [topHospital, setTopHospital] = useState({
+    name: 'Loading...',
+    amount_of_blood: 1,
+  });
 
   useEffect(() => {
     setStats();

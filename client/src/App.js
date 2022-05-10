@@ -9,6 +9,7 @@ import Header from './components/header/Header';
 import TopTens from './pages/top-tens/TopTens';
 import { useEffect, useState } from 'react';
 import { decode } from './api/decode.api';
+import Donation from './pages/donation/Donation';
 
 function App() {
   const [user, setUser] = useState({
@@ -34,6 +35,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/how-to-donate" element={<HowToDonate />} />
+        <Route path="/donation" element={<Donation />} />
         <Route path="/top-tens" element={<TopTens />} />
         <Route path="/login" element={<Login setUser={setUser} />} />
         <Route path="/register" element={<Register />} />

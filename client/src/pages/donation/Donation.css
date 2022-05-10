@@ -1,0 +1,64 @@
+.donation-page form {
+  margin: auto;
+  max-width: 450px;
+  width: 100%;
+}
+
+.donation-page input,
+select,
+option {
+  color: black;
+  padding: 13px;
+  border: 1px solid rgb(255, 255, 255);
+  outline: none;
+}
+
+.donation-page label {
+  display: flex;
+  align-items: center;
+}
+
+.check-donor-form {
+  width: 80%;
+  max-width: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.check-donor-form input {
+  width: 100%;
+}
+
+.check-donor-form button {
+  width: 90px;
+}
+
+.donation-page button:hover {
+  background-color: rgb(170, 0, 0);
+  color: white;
+}
+
+.donate-blood-form {
+  display: grid;
+  row-gap: 12px;
+  grid-template-columns: 30% 70%;
+}
+
+.donate-blood-form .donate-btn {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  width: 100%;
+}
+
+@media only screen and (max-width: 500px) {
+  .donate-blood-form {
+    grid-template-columns: 100%;
+  }
+
+  .donate-blood-form .donate-btn {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    width: 100%;
+  }
+}
