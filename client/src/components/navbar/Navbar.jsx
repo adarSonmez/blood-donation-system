@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './Navbar.css';
 
-function Navbar() {
-  const navigate = useNavigate();
-  const [loggedIn, setLoggedIn] = useState(true);
+function Navbar({ user, setUser }) {
+  
 
-  useEffect(() => {
-    const unsub = setLoggedIn(false);
-    return unsub;
-  }, []);
+  const logout = () => {
+    setUser({ name: '', email: '', type: '' });
+    localStorage.removeItem('x-access-token');
+  };
+
+
 
   return (
     <nav>
@@ -17,10 +17,10 @@ function Navbar() {
         Home
       </NavLink>
       <div className="nav-items user-type" to="/">
-        The Word | Hospital
+        {user.name}
       </div>
-      {loggedIn ? (
-        <span className="nav-items" onClick={() => navigate('logout')}>
+      {user.email ? (
+        <span className="nav-items" onClick={logout}>
           Logout
         </span>
       ) : (

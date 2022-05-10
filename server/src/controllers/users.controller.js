@@ -12,15 +12,22 @@ function login(req, res) {
 
     const user = data[0];
 
-    if (!user)
-      res.status(400).json({ success: false, message: 'User is not found!' });
+    if (!user) res.json({ success: false, message: 'User is not found!' });
     else if (user.password !== password)
-      res.status(400).json({ success: false, message: 'Wrong password!' });
+      res.json({ success: false, message: 'Wrong password!' });
     else {
-      const token = jwt.sign(JSON.stringify(user), process.env.TOKEN_SECRET);
-      res
-        .header('auth-token', token)
-        .json({ success: true, message: 'Logged in!' });
+      const token = jwt.sign(
+        {
+          name: user.full_name,
+          email: user.e_mail,
+          type: user.user_type,
+        },
+        process.env.TOKEN_SECRET,
+        {
+          expiresIn: '24h',
+        }
+      );
+      res.json({ success: true, message: 'Logged in!', token });
     }
   });
 }

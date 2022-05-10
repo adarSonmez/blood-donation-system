@@ -1,7 +1,12 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { decode } from '../../api/decode.api';
+
+import { login } from '../../api/users.api';
 import './Login.css';
 
-function Login() {
+function Login({ setUser }) {
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     email: '',
     password: '',
@@ -18,7 +23,25 @@ function Login() {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
+    login(form)
+      .then((r) => {
+        if (!r.data.success) alert(r.data.message);
+        else {
+          localStorage.setItem('x-access-token', r.data.token);
+          decode({ token: localStorage.getItem('x-access-token') })
+            .then((r) => {
+              if (r.data.user) {
+                const { name, email, type } = r.data.user;
+                setUser({ name, email, type });
+              }
+            })
+            .catch((err) => console.error(err.message));
+
+          navigate('/');
+        }
+      })
+      .catch((e) => console.error(e.message));
     e.preventDefault();
   };
 

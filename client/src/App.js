@@ -7,16 +7,35 @@ import Register from './pages/register/Register';
 import Footer from './components/footer/Footer';
 import Header from './components/header/Header';
 import TopTens from './pages/top-tens/TopTens';
+import { useEffect, useState } from 'react';
+import { decode } from './api/decode.api';
 
 function App() {
+  const [user, setUser] = useState({
+    name: '',
+    email: '',
+    type: '',
+  });
+
+  useEffect(() => {
+    decode({ token: localStorage.getItem('x-access-token') })
+      .then((r) => {
+        if (r.data.user) {
+          const { name, email, type } = r.data.user;
+          setUser({ name, email, type });
+        }
+      })
+      .catch((err) => console.error(err.message));
+  }, []);
+
   return (
     <div className="App">
-      <Header />
+      <Header user={user} setUser={setUser} />
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/how-to-donate" element={<HowToDonate />} />
         <Route path="/top-tens" element={<TopTens />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login setUser={setUser} />} />
         <Route path="/register" element={<Register />} />
         {/** No match route approach */}
         <Route path="*" element={<Navigate to="/" />} />

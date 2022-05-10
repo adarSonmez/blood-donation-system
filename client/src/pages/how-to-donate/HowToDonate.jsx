@@ -8,7 +8,7 @@ function HowToDonate() {
 
   useEffect(() => {
     getBanks()
-      .then((r) => {setBanks(r.data)})
+      .then((r) => setBanks(r.data))
       .catch((err) => console.error(err.message));
   }, []);
 
@@ -21,7 +21,9 @@ function HowToDonate() {
         <i className="bi bi-heart"></i>
       </p>
       <ul className="blood-banks">
-        {banks.map(({ bank_id, address }) => <li key={bank_id}>{address}</li>)}
+        {banks.map(({ bank_id, address }) => (
+          <li key={bank_id}>{address}</li>
+        ))}
       </ul>
     </main>
   );
