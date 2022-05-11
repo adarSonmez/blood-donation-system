@@ -6,8 +6,7 @@ const User = {
   `,
 
   selectUserByEmail: `
-    SELECT full_name, e_mail, password, user_type
-    FROM sys_user WHERE e_mail = (?)
+    SELECT * FROM sys_user WHERE e_mail = (?)
   `,
 };
 

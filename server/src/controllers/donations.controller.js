@@ -16,6 +16,7 @@ function checkDonorId(req, res) {
 
 function donation(req, res) {
   const { donor_id, name, blood_type, recep_id, bank_id } = req.body;
+  console.log(req.body)
 
   const insDonor = Donation.insertDonor;
   const insBlood = Donation.insertBlood;

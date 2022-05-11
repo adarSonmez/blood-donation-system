@@ -32,8 +32,8 @@ function Login({ setUser }) {
           decode({ token: localStorage.getItem('x-access-token') })
             .then((r) => {
               if (r.data.user) {
-                const { name, email, type } = r.data.user;
-                setUser({ name, email, type });
+                const { id, name, email, type } = r.data.user;
+                setUser({ id, name, email, type });
               }
             })
             .catch((err) => console.error(err.message));

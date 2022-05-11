@@ -18,6 +18,7 @@ function login(req, res) {
     else {
       const token = jwt.sign(
         {
+          id: user.user_id,
           name: user.full_name,
           email: user.e_mail,
           type: user.user_type,

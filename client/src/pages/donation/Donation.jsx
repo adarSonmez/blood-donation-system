@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { getBanks } from '../../api/banks.api';
-import { checkDonor } from '../../api/donations.api';
+import { checkDonor, postDonation } from '../../api/donations.api';
 
 import './Donation.css';
 
-function Donation() {
-  //const { donor_id, name, blood_type, recep_id, bank_id } = null;
+function Donation({ user }) {
+  const navigate = useNavigate();
   const [locked, setLocked] = useState(true);
   const [form1, setFrom1] = useState({ donor_id: '' });
   const [form2, setForm2] = useState({
-    donor_id: '',
     name: '',
     blood_type: '0-',
     bank_id: '',
@@ -51,16 +51,30 @@ function Donation() {
     event.preventDefault();
 
     checkDonor({ donor_id: form1.donor_id }).then((r) => {
-      if (!r.data.donor) setLocked(false);
-      else {
-        console.log(r.data);
+      if (!r.data.donor) {
+        alert(
+          `Donor with id ${form1.donor_id} is not registered. Please fill bla bla bla.`
+        );
         setForm2({
-          donor_id: r.data.donor.donor_id,
+          name: '',
+          blood_type: '0-',
+          bank_id: '',
+        });
+        setLocked(false);
+      } else {
+        setLocked(true);
+        setForm2({
           name: r.data.donor.name,
           blood_type: r.data.donor.blood_type,
         });
       }
     });
+  };
+
+  const donateBlood = () => {
+    postDonation({ ...form2, ...form1, recep_id: user.id })
+      .then(() => alert('Successfully donated!'))
+      .catch((err) => console.error(err.message));
   };
 
   return (
@@ -79,7 +93,7 @@ function Donation() {
         <button type="submit">Search</button>
       </form>
 
-      <form className="donate-blood-form">
+      <form className="donate-blood-form" onSubmit={donateBlood}>
         <label form="ssn">SSN: </label>
         <input
           type="text"
@@ -107,7 +121,7 @@ function Donation() {
 
         <label form="blood-type">Blood Type: </label>
         <select
-          name="type"
+          name="blood_type"
           selected={form2.blood_type}
           value={form2.blood_type}
           onChange={(e) => handleChange(e, 2)}

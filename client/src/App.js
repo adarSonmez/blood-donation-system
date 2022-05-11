@@ -13,6 +13,7 @@ import Donation from './pages/donation/Donation';
 
 function App() {
   const [user, setUser] = useState({
+    id: '',
     name: '',
     email: '',
     type: '',
@@ -22,8 +23,8 @@ function App() {
     decode({ token: localStorage.getItem('x-access-token') })
       .then((r) => {
         if (r.data.user) {
-          const { name, email, type } = r.data.user;
-          setUser({ name, email, type });
+          const { id, name, email, type } = r.data.user;
+          setUser({ id, name, email, type });
         }
       })
       .catch((err) => console.error(err.message));
@@ -35,7 +36,16 @@ function App() {
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/how-to-donate" element={<HowToDonate />} />
-        <Route path="/donation" element={<Donation />} />
+        <Route
+          path="/donation"
+          element={
+            user.type === 'receptionist' ? (
+              <Donation user={user} />
+            ) : (
+              <Navigate replace to="/" />
+            )
+          }
+        />
         <Route path="/top-tens" element={<TopTens />} />
         <Route path="/login" element={<Login setUser={setUser} />} />
         <Route path="/register" element={<Register />} />
