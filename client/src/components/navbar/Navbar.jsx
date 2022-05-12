@@ -1,28 +1,26 @@
 import { NavLink } from 'react-router-dom';
+
+import ActionsDropdown from '../actions-dropdown/ActionsDropdown';
 import './Navbar.css';
 
 function Navbar({ user, setUser }) {
-  
-
   const logout = () => {
-    setUser({ name: '', email: '', type: '' });
+    setUser({ id: '', name: '', email: '', type: '' });
     localStorage.removeItem('x-access-token');
   };
-
-
 
   return (
     <nav>
       <NavLink className="nav-items" to="/">
         Home
       </NavLink>
-      <div className="nav-items user-type" to="/">
-        {user.name}
-      </div>
       {user.email ? (
-        <span className="nav-items" onClick={logout}>
-          Logout
-        </span>
+        <>
+          <ActionsDropdown user={user} />
+          <span className="nav-items" onClick={logout}>
+            Logout
+          </span>
+        </>
       ) : (
         <NavLink className="nav-items" to="/login">
           Login
