@@ -4,8 +4,6 @@ const Bank = require('../models/banks.model');
 function getBanks(req, res) {
   const sql = Bank.selectBanks;
 
-  // console.log(req.user);
-
   db.query(sql, (err, data) => {
     if (err) throw err;
     res.json(data);

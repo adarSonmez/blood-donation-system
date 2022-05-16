@@ -9,7 +9,6 @@ const topsRouter = require('./routes/tops.router');
 const banksRouter = require('./routes/banks.router');
 const donationsRouter = require('./routes/donations.router');
 const usersRouter = require('./routes/users.router');
-const decodeRouter = require('./routes/decode.router');
 
 const app = express();
 
@@ -21,6 +20,5 @@ app.use('/users', usersRouter);
 app.use('/banks', banksRouter);
 app.use('/tops', topsRouter);
 app.use('/donations', donationsRouter);
-app.use('/decode', decodeRouter);
 
 module.exports = app;

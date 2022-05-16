@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { decode } from '../../api/decode.api';
 
-import { login } from '../../api/users.api';
+import { decode, login } from '../../api/users.api';
 import './Login.css';
 
 function Login({ setUser }) {
@@ -12,7 +11,6 @@ function Login({ setUser }) {
     password: '',
   });
 
-  // Handles change for any input field
   const handleChange = (event) => {
     let name = event.target.name;
     let value = event.target.value;
@@ -37,7 +35,6 @@ function Login({ setUser }) {
               }
             })
             .catch((err) => console.error(err.message));
-
           navigate('/');
         }
       })

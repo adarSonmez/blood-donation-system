@@ -8,8 +8,8 @@ import Footer from './components/footer/Footer';
 import Header from './components/header/Header';
 import TopTens from './pages/top-tens/TopTens';
 import { useEffect, useState } from 'react';
-import { decode } from './api/decode.api';
 import Donation from './pages/donation/Donation';
+import { decode } from './api/users.api';
 
 function App() {
   const [user, setUser] = useState({
@@ -47,9 +47,17 @@ function App() {
           }
         />
         <Route path="/top-tens" element={<TopTens />} />
-        <Route path="/login" element={<Login setUser={setUser} />} />
+        <Route
+          path="/login"
+          element={
+            user.email ? (
+              <Navigate replace to="/" />
+            ) : (
+              <Login setUser={setUser} />
+            )
+          }
+        />
         <Route path="/register" element={<Register />} />
-        {/** No match route approach */}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
       <Footer />

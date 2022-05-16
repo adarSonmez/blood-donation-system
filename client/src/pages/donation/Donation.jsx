@@ -2,19 +2,22 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getBanks } from '../../api/banks.api';
 import { checkDonor, postDonation } from '../../api/donations.api';
+import bloodTypes from '../../data/bloodTypes';
 
 import './Donation.css';
 
 function Donation({ user }) {
   const navigate = useNavigate();
+  
   const [locked, setLocked] = useState(true);
+  const [searched, setSearched] = useState(false);
+  const [banks, setBanks] = useState([]);
   const [form1, setFrom1] = useState({ donor_id: '' });
   const [form2, setForm2] = useState({
     name: '',
     blood_type: '0-',
-    bank_id: '',
+    bank_id: 1,
   });
-  const [banks, setBanks] = useState([]);
 
   useEffect(() => {
     getBanks()
@@ -30,40 +33,31 @@ function Donation({ user }) {
       .catch((err) => console.error(err));
   }, []);
 
-  // Handles change for any input field
   const handleChange = (event, formNo) => {
     let name = event.target.name;
     let value = event.target.value;
 
-    if (formNo === 1)
-      setFrom1({
-        ...form1,
-        [name]: value,
-      });
-    else if (formNo === 2)
-      setForm2({
-        ...form2,
-        [name]: value,
-      });
+    if (formNo === 1) {
+      setSearched(false);
+      setFrom1({ ...form1, [name]: value });
+    } else if (formNo === 2) setForm2({ ...form2, [name]: value });
   };
 
   const searchSSN = (event) => {
     event.preventDefault();
+    setSearched(true);
 
     checkDonor({ donor_id: form1.donor_id }).then((r) => {
       if (!r.data.donor) {
         alert(
-          `Donor with id ${form1.donor_id} is not registered. Please fill bla bla bla.`
+          `Donor with id ${form1.donor_id} is not registered. Please enter donor information.`
         );
-        setForm2({
-          name: '',
-          blood_type: '0-',
-          bank_id: '',
-        });
+        setForm2({ name: '', blood_type: '0-', bank_id: 1 });
         setLocked(false);
       } else {
         setLocked(true);
         setForm2({
+          ...form2,
           name: r.data.donor.name,
           blood_type: r.data.donor.blood_type,
         });
@@ -71,10 +65,20 @@ function Donation({ user }) {
     });
   };
 
-  const donateBlood = () => {
-    postDonation({ ...form2, ...form1, recep_id: user.id })
-      .then(() => alert('Successfully donated!'))
-      .catch((err) => console.error(err.message));
+  const donateBlood = (event) => {
+    event.preventDefault();
+
+    if (!searched)
+      alert(
+        "Please enter the user's SSN first and then click the search button!"
+      );
+    else
+      postDonation({ ...form2, ...form1, recep_id: user.id })
+        .then(() => {
+          alert('Successfully donated!');
+          navigate('/');
+        })
+        .catch((err) => console.error(err.message));
   };
 
   return (
@@ -122,27 +126,23 @@ function Donation({ user }) {
         <label form="blood-type">Blood Type: </label>
         <select
           name="blood_type"
-          selected={form2.blood_type}
           value={form2.blood_type}
           onChange={(e) => handleChange(e, 2)}
           disabled={locked}
           id="blood_type"
           required
         >
-          <option value={'0-'}>0-</option>
-          <option value={'0+'}>0+</option>
-          <option value={'A-'}>A-</option>
-          <option value={'A+'}>A+</option>
-          <option value={'B-'}>B-</option>
-          <option value={'B+'}>B+</option>
-          <option value={'AB-'}>AB-</option>
-          <option value={'AB+'}>AB+</option>
+          {bloodTypes.map(({ type }) => (
+            <option key={type} value={type}>
+              {type}
+            </option>
+          ))}
         </select>
 
         <label form="bank-address">Bank Address: </label>
         <select
           name="bank_id"
-          selected={form2.bank_id}
+          value={form2.bank_id}
           onChange={(e) => handleChange(e, 2)}
           required
           id="bank-address"
@@ -154,7 +154,7 @@ function Donation({ user }) {
           ))}
         </select>
 
-        <button className="donate-btn" type="submit" disabled={locked}>
+        <button className="donate-btn" type="submit">
           Donate (500ml)
         </button>
       </form>

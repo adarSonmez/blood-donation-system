@@ -1,4 +1,4 @@
-const jwt = require('jsonwebtoken');
+const { sign, verify } = require('jsonwebtoken');
 
 const db = require('../config/db.config');
 const User = require('../models/users.model');
@@ -16,7 +16,7 @@ function login(req, res) {
     else if (user.password !== password)
       res.json({ success: false, message: 'Wrong password!' });
     else {
-      const token = jwt.sign(
+      const token = sign(
         {
           id: user.user_id,
           name: user.full_name,
@@ -57,7 +57,22 @@ function register(req, res) {
   );
 }
 
+function decodeToken(req, res) {
+  let token = req.body.token;
+
+  if (!token) return res.json({ loggedIn: false, message: 'Please login!' });
+
+  try {
+    const decoded = verify(token, process.env.TOKEN_SECRET);
+    const { name, email, type, id } = decoded;
+    return res.json({ loggedIn: true, user: { name, email, type, id } });
+  } catch {
+    return res.json({ loggedIn: false, message: 'Invalid token!' });
+  }
+}
+
 module.exports = {
   login,
   register,
+  decodeToken,
 };

@@ -11,14 +11,14 @@ import './TopTens.css';
 
 function TopTens() {
   const [topDonors, setTopDonors] = useState([{ id: 0, unit: 'Donations' }]);
-  const [topReceps, setTopReceps] = useState([{ id: 0, unit: 'Registrations' }]);
-  const [topHospitals, setTopHospitals] = useState([{ id: 0, unit: 'Orders (L)' }]);
+  const [topReceps, setTopReceps] = useState([
+    { id: 0, unit: 'Registrations' },
+  ]);
+  const [topHospitals, setTopHospitals] = useState([
+    { id: 0, unit: 'Orders (L)' },
+  ]);
 
   useEffect(() => {
-    setStates();
-  }, []);
-
-  const setStates = () => {
     getTopTenDonors()
       .then((r) =>
         setTopDonors(
@@ -63,7 +63,7 @@ function TopTens() {
         )
       )
       .catch((err) => console.error(err.message));
-  };
+  }, [topDonors, topHospitals, topReceps]);
 
   return (
     <main className="top-tens-page">
