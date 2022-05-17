@@ -10,7 +10,8 @@ import Header from './components/header/Header';
 import TopTens from './pages/top-tens/TopTens';
 import Donation from './pages/donation/Donation';
 import { decode } from './api/users.api';
-import OrderBlood from './pages/order/OrderBlood';
+import OrderBlood from './pages/order-blood/OrderBlood';
+import MyOrders from './components/my-orders/MyOrders';
 
 function App() {
   const [user, setUser] = useState({
@@ -48,10 +49,20 @@ function App() {
           }
         />
         <Route
-          path="/order"
+          path="/order-blood"
           element={
             user.type === 'hospital' ? (
               <OrderBlood user={user} />
+            ) : (
+              <Navigate replace to="/" />
+            )
+          }
+        />
+        <Route
+          path="/my-orders"
+          element={
+            user.type === 'hospital' ? (
+              <MyOrders user={user} />
             ) : (
               <Navigate replace to="/" />
             )

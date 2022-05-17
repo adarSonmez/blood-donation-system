@@ -66,13 +66,24 @@ function decodeToken(req, res) {
     const decoded = verify(token, process.env.TOKEN_SECRET);
     const { name, email, type, id } = decoded;
     return res.json({ loggedIn: true, user: { name, email, type, id } });
-  } catch {
-    return res.json({ loggedIn: false, message: 'Invalid token!' });
+  } catch (err) {
+    console.error(err.message);
   }
+}
+
+function getRandomManagerId(req, res) {
+  const sql = User.selectRandomManagerId;
+
+  db.query(sql, [], (err, data) => {
+    if (err) throw err;
+
+    res.json(data[0]);
+  });
 }
 
 module.exports = {
   login,
   register,
   decodeToken,
+  getRandomManagerId,
 };

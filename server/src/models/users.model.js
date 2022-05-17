@@ -8,6 +8,12 @@ const User = {
   selectUserByEmail: `
     SELECT * FROM sys_user WHERE e_mail = (?)
   `,
+
+  selectRandomManagerId: `
+    SELECT user_id FROM sys_user 
+    WHERE user_type = "system_manager"
+    ORDER BY RAND() LIMIT 1
+  `,
 };
 
 module.exports = User;

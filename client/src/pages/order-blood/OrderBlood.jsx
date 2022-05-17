@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { orderBlood } from '../../api/orders.api';
+import { getRandomManagerId } from '../../api/users.api';
 import bloodTypes from '../../data/bloodTypes';
 
 import './OrderBlood.css';
@@ -17,21 +18,28 @@ function OrderBlood({ user }) {
   const handleChange = (event) => {
     let name = event.target.name;
     let value = event.target.value;
-    console.log([name] + ': ' + value);
 
     setOrderForm({ ...orderForm, [name]: value });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    orderBlood({ ...orderForm, hospital_id: user.id, man_id: 1 })
-      .then(() => {
-        alert('Order Submitted!');
-        const param = user.id;
-        navigate(`\\orders\\${param}`);
-      })
-      .catch((err) => console.error(err));
+    try {
+      const res = await getRandomManagerId();
+      const man_id = await res.data.user_id;
+
+      await orderBlood({ ...orderForm, hospital_id: user.id, man_id });
+      alert('Order Submitted!');
+
+      navigate('/my-orders');
+    } catch (err) {
+      console.error(err);
+    }
+
+    try {
+      // TO DO: update my orders on submit
+    } catch (err) {}
   };
 
   return (
