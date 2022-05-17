@@ -11,7 +11,7 @@ function MyOrders({ user }) {
   }, [user]);
 
   const updateOrderHistory = () => {
-    getOrdersByHospitalId({ hospital_id: user.id })
+    getOrdersByHospitalId(user.id)
       .then((r) => setMyOrders(r.data))
       .catch((err) => console.error(err.message));
   };
@@ -30,7 +30,7 @@ function MyOrders({ user }) {
   };
 
   const cancelOrder = (order_id) => {
-    deleteOrder({ order_id })
+    deleteOrder(order_id)
       .then(() => updateOrderHistory())
       .catch((err) => console.error(err));
   };

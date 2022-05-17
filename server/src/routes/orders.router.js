@@ -1,14 +1,14 @@
 const { Router } = require('express');
 const {
   orderBlood,
-  getOrdersByHospitalId,
   deleteOrderById,
+  getOrders,
 } = require('../controllers/orders.controller');
 
 const ordersRouter = Router();
 
 ordersRouter.post('/order-blood', orderBlood);
-ordersRouter.post('/delete', deleteOrderById);
-ordersRouter.post('/orders-by-hospital-id', getOrdersByHospitalId);
+ordersRouter.get('/', getOrders);
+ordersRouter.delete('/', deleteOrderById);
 
 module.exports = ordersRouter;

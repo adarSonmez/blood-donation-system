@@ -12,8 +12,8 @@ function orderBlood(req, res) {
   });
 }
 
-function getOrdersByHospitalId(req, res) {
-  const { hospital_id } = req.body;
+function getOrders(req, res) {
+  const { hospital_id } = req.query;
   const sql = Order.selectOrdersOfAHospital;
 
   db.query(sql, [hospital_id], (err, data) => {
@@ -24,7 +24,8 @@ function getOrdersByHospitalId(req, res) {
 }
 
 function deleteOrderById(req, res) {
-  const { order_id } = req.body;
+  const { order_id } = req.query;
+  console.log(order_id);
   const sql = Order.deleteOrder;
 
   db.query(sql, [order_id], (err, data) => {
@@ -36,6 +37,6 @@ function deleteOrderById(req, res) {
 
 module.exports = {
   orderBlood,
-  getOrdersByHospitalId,
+  getOrders,
   deleteOrderById,
 };
