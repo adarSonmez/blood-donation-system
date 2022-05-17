@@ -8,7 +8,7 @@ import './Donation.css';
 
 function Donation({ user }) {
   const navigate = useNavigate();
-  
+
   const [locked, setLocked] = useState(true);
   const [searched, setSearched] = useState(false);
   const [banks, setBanks] = useState([]);

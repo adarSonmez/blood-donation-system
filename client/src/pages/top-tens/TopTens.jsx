@@ -19,6 +19,10 @@ function TopTens() {
   ]);
 
   useEffect(() => {
+    setStats();
+  }, []);
+
+  const setStats = () => {
     getTopTenDonors()
       .then((r) =>
         setTopDonors(
@@ -63,7 +67,7 @@ function TopTens() {
         )
       )
       .catch((err) => console.error(err.message));
-  }, [topDonors, topHospitals, topReceps]);
+  };
 
   return (
     <main className="top-tens-page">

@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 import Homepage from './pages/homepage/Homepage';
@@ -7,9 +8,9 @@ import Register from './pages/register/Register';
 import Footer from './components/footer/Footer';
 import Header from './components/header/Header';
 import TopTens from './pages/top-tens/TopTens';
-import { useEffect, useState } from 'react';
 import Donation from './pages/donation/Donation';
 import { decode } from './api/users.api';
+import OrderBlood from './pages/order/OrderBlood';
 
 function App() {
   const [user, setUser] = useState({
@@ -41,6 +42,16 @@ function App() {
           element={
             user.type === 'receptionist' ? (
               <Donation user={user} />
+            ) : (
+              <Navigate replace to="/" />
+            )
+          }
+        />
+        <Route
+          path="/order"
+          element={
+            user.type === 'hospital' ? (
+              <OrderBlood user={user} />
             ) : (
               <Navigate replace to="/" />
             )
