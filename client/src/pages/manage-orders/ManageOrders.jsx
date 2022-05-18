@@ -19,14 +19,14 @@ function ManageOrders({ user }) {
   };
 
   const approveOrder = (order_id) => {
-    updateOrderState(order_id, 'approved')
+    updateOrderState({ order_id, state: 'approved' })
       .then(() => updateOrderTable())
       .catch((err) => console.error(err));
   };
 
   const rejectOrder = (order_id) => {
     console.log(order_id);
-    updateOrderState(order_id, 'rejected')
+    updateOrderState({ order_id, state: 'rejected' })
       .then(() => updateOrderTable())
       .catch((err) => console.error(err));
   };
@@ -34,7 +34,7 @@ function ManageOrders({ user }) {
   return (
     <main className="manage-orders-page">
       <table className="manage-orders-table">
-        {orders ? (
+        {orders[0] ? (
           <caption>Please manage orders!</caption>
         ) : (
           <caption>No orders to manage.</caption>

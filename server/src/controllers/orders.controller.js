@@ -44,8 +44,7 @@ function deleteOrderById(req, res) {
 }
 
 function updateOrder(req, res) {
-  const { order_id } = req.query;
-  const { state } = req.body;
+  const { state, order_id } = req.body;
   const sql = Order.updateOrderState;
 
   db.query(sql, [state, order_id], (err, data) => {
