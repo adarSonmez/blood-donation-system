@@ -25,7 +25,6 @@ function getOrders(req, res) {
 
 function deleteOrderById(req, res) {
   const { order_id } = req.query;
-  console.log(order_id);
   const sql = Order.deleteOrder;
 
   db.query(sql, [order_id], (err, data) => {

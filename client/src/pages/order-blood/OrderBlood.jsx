@@ -47,7 +47,7 @@ function OrderBlood({ user }) {
       <form className="order-blood-form" onSubmit={handleSubmit}>
         <h3>Order Blood</h3>
 
-        <label form="blood-type">Blood Type: </label>
+        <label htmlFor="blood-type">Blood Type: </label>
         <select
           name="blood_type"
           value={orderForm.blood_type}
@@ -62,7 +62,7 @@ function OrderBlood({ user }) {
           ))}
         </select>
 
-        <label form="amount">Amount (unit: 500ml): </label>
+        <label htmlFor="amount">Amount (unit: 500ml): </label>
         <input
           type="number"
           name="amount"

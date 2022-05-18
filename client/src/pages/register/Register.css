@@ -1,0 +1,49 @@
+.register-page form {
+  margin: auto;
+  max-width: 450px;
+  width: 100%;
+}
+
+.register-page input,
+select,
+option,
+textarea {
+  color: black;
+  padding: 13px;
+  border: 1px solid rgb(255, 255, 255);
+  outline: none;
+}
+
+.register-page label {
+  display: flex;
+  align-items: center;
+}
+
+.register-page button:hover {
+  background-color: rgb(170, 0, 0);
+  color: white;
+}
+
+.register-user-form {
+  display: grid;
+  row-gap: 12px;
+  grid-template-columns: 30% 70%;
+}
+
+.register-user-form button {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  width: 100%;
+}
+
+@media only screen and (max-width: 500px) {
+  .register-user-form {
+    grid-template-columns: 100%;
+  }
+
+  .register-user-form button {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    width: 100%;
+  }
+}

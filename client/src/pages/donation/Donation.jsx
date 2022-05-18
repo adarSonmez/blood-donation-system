@@ -98,7 +98,7 @@ function Donation({ user }) {
       </form>
 
       <form className="donate-blood-form" onSubmit={donateBlood}>
-        <label form="ssn">SSN: </label>
+        <label htmlFor="ssn">SSN: </label>
         <input
           type="text"
           maxLength={11}
@@ -111,7 +111,7 @@ function Donation({ user }) {
           id="ssn"
         />
 
-        <label form="full-name">Full Name: </label>
+        <label htmlFor="full-name">Full Name: </label>
         <input
           type="text"
           name="name"
@@ -123,7 +123,7 @@ function Donation({ user }) {
           id="full-name"
         />
 
-        <label form="blood-type">Blood Type: </label>
+        <label htmlFor="blood-type">Blood Type: </label>
         <select
           name="blood_type"
           value={form2.blood_type}
@@ -139,7 +139,7 @@ function Donation({ user }) {
           ))}
         </select>
 
-        <label form="bank-address">Bank Address: </label>
+        <label htmlFor="bank-address">Bank Address: </label>
         <select
           name="bank_id"
           value={form2.bank_id}

@@ -42,19 +42,20 @@ function register(req, res) {
 
     if (data[0])
       return res.json({ success: false, message: 'User already registered!' });
-  });
+    else {
+      const regUser = User.insertUser;
 
-  const regUser = User.insertUser;
+      db.query(
+        regUser,
+        [full_name, e_mail, password, phone, address, user_type],
+        (err, data) => {
+          if (err) throw err;
 
-  db.query(
-    regUser,
-    [full_name, e_mail, password, phone, address, user_type],
-    (err, data) => {
-      if (err) throw err;
-
-      res.json({ success: true, message: 'Successfully registered!' });
+          res.json({ success: true, message: 'Successfully registered!' });
+        }
+      );
     }
-  );
+  });
 }
 
 function decodeToken(req, res) {
