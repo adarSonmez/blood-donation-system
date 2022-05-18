@@ -13,14 +13,23 @@ function orderBlood(req, res) {
 }
 
 function getOrders(req, res) {
-  const { hospital_id } = req.query;
-  const sql = Order.selectOrdersOfAHospital;
+  const { hospital_id, man_id } = req.query;
+  const sqlForHospital = Order.selectOrdersOfAHospital;
+  const sqlForManager = Order.selectOrdersForAManager;
 
-  db.query(sql, [hospital_id], (err, data) => {
-    if (err) throw err;
+  if (hospital_id) {
+    db.query(sqlForHospital, [hospital_id], (err, data) => {
+      if (err) throw err;
 
-    res.json(data);
-  });
+      res.json(data);
+    });
+  } else if (man_id) {
+    db.query(sqlForManager, [man_id], (err, data) => {
+      if (err) throw err;
+
+      res.json(data);
+    });
+  }
 }
 
 function deleteOrderById(req, res) {
@@ -34,8 +43,21 @@ function deleteOrderById(req, res) {
   });
 }
 
+function updateOrder(req, res) {
+  const { order_id } = req.query;
+  const { state } = req.body;
+  const sql = Order.updateOrderState;
+
+  db.query(sql, [state, order_id], (err, data) => {
+    if (err) throw err;
+
+    res.json({ success: true, message: 'Order status changed!' });
+  });
+}
+
 module.exports = {
   orderBlood,
   getOrders,
   deleteOrderById,
+  updateOrder,
 };

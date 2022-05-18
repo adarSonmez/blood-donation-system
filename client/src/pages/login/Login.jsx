@@ -58,6 +58,7 @@ function Login({ setUser }) {
             value={form.email}
             placeholder="username"
             onChange={handleChange}
+            required
           />
           <input
             id="password"
@@ -66,6 +67,7 @@ function Login({ setUser }) {
             value={form.password}
             placeholder="password"
             onChange={handleChange}
+            required
           />
           <button type="submit" className="submitBtn">
             login

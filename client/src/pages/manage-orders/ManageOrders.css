@@ -1,0 +1,29 @@
+.manage-orders-table {
+  padding: 10px;
+  text-align: center;
+}
+
+.manage-orders-table thead tr {
+  background-color: rgb(37, 37, 37);
+}
+
+.manage-orders-table tbody tr {
+  background-color: rgb(75, 0, 110);
+}
+
+.manage-orders-table td,
+.manage-orders-table th {
+  padding: 10px 8px;
+}
+
+.manage-orders-table caption {
+  font-size: 18px;
+  text-align: center;
+}
+
+.manage-orders-table td .bi {
+  color: rgb(255, 255, 255);
+  font-size: 18px;
+  padding: 10px;
+  cursor: pointer;
+}

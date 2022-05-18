@@ -12,6 +12,7 @@ import Donation from './pages/donation/Donation';
 import { decode } from './api/users.api';
 import OrderBlood from './pages/order-blood/OrderBlood';
 import MyOrders from './components/my-orders/MyOrders';
+import ManageOrders from './pages/manage-orders/ManageOrders';
 
 function App() {
   const [user, setUser] = useState({
@@ -63,6 +64,16 @@ function App() {
           element={
             user.type === 'hospital' ? (
               <MyOrders user={user} />
+            ) : (
+              <Navigate replace to="/" />
+            )
+          }
+        />
+        <Route
+          path="/manage-orders"
+          element={
+            user.type === 'system_manager' ? (
+              <ManageOrders user={user} />
             ) : (
               <Navigate replace to="/" />
             )
