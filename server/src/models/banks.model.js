@@ -14,14 +14,14 @@ const Bank = {
 
   selectNumAvailableBlood: `
     SELECT COUNT(*) as total_available FROM blood
-    WHERE expires_in <> 0
+    WHERE donated_date > (SELECT DATE_SUB(CURRENT_DATE(), INTERVAL 45 DAY))
   `,
 
   selectLeastAvailableBloodType: `
     SELECT donor.blood_type, COUNT(blood.blood_id) AS num_of_blood
     FROM donor LEFT JOIN blood 
     ON donor.donor_id = blood.donor_id 
-    WHERE expires_in <> 0 
+    WHERE donated_date > (SELECT DATE_SUB(CURRENT_DATE(), INTERVAL 45 DAY))
     GROUP BY blood_type
     ORDER BY num_of_blood ASC
     LIMIT 1
@@ -31,7 +31,7 @@ const Bank = {
     SELECT donor.blood_type, COUNT(blood.blood_id) AS num_of_blood
     FROM donor LEFT JOIN blood 
     ON donor.donor_id = blood.donor_id 
-    WHERE expires_in <> 0 
+    WHERE donated_date > (SELECT DATE_SUB(CURRENT_DATE(), INTERVAL 45 DAY))
     GROUP BY blood_type
     ORDER BY num_of_blood DESC
     LIMIT 1

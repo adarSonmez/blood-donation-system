@@ -81,6 +81,16 @@ function App() {
           }
         />
         <Route
+          path="/manage-account"
+          element={
+            user.email ? (
+              <ManageAccount user={user} />
+            ) : (
+              <Navigate replace to="/" />
+            )
+          }
+        />
+        <Route
           path="/login"
           element={
             user.email ? (
@@ -90,10 +100,18 @@ function App() {
             )
           }
         />
-        <Route path="/register" element={<Register />} />
+        <Route
+          path="/register"
+          element={
+            user.type === 'system_manager' ? (
+              <Register user={user} />
+            ) : (
+              <Navigate replace to="/" />
+            )
+          }
+        />
         <Route path="/top-tens" element={<TopTens />} />
         <Route path="/how-to-donate" element={<HowToDonate />} />
-        <Route path="/manage-account" element={<ManageAccount user={user} />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
       <Footer />

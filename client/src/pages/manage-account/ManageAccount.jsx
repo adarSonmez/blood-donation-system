@@ -83,7 +83,7 @@ function ManageAccount({ user }) {
         <label htmlFor="phone">Update Phone Number </label>
         <input
           type="tel"
-          maxLength={11}
+          maxLength={10}
           name="phone"
           placeholder="Enter phone number for new user"
           value={updateForm.phone}

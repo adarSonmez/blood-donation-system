@@ -100,19 +100,19 @@ function Homepage() {
           </li>
           <li>
             The donor who donated the most blood so far is{' '}
-            <span>{topDonor.name}</span> with{' '}
-            <span>{topDonor.num_of_blood}</span> donations (
-            {topDonor.num_of_blood / 2} litters).
+            <span>{topDonor?.name}</span> with{' '}
+            <span>{topDonor?.num_of_blood}</span> donations (
+            {topDonor?.num_of_blood / 2} litters).
           </li>
           <li>
             Our receptionist that registers the most donors is{' '}
-            <span>{topRecep.full_name}</span> with{' '}
-            <span>{topRecep.num_of_registration}</span> registrations.
+            <span>{topRecep?.full_name}</span> with{' '}
+            <span>{topRecep?.num_of_registration}</span> registrations.
           </li>
           <li>
             The hospital we supply the most blood so far is{' '}
-            <span>{topHospital.full_name}</span> with{' '}
-            <span>{topHospital.amount_of_blood / 2}</span> liters.
+            <span>{topHospital?.full_name}</span> with{' '}
+            <span>{topHospital?.amount_of_blood / 2}</span> liters.
           </li>
         </ul>
       </div>

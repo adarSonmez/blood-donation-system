@@ -73,7 +73,7 @@ function Register() {
         <label htmlFor="phone">Phone: </label>
         <input
           type="tel"
-          maxLength={11}
+          maxLength={10}
           name="phone"
           placeholder="Enter phone number for new user"
           value={form.phone}
