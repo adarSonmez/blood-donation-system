@@ -5,8 +5,8 @@
 }
 
 .donation-page input,
-select,
-option {
+.donation-page select,
+.donation-page option {
   color: black;
   padding: 13px;
   border: 1px solid rgb(255, 255, 255);

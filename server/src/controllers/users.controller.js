@@ -75,10 +75,35 @@ function decodeToken(req, res) {
 function getRandomManagerId(req, res) {
   const sql = User.selectRandomManagerId;
 
-  db.query(sql, [], (err, data) => {
+  db.query(sql, (err, data) => {
     if (err) throw err;
 
     res.json(data[0]);
+  });
+}
+
+function getUserByEmail(req, res) {
+  const { e_mail } = req.query;
+  const sql = User.selectUserByEmail;
+
+  if (!e_mail)
+    return res.json({ success: false, message: 'email is not specified' });
+
+  db.query(sql, [e_mail], (err, data) => {
+    if (err) throw err;
+
+    res.json(data[0]);
+  });
+}
+
+function updateUser(req, res) {
+  const sql = User.updateUserByEmail;
+  const { password, phone, address, e_mail } = req.body;
+
+  db.query(sql, [password, phone, address, e_mail], (err, data) => {
+    if (err) throw err;
+
+    res.json({ success: true });
   });
 }
 
@@ -87,4 +112,6 @@ module.exports = {
   register,
   decodeToken,
   getRandomManagerId,
+  getUserByEmail,
+  updateUser,
 };

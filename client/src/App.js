@@ -1,18 +1,20 @@
 import { useEffect, useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
+import { decode } from './api/users.api';
+import MyOrders from './components/my-orders/MyOrders';
+import Footer from './components/footer/Footer';
+import Header from './components/header/Header';
+
 import Homepage from './pages/homepage/Homepage';
 import HowToDonate from './pages/how-to-donate/HowToDonate';
 import Login from './pages/login/Login';
 import Register from './pages/register/Register';
-import Footer from './components/footer/Footer';
-import Header from './components/header/Header';
 import TopTens from './pages/top-tens/TopTens';
 import Donation from './pages/donation/Donation';
-import { decode } from './api/users.api';
 import OrderBlood from './pages/order-blood/OrderBlood';
-import MyOrders from './components/my-orders/MyOrders';
 import ManageOrders from './pages/manage-orders/ManageOrders';
+import ManageAccount from './pages/manage-account/ManageAccount';
 
 function App() {
   const [user, setUser] = useState({
@@ -38,7 +40,6 @@ function App() {
       <Header user={user} setUser={setUser} />
       <Routes>
         <Route path="/" element={<Homepage />} />
-        <Route path="/how-to-donate" element={<HowToDonate />} />
         <Route
           path="/donation"
           element={
@@ -79,7 +80,6 @@ function App() {
             )
           }
         />
-        <Route path="/top-tens" element={<TopTens />} />
         <Route
           path="/login"
           element={
@@ -91,6 +91,9 @@ function App() {
           }
         />
         <Route path="/register" element={<Register />} />
+        <Route path="/top-tens" element={<TopTens />} />
+        <Route path="/how-to-donate" element={<HowToDonate />} />
+        <Route path="/manage-account" element={<ManageAccount user={user} />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
       <Footer />

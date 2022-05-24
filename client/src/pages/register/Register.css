@@ -5,9 +5,9 @@
 }
 
 .register-page input,
-select,
-option,
-textarea {
+.register-page select,
+.register-page option,
+.register-page textarea {
   color: black;
   padding: 13px;
   border: 1px solid rgb(255, 255, 255);
@@ -17,11 +17,6 @@ textarea {
 .register-page label {
   display: flex;
   align-items: center;
-}
-
-.register-page button:hover {
-  background-color: rgb(170, 0, 0);
-  color: white;
 }
 
 .register-user-form {

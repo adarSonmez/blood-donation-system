@@ -65,6 +65,7 @@ function Register() {
           placeholder="Enter temporary password for new user"
           value={form.password}
           onChange={handleChange}
+          minLength={6}
           required
           id="password"
         />

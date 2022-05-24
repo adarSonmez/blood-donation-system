@@ -89,13 +89,13 @@ function Homepage() {
           <li>
             The most available blood type is{' '}
             <span>{mostAvailable.blood_type}</span> with{' '}
-            <span>{(mostAvailable.num_of_blood / numOfAvailable) * 100}</span>
+            <span>{((mostAvailable.num_of_blood / numOfAvailable) * 100).toFixed(2)}</span>
             %.
           </li>
           <li>
             The least available blood type is{' '}
             <span>{leastAvailable.blood_type}</span> with{' '}
-            <span>{(leastAvailable.num_of_blood / numOfAvailable) * 100}</span>
+            <span>{((leastAvailable.num_of_blood / numOfAvailable) * 100).toFixed(2)}</span>
             %.
           </li>
           <li>

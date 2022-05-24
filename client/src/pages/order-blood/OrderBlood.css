@@ -5,8 +5,8 @@
 }
 
 .order-page input,
-select,
-option {
+.order-page select,
+.order-page option {
   color: black;
   padding: 13px;
   border: 1px solid rgb(255, 255, 255);
