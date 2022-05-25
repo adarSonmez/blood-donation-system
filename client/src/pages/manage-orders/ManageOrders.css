@@ -1,29 +1,11 @@
-.manage-orders-table {
-  padding: 10px;
-  text-align: center;
+.manage-orders-page {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
 }
 
-.manage-orders-table thead tr {
-  background-color: rgb(54, 54, 54);
-}
-
-.manage-orders-table tbody tr {
-  background-color: rgb(75, 0, 110);
-}
-
-.manage-orders-table td,
-.manage-orders-table th {
-  padding: 10px 8px;
-}
-
-.manage-orders-table caption {
-  font-size: 18px;
-  text-align: center;
-}
-
-.manage-orders-table td .bi {
-  color: rgb(255, 255, 255);
-  font-size: 18px;
-  padding: 10px;
-  cursor: pointer;
+@media only screen and (max-width: 700px) {
+  .manage-orders-page {
+    display: grid;
+  }
 }

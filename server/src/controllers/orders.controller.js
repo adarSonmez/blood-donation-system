@@ -44,14 +44,22 @@ function deleteOrderById(req, res) {
 }
 
 function updateOrder(req, res) {
-  const { state, order_id } = req.body;
-  const sql = Order.updateOrderState;
+  const { state, order_id, blood_type, amount } = req.body;
+  const reduceBlood = Order.updateBloodState;
+  const updateOrderState = Order.updateOrderState;
 
-  db.query(sql, [state, order_id], (err, data) => {
+  db.query(reduceBlood, [blood_type, amount], (err, data) => {
     if (err) throw err;
 
-    res.json({ success: true, message: 'Order status changed!' });
+    db.query(updateOrderState, [state, order_id], (err, data) => {
+      if (err) throw err;
+      res.json({ success: true, message: 'Order status changed!' });
+    });
   });
+}
+
+function updateBloodState(req, res) {
+  const { blood_type, amount } = req.query;
 }
 
 module.exports = {
@@ -59,4 +67,5 @@ module.exports = {
   getOrders,
   deleteOrderById,
   updateOrder,
+  updateBloodState,
 };

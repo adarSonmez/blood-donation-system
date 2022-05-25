@@ -1,14 +1,24 @@
 import { useEffect, useState } from 'react';
-import { getOrdersForAManager, updateOrderState } from '../../api/orders.api';
+import { getAllAvailableBloodTypes } from '../../api/banks.api';
+import { getOrdersForAManager } from '../../api/orders.api';
+import BloodTypesTable from '../../components/blood-types-table/BloodTypesTable';
+import ManageOrdersTable from '../../components/manage-orders-table/ManageOrdersTable';
 
 import './ManageOrders.css';
 
 function ManageOrders({ user }) {
   const [orders, setOrders] = useState([]);
+  const [types, setTypes] = useState([]);
 
   useEffect(() => {
     updateOrderTable();
   }, []);
+
+  useEffect(() => {
+    getAllAvailableBloodTypes()
+      .then((r) => setTypes(r.data))
+      .catch((err) => console.error(err));
+  }, [orders]);
 
   const updateOrderTable = () => {
     getOrdersForAManager(user.id)
@@ -18,62 +28,14 @@ function ManageOrders({ user }) {
       .catch((err) => console.error(err));
   };
 
-  const approveOrder = (order_id) => {
-    updateOrderState({ order_id, state: 'approved' })
-      .then(() => updateOrderTable())
-      .catch((err) => console.error(err));
-  };
-
-  const rejectOrder = (order_id) => {
-    console.log(order_id);
-    updateOrderState({ order_id, state: 'rejected' })
-      .then(() => updateOrderTable())
-      .catch((err) => console.error(err));
-  };
-
   return (
     <main className="manage-orders-page">
-      <table className="manage-orders-table">
-        {orders[0] ? (
-          <caption>Please manage orders!</caption>
-        ) : (
-          <caption>No orders to manage.</caption>
-        )}
-        <thead>
-          <tr>
-            <th>Hospital</th>
-            <th>Type</th>
-            <th>Units</th>
-            <th>Order Date</th>
-            <th>Approve</th>
-            <th>Reject</th>
-          </tr>
-        </thead>
-        <tbody>
-          {orders.map(
-            ({ blood_type, amount, order_date, order_id, full_name }) => (
-              <tr key={order_id}>
-                <td>{full_name}</td>
-                <td>{blood_type}</td>
-                <td>{amount}</td>
-                <td>{new Date(order_date).toLocaleDateString()}</td>
-                <td>
-                  <i
-                    className="bi bi-check"
-                    onClick={() => approveOrder(order_id)}
-                  ></i>
-                </td>
-                <td>
-                  <i
-                    className="bi bi-x"
-                    onClick={() => rejectOrder(order_id)}
-                  ></i>
-                </td>
-              </tr>
-            )
-          )}
-        </tbody>
-      </table>
+      <ManageOrdersTable
+        orders={orders}
+        updateOrderTable={updateOrderTable}
+        types={types}
+      />
+      <BloodTypesTable orders={orders} types={types} />
     </main>
   );
 }

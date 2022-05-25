@@ -1,0 +1,18 @@
+.blood-types-table {
+  margin: 13px;
+  border-collapse: collapse;
+  background-color: var(--secondary-theme);
+}
+
+.blood-types-table td,
+.blood-types-table th {
+  border: 1px solid rgb(110, 110, 110);
+  padding: 10px 15px;
+  text-align: center;
+}
+
+.blood-types-table caption {
+  text-transform: capitalize;
+  font-weight: 700;
+  color: rgb(255, 255, 255);
+}

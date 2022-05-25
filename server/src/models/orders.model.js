@@ -25,6 +25,17 @@ const Order = {
   updateOrderState: `
     UPDATE orders SET state = (?) WHERE order_id = (?)
   `,
+
+  updateBloodState: `
+    UPDATE blood
+    LEFT JOIN donor
+    ON blood.donor_id = donor.donor_id 
+    SET blood.used = 1
+    WHERE donated_date > (SELECT DATE_SUB(CURRENT_DATE(), INTERVAL 4500 DAY)) 
+    AND used = 0 AND blood_type = ? 
+    ORDER BY blood.donated_date
+    LIMIT ?
+  `,
 };
 
 module.exports = Order;

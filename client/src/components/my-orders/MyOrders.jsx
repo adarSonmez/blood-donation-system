@@ -42,7 +42,10 @@ function MyOrders({ user }) {
         <thead>
           <tr>
             <th>Type</th>
-            <th>Amount</th>
+            <th>
+              Units <br />
+              (0.5L)
+            </th>
             <th>Date</th>
             <th>Status</th>
             <th>Cancel</th>
