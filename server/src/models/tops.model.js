@@ -15,6 +15,7 @@ const Top = {
     SUM(orders.amount) AS amount_of_blood
     FROM sys_user RIGHT JOIN orders 
     ON sys_user.user_id = orders.hospital_id 
+    WHERE orders.state = "approved"
     GROUP BY full_name
     ORDER BY amount_of_blood DESC
     LIMIT 10

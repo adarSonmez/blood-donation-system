@@ -43,7 +43,7 @@ function ManageOrders({ user }) {
           <tr>
             <th>Hospital</th>
             <th>Type</th>
-            <th>Amount</th>
+            <th>Units</th>
             <th>Order Date</th>
             <th>Approve</th>
             <th>Reject</th>

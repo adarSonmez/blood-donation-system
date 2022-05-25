@@ -89,20 +89,26 @@ function Homepage() {
           <li>
             The most available blood type is{' '}
             <span>{mostAvailable.blood_type}</span> with{' '}
-            <span>{((mostAvailable.num_of_blood / numOfAvailable) * 100).toFixed(2)}</span>
-            %.
+            <span>
+              {((mostAvailable.num_of_blood / numOfAvailable) * 100).toFixed(2)}
+            </span>
+            %. (<span>{mostAvailable.num_of_blood / 2}</span> litters)
           </li>
           <li>
             The least available blood type is{' '}
             <span>{leastAvailable.blood_type}</span> with{' '}
-            <span>{((leastAvailable.num_of_blood / numOfAvailable) * 100).toFixed(2)}</span>
-            %.
+            <span>
+              {((leastAvailable.num_of_blood / numOfAvailable) * 100).toFixed(
+                2
+              )}
+            </span>
+            %. (<span>{leastAvailable.num_of_blood / 2}</span> litters)
           </li>
           <li>
             The donor who donated the most blood so far is{' '}
             <span>{topDonor?.name}</span> with{' '}
             <span>{topDonor?.num_of_blood}</span> donations (
-            {topDonor?.num_of_blood / 2} litters).
+            <span>{topDonor?.num_of_blood / 2}</span> litters).
           </li>
           <li>
             Our receptionist that registers the most donors is{' '}
