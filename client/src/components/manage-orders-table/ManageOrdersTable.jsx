@@ -14,8 +14,8 @@ function ManageOrdersTable({ updateOrderTable, orders, types }) {
     }
   };
 
-  const rejectOrder = (order_id) => {
-    updateOrderState({ order_id, state: 'rejected' })
+  const rejectOrder = (order_id, amount, blood_type) => {
+    updateOrderState({ order_id, state: 'rejected', blood_type, amount })
       .then(() => updateOrderTable())
       .catch((err) => console.error(err));
   };
@@ -54,7 +54,7 @@ function ManageOrdersTable({ updateOrderTable, orders, types }) {
               <td>
                 <i
                   className="bi bi-x"
-                  onClick={() => rejectOrder(order_id)}
+                  onClick={() => rejectOrder(order_id, amount, blood_type)}
                 ></i>
               </td>
             </tr>

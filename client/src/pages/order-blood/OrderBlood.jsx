@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { orderBlood } from '../../api/orders.api';
-import { getRandomManagerId } from '../../api/users.api';
+import { getRandomManager } from '../../api/users.api';
 import bloodTypes from '../../data/bloodTypes';
 
 import './OrderBlood.css';
@@ -26,7 +26,7 @@ function OrderBlood({ user }) {
     event.preventDefault();
 
     try {
-      const res = await getRandomManagerId();
+      const res = await getRandomManager();
       const man_id = await res.data.user_id;
 
       await orderBlood({ ...orderForm, hospital_id: user.id, man_id });

@@ -45,6 +45,7 @@ function deleteOrderById(req, res) {
 
 function updateOrder(req, res) {
   const { state, order_id, blood_type, amount } = req.body;
+  console.log(req.body)
   const reduceBlood = Order.updateBloodState;
   const updateOrderState = Order.updateOrderState;
 

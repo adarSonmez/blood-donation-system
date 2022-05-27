@@ -1,8 +1,12 @@
 import { useEffect, useState } from 'react';
-import { getUserByEmail, updateUser } from '../../api/users.api';
+import {
+  deleteUserById,
+  getUserByEmail,
+  updateUser,
+} from '../../api/users.api';
 import './ManageAccount.css';
 
-function ManageAccount({ user }) {
+function ManageAccount({ user, setUser }) {
   const [checked, setChecked] = useState({
     password: false,
     phone: false,
@@ -51,6 +55,20 @@ function ManageAccount({ user }) {
     updateUser({ ...updateForm, e_mail: user.email })
       .then(() => alert('User information has been successfully changed!'))
       .catch((err) => console.error(err.message));
+  };
+
+  const deleteAccount = (e) => {
+    const deleted = window.confirm(
+      'Are you sure you want to delete your account?'
+    );
+
+    if (deleted)
+      deleteUserById(user.id)
+        .then(() => {
+          setUser({ id: '', name: '', email: '', type: '' });
+          localStorage.removeItem('x-access-token');
+        })
+        .catch((e) => console.error(e));
   };
 
   return (
@@ -111,6 +129,9 @@ function ManageAccount({ user }) {
         />
         <button type="submit">Update User</button>
       </form>
+      <p className="delete-account" onClick={deleteAccount}>
+        Delete Account
+      </p>
     </main>
   );
 }

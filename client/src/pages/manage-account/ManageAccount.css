@@ -34,3 +34,8 @@ input[type=checkbox] {
   width: 100%;
   margin: auto;
 }
+
+.delete-account {
+  cursor: pointer;
+  color: rgb(255, 28, 28);
+}

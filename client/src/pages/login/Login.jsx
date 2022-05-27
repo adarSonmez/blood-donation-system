@@ -1,15 +1,22 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { decode, login } from '../../api/users.api';
+import { decode, getRandomManager, login } from '../../api/users.api';
 import './Login.css';
 
 function Login({ setUser }) {
   const navigate = useNavigate();
+  const [randomManMail, setRandomManMail] = useState('adarsonmez@outlook.com');
   const [form, setForm] = useState({
     email: '',
     password: '',
   });
+
+  useEffect(() => {
+    getRandomManager()
+      .then((m) => setRandomManMail(m.data.e_mail))
+      .catch((e) => console.error(e));
+  }, []);
 
   const handleChange = (event) => {
     let name = event.target.name;
@@ -47,7 +54,7 @@ function Login({ setUser }) {
       <p className="contact-message">
         If you are unable to login as a receptionist, hospital or system
         administrator, <br />
-        please <a href="mailto:adarsonmez@gmail.com">contact us</a>.
+        please <a href={`mailto:${randomManMail}`}>contact us</a>.
       </p>
       <div className="form">
         <form className="login-form" onSubmit={handleSubmit} method="POST">

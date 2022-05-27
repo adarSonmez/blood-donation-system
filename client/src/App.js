@@ -84,7 +84,7 @@ function App() {
           path="/manage-account"
           element={
             user.email ? (
-              <ManageAccount user={user} />
+              <ManageAccount user={user} setUser={setUser} />
             ) : (
               <Navigate replace to="/" />
             )

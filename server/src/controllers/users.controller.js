@@ -72,8 +72,8 @@ function decodeToken(req, res) {
   }
 }
 
-function getRandomManagerId(req, res) {
-  const sql = User.selectRandomManagerId;
+function getRandomManager(req, res) {
+  const sql = User.selectRandomManager;
 
   db.query(sql, (err, data) => {
     if (err) throw err;
@@ -107,11 +107,23 @@ function updateUser(req, res) {
   });
 }
 
+function deleteUser(req, res) {
+  const sql = User.DeleteUserById;
+  const { user_id } = req.query;
+
+  db.query(sql, [user_id], (err, data) => {
+    if (err) throw err;
+
+    res.json({ success: true });
+  });
+}
+
 module.exports = {
   login,
   register,
   decodeToken,
-  getRandomManagerId,
+  getRandomManager,
   getUserByEmail,
   updateUser,
+  deleteUser,
 };
