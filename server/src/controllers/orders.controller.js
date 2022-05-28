@@ -45,18 +45,24 @@ function deleteOrderById(req, res) {
 
 function updateOrder(req, res) {
   const { state, order_id, blood_type, amount } = req.body;
-  console.log(req.body)
+  console.log(req.body);
   const reduceBlood = Order.updateBloodState;
   const updateOrderState = Order.updateOrderState;
 
-  db.query(reduceBlood, [blood_type, amount], (err, data) => {
-    if (err) throw err;
+  if ((state == 'approved'))
+    db.query(reduceBlood, [blood_type, amount], (err, data) => {
+      if (err) throw err;
 
+      db.query(updateOrderState, [state, order_id], (err, data) => {
+        if (err) throw err;
+        res.json({ success: true, message: 'Order status changed!' });
+      });
+    });
+  else
     db.query(updateOrderState, [state, order_id], (err, data) => {
       if (err) throw err;
       res.json({ success: true, message: 'Order status changed!' });
     });
-  });
 }
 
 function updateBloodState(req, res) {

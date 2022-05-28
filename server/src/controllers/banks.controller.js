@@ -1,5 +1,6 @@
 const db = require('../config/db.config');
 const Bank = require('../models/banks.model');
+const { completeMissingBloodTypes } = require('../utils/banks.utils');
 
 function getBanks(req, res) {
   const sql = Bank.selectBanks;
@@ -33,6 +34,7 @@ function getLeastAvailableBloodType(req, res) {
 
   db.query(sql, (err, data) => {
     if (err) throw err;
+    data = completeMissingBloodTypes(data);
     res.json(data[7]);
   });
 }
@@ -42,6 +44,7 @@ function getMostAvailableBloodType(req, res) {
 
   db.query(sql, (err, data) => {
     if (err) throw err;
+    data = completeMissingBloodTypes(data);
     res.json(data[0]);
   });
 }
@@ -51,6 +54,7 @@ function getAvailableBloodTypes(req, res) {
 
   db.query(sql, (err, data) => {
     if (err) throw err;
+    data = completeMissingBloodTypes(data);
     res.json(data);
   });
 }

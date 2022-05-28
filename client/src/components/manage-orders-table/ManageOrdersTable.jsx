@@ -5,8 +5,9 @@ import './ManageOrdersTable.css';
 
 function ManageOrdersTable({ updateOrderTable, orders, types }) {
   const approveOrder = (order_id, amount, blood_type) => {
-    const order = types.filter((t) => t.blood_type === blood_type)[0];
-    if (order.amount < amount) alert('There is not enough blood available!');
+    const stock = types.filter((t) => t.blood_type === blood_type)[0];
+    if (stock.num_of_blood < amount)
+      alert('There is not enough blood available!');
     else {
       updateOrderState({ order_id, state: 'approved', blood_type, amount })
         .then(() => updateOrderTable())

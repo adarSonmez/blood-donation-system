@@ -9,7 +9,6 @@ const getLeastAvailableBloodType = () => axios.get(url + '/least-available-blood
 const getMostAvailableBloodType = () => axios.get(url + '/most-available-blood-type');
 const getAllAvailableBloodTypes = () => axios.get(url + '/all-available-blood-types');
 
-
 export {
   getBanks,
   getTotalDonatedBlood,
