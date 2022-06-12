@@ -9,8 +9,8 @@ const userActions = {
     { link: 'Manage Account', to: '/manage-account' },
   ],
   hospital: [
-    { link: 'Order Blood', to: '/order-blood' },
     { link: 'My Orders', to: '/my-orders' },
+    { link: 'Order Blood', to: '/order-blood' },
     { link: 'Manage Account', to: '/manage-account' },
   ],
 };
