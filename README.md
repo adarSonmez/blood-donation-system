@@ -1,6 +1,6 @@
 # BLOOD DONATION SYSTEM
 
-__NOTE 1__: See the report.pdf file to see all the stages of developing our application.
+__NOTE 1__: Check out the report.pdf file to see all the stages we went through while developing our app.
 
 __NOTE 2__: This application was developed with node.js v16.0.0.
 If you do not have this version or higher versions of node.js on your computer, please download it. 
