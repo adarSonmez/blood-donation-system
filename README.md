@@ -31,9 +31,3 @@ npm start
 5. That's it! To open the application, enter the address below in your browser.
 
 http://localhost:3000/
-
-## Entity Relationship Diagram
-![Screenshoot](assets/er_diagram.jpg)
-
-## Database Schema
-![Screenshoot](assets/db_schema.png)
