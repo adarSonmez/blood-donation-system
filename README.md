@@ -33,7 +33,7 @@ npm start
 http://localhost:3000/
 
 ## Entity Relationship Diagram
-![Screenshoot](img/er_diagram.jpg)
+![Screenshoot](assets/er_diagram.jpg)
 
 ## Database Schema
-![Screenshoot](img/db_schema.png)
+![Screenshoot](assets/db_schema.png)
