@@ -6,7 +6,7 @@ import { UserContext } from '../../contexts/user.context';
 import './Login.css';
 
 function Login() {
-  const { setUser } = useContext(UserContext);
+  const { setCurrentUser } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -42,7 +42,7 @@ function Login() {
             .then((r) => {
               if (r.data.user) {
                 const { id, name, email, type } = r.data.user;
-                setUser({ id, name, email, type });
+                setCurrentUser({ id, name, email, type });
               }
             })
             .catch((err) => console.error(err.message));

@@ -8,7 +8,7 @@ import { UserContext } from '../../contexts/user.context';
 import './ManageAccount.css';
 
 function ManageAccount() {
-  const { user, setUser } = useContext(UserContext);
+  const { user, clearCurrentUser } = useContext(UserContext);
 
   const [checked, setChecked] = useState({
     password: false,
@@ -67,10 +67,7 @@ function ManageAccount() {
 
     if (deleted)
       deleteUserById(user.id)
-        .then(() => {
-          setUser({ id: '', name: '', email: '', type: '' });
-          localStorage.removeItem('x-access-token');
-        })
+        .then(() => clearCurrentUser())
         .catch((e) => console.error(e));
   };
 

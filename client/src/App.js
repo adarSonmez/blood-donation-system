@@ -2,9 +2,9 @@ import { useEffect } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { useContext } from 'react';
 
+import { decode } from './api/users.api';
 import { UserContext } from './contexts/user.context';
 
-import { decode } from './api/users.api';
 import MyOrders from './components/my-orders/MyOrders';
 import Footer from './components/footer/Footer';
 import Header from './components/header/Header';
@@ -20,14 +20,14 @@ import ManageOrders from './pages/manage-orders/ManageOrders';
 import ManageAccount from './pages/manage-account/ManageAccount';
 
 function App() {
-  const { user, setUser } = useContext(UserContext);
+  const { user, setCurrentUser } = useContext(UserContext);
 
   useEffect(() => {
     decode({ token: localStorage.getItem('x-access-token') })
       .then((r) => {
         if (r.data.user) {
           const { id, name, email, type } = r.data.user;
-          setUser({ id, name, email, type });
+          setCurrentUser({ id, name, email, type });
         }
       })
       .catch((err) => console.error(err.message));

@@ -6,13 +6,9 @@ import ActionsDropdown from '../actions-dropdown/ActionsDropdown';
 import './Navbar.css';
 
 function Navbar() {
-  const { user, setUser } = useContext(UserContext);
+  const { user, clearCurrentUser } = useContext(UserContext);
 
-
-  const logout = () => {
-    setUser({ id: '', name: '', email: '', type: '' });
-    localStorage.removeItem('x-access-token');
-  };
+  const logout = () => clearCurrentUser();
 
   return (
     <nav>
