@@ -1,12 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { getAllAvailableBloodTypes } from '../../api/banks.api';
 import { getOrdersForAManager } from '../../api/orders.api';
 import BloodTypesTable from '../../components/blood-types-table/BloodTypesTable';
 import ManageOrdersTable from '../../components/manage-orders-table/ManageOrdersTable';
+import { UserContext } from '../../contexts/user.context';
 
 import './ManageOrders.css';
 
-function ManageOrders({ user }) {
+function ManageOrders() {
+  const { user } = useContext(UserContext);
+
   const [orders, setOrders] = useState([]);
   const [types, setTypes] = useState([]);
 

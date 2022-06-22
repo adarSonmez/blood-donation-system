@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { orderBlood } from '../../api/orders.api';
 import { getRandomManager } from '../../api/users.api';
+import { UserContext } from '../../contexts/user.context';
 import bloodTypes from '../../data/bloodTypes';
 
 import './OrderBlood.css';
 
-function OrderBlood({ user }) {
+function OrderBlood() {
   const navigate = useNavigate();
+  const { user } = useContext(UserContext);
+
   const [orderForm, setOrderForm] = useState({
     blood_type: '0-',
     amount: 1,

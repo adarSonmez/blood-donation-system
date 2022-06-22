@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getBanks } from '../../api/banks.api';
 import { checkDonor, postDonation } from '../../api/donations.api';
+import { UserContext } from '../../contexts/user.context';
 import bloodTypes from '../../data/bloodTypes';
 
 import './Donation.css';
 
-function Donation({ user }) {
+function Donation() {
   const navigate = useNavigate();
+  const { user } = useContext(UserContext);
 
   const [locked, setLocked] = useState(true);
   const [searched, setSearched] = useState(false);

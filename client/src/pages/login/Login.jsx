@@ -1,11 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { decode, getRandomManager, login } from '../../api/users.api';
+import { UserContext } from '../../contexts/user.context';
 import './Login.css';
 
-function Login({ setUser }) {
+function Login() {
+  const { setUser } = useContext(UserContext);
+
   const navigate = useNavigate();
+
   const [randomManMail, setRandomManMail] = useState('adarsonmez@outlook.com');
   const [form, setForm] = useState({
     email: '',

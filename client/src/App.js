@@ -1,5 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
+import { useContext } from 'react';
+
+import { UserContext } from './contexts/user.context';
 
 import { decode } from './api/users.api';
 import MyOrders from './components/my-orders/MyOrders';
@@ -17,12 +20,7 @@ import ManageOrders from './pages/manage-orders/ManageOrders';
 import ManageAccount from './pages/manage-account/ManageAccount';
 
 function App() {
-  const [user, setUser] = useState({
-    id: '',
-    name: '',
-    email: '',
-    type: '',
-  });
+  const { user, setUser } = useContext(UserContext);
 
   useEffect(() => {
     decode({ token: localStorage.getItem('x-access-token') })
@@ -37,14 +35,14 @@ function App() {
 
   return (
     <div className="App">
-      <Header user={user} setUser={setUser} />
+      <Header />
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route
           path="/donation"
           element={
             user.type === 'receptionist' ? (
-              <Donation user={user} />
+              <Donation />
             ) : (
               <Navigate replace to="/" />
             )
@@ -54,7 +52,7 @@ function App() {
           path="/order-blood"
           element={
             user.type === 'hospital' ? (
-              <OrderBlood user={user} />
+              <OrderBlood />
             ) : (
               <Navigate replace to="/" />
             )
@@ -64,7 +62,7 @@ function App() {
           path="/my-orders"
           element={
             user.type === 'hospital' ? (
-              <MyOrders user={user} />
+              <MyOrders />
             ) : (
               <Navigate replace to="/" />
             )
@@ -74,7 +72,7 @@ function App() {
           path="/manage-orders"
           element={
             user.type === 'system_manager' ? (
-              <ManageOrders user={user} />
+              <ManageOrders />
             ) : (
               <Navigate replace to="/" />
             )
@@ -82,29 +80,17 @@ function App() {
         />
         <Route
           path="/manage-account"
-          element={
-            user.email ? (
-              <ManageAccount user={user} setUser={setUser} />
-            ) : (
-              <Navigate replace to="/" />
-            )
-          }
+          element={user.email ? <ManageAccount /> : <Navigate replace to="/" />}
         />
         <Route
           path="/login"
-          element={
-            user.email ? (
-              <Navigate replace to="/" />
-            ) : (
-              <Login setUser={setUser} />
-            )
-          }
+          element={user.email ? <Navigate replace to="/" /> : <Login />}
         />
         <Route
           path="/register"
           element={
             user.type === 'system_manager' ? (
-              <Register user={user} />
+              <Register />
             ) : (
               <Navigate replace to="/" />
             )

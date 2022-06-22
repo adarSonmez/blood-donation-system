@@ -1,12 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import {
   deleteUserById,
   getUserByEmail,
   updateUser,
 } from '../../api/users.api';
+import { UserContext } from '../../contexts/user.context';
 import './ManageAccount.css';
 
-function ManageAccount({ user, setUser }) {
+function ManageAccount() {
+  const { user, setUser } = useContext(UserContext);
+
   const [checked, setChecked] = useState({
     password: false,
     phone: false,

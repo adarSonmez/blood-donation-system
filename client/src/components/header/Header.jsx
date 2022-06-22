@@ -1,10 +1,10 @@
 import Navbar from '../navbar/Navbar';
 import './Header.css';
 
-function Header({ user, setUser }) {
+function Header() {
   return (
     <header>
-      <Navbar user={user} setUser={setUser} />
+      <Navbar/>
     </header>
   );
 }

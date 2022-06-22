@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { deleteOrder, getOrdersByHospitalId } from '../../api/orders.api';
+import { UserContext } from '../../contexts/user.context';
 
 import './MyOrders.css';
 
-function MyOrders({ user }) {
+function MyOrders() {
+  const { user } = useContext(UserContext);
+  
   const [myOrders, setMyOrders] = useState([]);
 
   useEffect(() => {
