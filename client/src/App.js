@@ -18,9 +18,7 @@ const Register = lazy(() => import('./pages/register/Register'));
 const Donation = lazy(() => import('./pages/donation/Donation'));
 const OrderBlood = lazy(() => import('./pages/order-blood/OrderBlood'));
 const ManageOrders = lazy(() => import('./pages/manage-orders/ManageOrders'));
-const ManageAccount = lazy(() =>
-  import('./pages/manage-account/ManageAccount')
-);
+const ManageAccount = lazy(() =>  import('./pages/manage-account/ManageAccount'));
 
 function App() {
   const { user, setCurrentUser } = useContext(UserContext);
