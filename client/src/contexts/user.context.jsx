@@ -12,7 +12,11 @@ const INITIAL_USER = {
   type: '',
 };
 
-const UserContext = createContext();
+const UserContext = createContext({
+  user: INITIAL_USER,
+  setCurrentUser: () => null,
+  clearCurrentUser: () => null,
+});
 
 const userReducer = (state, action) => {
   const { type, payload } = action;
