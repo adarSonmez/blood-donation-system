@@ -7,8 +7,6 @@ import {
   getTopTenReceptionists,
 } from '../../api/tops.api';
 
-import './TopTens.css';
-
 function TopTens() {
   const [topDonors, setTopDonors] = useState([{ id: 0, unit: 'Donations' }]);
   const [topReceps, setTopReceps] = useState([

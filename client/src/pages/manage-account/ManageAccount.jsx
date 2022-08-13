@@ -5,7 +5,6 @@ import {
   updateUser,
 } from '../../api/users.api';
 import { UserContext } from '../../contexts/user.context';
-import './ManageAccount.css';
 
 function ManageAccount() {
   const { user, clearCurrentUser } = useContext(UserContext);

@@ -5,8 +5,6 @@ import { checkDonor, postDonation } from '../../api/donations.api';
 import { UserContext } from '../../contexts/user.context';
 import bloodTypes from '../../data/bloodTypes';
 
-import './Donation.css';
-
 function Donation() {
   const navigate = useNavigate();
   const { user } = useContext(UserContext);

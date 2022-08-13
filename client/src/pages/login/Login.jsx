@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 
 import { decode, getRandomManager, login } from '../../api/users.api';
 import { UserContext } from '../../contexts/user.context';
-import './Login.css';
 
 function Login() {
   const { setCurrentUser } = useContext(UserContext);

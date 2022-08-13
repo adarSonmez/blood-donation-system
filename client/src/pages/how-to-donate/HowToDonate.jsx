@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getBanks } from '../../api/banks.api';
 
-import './HowToDonate.css';
-
 function HowToDonate() {
   const [banks, setBanks] = useState([]);
 

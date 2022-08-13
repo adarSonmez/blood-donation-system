@@ -1,5 +1,3 @@
-import './BloodTypesTable.css';
-
 function BloodTypesTable({ orders, types }) {
   return (
     <table className="blood-types-table">

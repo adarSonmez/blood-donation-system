@@ -1,5 +1,3 @@
-import './TopTensTable.css';
-
 function TopTensTable({ url, data }) {
   return (
     <table className="top-tens-table">

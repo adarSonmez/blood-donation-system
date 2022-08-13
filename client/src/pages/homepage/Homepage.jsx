@@ -13,8 +13,6 @@ import {
   getTopTenReceptionists,
 } from '../../api/tops.api';
 
-import './Homepage.css';
-
 function Homepage() {
   const navigate = useNavigate();
 

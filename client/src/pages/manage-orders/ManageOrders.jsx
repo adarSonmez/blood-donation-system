@@ -5,8 +5,6 @@ import BloodTypesTable from '../../components/blood-types-table/BloodTypesTable'
 import ManageOrdersTable from '../../components/manage-orders-table/ManageOrdersTable';
 import { UserContext } from '../../contexts/user.context';
 
-import './ManageOrders.css';
-
 function ManageOrders() {
   const { user } = useContext(UserContext);
 

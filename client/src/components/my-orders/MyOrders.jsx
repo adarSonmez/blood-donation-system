@@ -2,8 +2,6 @@ import React, { useContext, useEffect, useState } from 'react';
 import { deleteOrder, getOrdersByHospitalId } from '../../api/orders.api';
 import { UserContext } from '../../contexts/user.context';
 
-import './MyOrders.css';
-
 function MyOrders() {
   const { user } = useContext(UserContext);
   

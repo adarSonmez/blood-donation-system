@@ -5,8 +5,6 @@ import { getRandomManager } from '../../api/users.api';
 import { UserContext } from '../../contexts/user.context';
 import bloodTypes from '../../data/bloodTypes';
 
-import './OrderBlood.css';
-
 function OrderBlood() {
   const navigate = useNavigate();
   const { user } = useContext(UserContext);

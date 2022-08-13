@@ -1,8 +1,6 @@
 import React from 'react';
 import { updateOrderState } from '../../api/orders.api';
 
-import './ManageOrdersTable.css';
-
 function ManageOrdersTable({ updateOrderTable, orders, types }) {
   const approveOrder = (order_id, amount, blood_type) => {
     const stock = types.filter((t) => t.blood_type === blood_type)[0];
