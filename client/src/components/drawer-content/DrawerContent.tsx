@@ -7,6 +7,7 @@ import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import MailIcon from '@mui/icons-material/Mail'
 import Toolbar from '@mui/material/Toolbar'
+import userActions from '../../data/userActions'
 
 function DrawerContent() {
   return (
@@ -14,13 +15,13 @@ function DrawerContent() {
       <Toolbar />
       <Divider />
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem key={text} disablePadding>
+        {userActions.common.map(({link, to, icon}) => (
+          <ListItem key={to} disablePadding>
             <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              <ListItemIcon sx={{color: "#d32f2f"}}>
+                {icon}
               </ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemText primary={link} />
             </ListItemButton>
           </ListItem>
         ))}
