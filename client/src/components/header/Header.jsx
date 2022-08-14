@@ -35,7 +35,6 @@ function Header() {
   return (
     <AppBar
       position="fixed"
-      color="error"
       sx={{
         width: { sm: `calc(100% - ${width}px)` },
         ml: { sm: `${width}px` },

@@ -8,19 +8,30 @@ import ListItemText from '@mui/material/ListItemText'
 import MailIcon from '@mui/icons-material/Mail'
 import Toolbar from '@mui/material/Toolbar'
 import userActions from '../../data/userActions'
+import { useNavigate } from 'react-router-dom'
+import SwitchTheme from '../switch-theme/SwitchTheme'
 
 function DrawerContent() {
+  const navigate = useNavigate()
+  const handleListItemClick = (to: string) => {
+    navigate(to)
+  }
+
   return (
     <div>
-      <Toolbar />
+      <Toolbar>
+        <SwitchTheme />
+      </Toolbar>
       <Divider />
       <List>
-        {userActions.common.map(({link, to, icon}) => (
-          <ListItem key={to} disablePadding>
+        {userActions.common.map(({ link, to, icon }) => (
+          <ListItem
+            key={to}
+            disablePadding
+            onClick={() => handleListItemClick(to)}
+          >
             <ListItemButton>
-              <ListItemIcon sx={{color: "#d32f2f"}}>
-                {icon}
-              </ListItemIcon>
+              <ListItemIcon>{icon}</ListItemIcon>
               <ListItemText primary={link} />
             </ListItemButton>
           </ListItem>

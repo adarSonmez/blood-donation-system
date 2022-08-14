@@ -7,16 +7,19 @@ import App from './App'
 
 import { UserProvider } from './contexts/user.context'
 import { DrawerProvider } from './contexts/drawer.context'
+import { ThemeModeProvider } from './contexts/themeMode.context'
 
 const root = ReactDOM.createRoot(document.getElementById('root')!)
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <UserProvider>
-        <DrawerProvider>
-          <App />
-        </DrawerProvider>
-      </UserProvider>
+      <ThemeModeProvider>
+        <UserProvider>
+          <DrawerProvider>
+            <App />
+          </DrawerProvider>
+        </UserProvider>
+      </ThemeModeProvider>
     </BrowserRouter>
   </React.StrictMode>
 )
