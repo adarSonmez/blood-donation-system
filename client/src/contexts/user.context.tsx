@@ -20,7 +20,7 @@ const INITIAL_USER: User = {
 }
 
 const UserContext = createContext({
-  state: INITIAL_USER,
+  user: INITIAL_USER,
   setCurrentUser: (user: User) => {},
   clearCurrentUser: () => {},
 })
@@ -39,7 +39,7 @@ const userReducer = (state: User, action: UserAction) => {
 }
 
 const UserProvider = ({ children }: { children: ReactNode }) => {
-  const [state, dispatch] = useReducer(userReducer, INITIAL_USER)
+  const [user, dispatch] = useReducer(userReducer, INITIAL_USER)
 
   const setCurrentUser = (user: User) =>
     dispatch({ type: 'SET_CURRENT_USER', payload: user })
@@ -49,7 +49,7 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
     localStorage.removeItem('x-access-token')
   }
 
-  const value = { state, setCurrentUser, clearCurrentUser }
+  const value = { user, setCurrentUser, clearCurrentUser }
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>
 }

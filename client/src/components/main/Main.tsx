@@ -1,38 +1,21 @@
-import { useEffect, lazy, Suspense } from 'react'
+import { lazy, Suspense, useContext } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
-import { useContext } from 'react'
+import { UserContext } from '../../contexts/user.context'
 
-import { decode } from './api/users.api'
-import { UserContext } from './contexts/user.context'
+import Homepage from '../../pages/homepage/Homepage'
+import HowToDonate from '../../pages/how-to-donate/HowToDonate'
+import TopTens from '../../pages/top-tens/TopTens'
+import Login from '../../pages/login/Login'
+import MyOrders from '../../components/my-orders/MyOrders'
 
-import MyOrders from './components/my-orders/MyOrders'
-import Footer from './components/footer/Footer'
-import Header from './components/header/Header'
+const Register = lazy(() => import('../../pages/register/Register'))
+const Donation = lazy(() => import('../../pages/donation/Donation'))
+const OrderBlood = lazy(() => import('../../pages/order-blood/OrderBlood'))
+const ManageOrders = lazy(() => import('../../pages/manage-orders/ManageOrders'))
+const ManageAccount = lazy(() => import('../../pages/manage-account/ManageAccount'))
 
-import Homepage from './pages/homepage/Homepage'
-import HowToDonate from './pages/how-to-donate/HowToDonate'
-import TopTens from './pages/top-tens/TopTens'
-import Login from './pages/login/Login'
-
-const Register = lazy(() => import('./pages/register/Register'))
-const Donation = lazy(() => import('./pages/donation/Donation'))
-const OrderBlood = lazy(() => import('./pages/order-blood/OrderBlood'))
-const ManageOrders = lazy(() => import('./pages/manage-orders/ManageOrders'))
-const ManageAccount = lazy(() => import('./pages/manage-account/ManageAccount'))
-
-function App() {
-  const { user, setCurrentUser } = useContext(UserContext)
-
-  useEffect(() => {
-    decode({ token: localStorage.getItem('x-access-token') })
-      .then((r) => {
-        if (r.data.user) {
-          const { id, name, email, type } = r.data.user
-          setCurrentUser({ id, name, email, type })
-        }
-      })
-      .catch((err) => console.error(err.message))
-  }, [])
+function Main() {
+  const { user } = useContext(UserContext)
 
   return (
     <main>
@@ -104,9 +87,8 @@ function App() {
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Suspense>
-      <Footer />
     </main>
   )
 }
 
-export default App
+export default Main

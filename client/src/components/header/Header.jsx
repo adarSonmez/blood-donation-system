@@ -14,7 +14,7 @@ function Header() {
   } = useContext(DrawerContext)
 
   const {
-    state: { id },
+    user: { id },
     clearCurrentUser,
   } = useContext(UserContext)
 

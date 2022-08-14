@@ -1,19 +1,35 @@
+import { useEffect, lazy, Suspense, useContext, useMemo } from 'react'
+import { Navigate, Route, Routes } from 'react-router-dom'
+
+import { decode } from './api/users.api'
+import { UserContext } from './contexts/user.context'
+import { DrawerContext } from './contexts/drawer.context'
+import { ThemeModeContext } from './contexts/themeMode.context'
+
 import { CssBaseline, ThemeProvider, Toolbar } from '@mui/material'
 import { Box } from '@mui/system'
-import { useContext, useMemo } from 'react'
 import { mainTheme } from './assets/themes/main.theme'
+
 import DrawerContainer from './components/drawer-container/DrawerContainer'
 import Header from './components/header/Header'
-import { DrawerContext } from './contexts/drawer.context'
-import { Mode, ThemeModeContext } from './contexts/themeMode.context'
+import Footer from './components/footer/Footer'
+import Main from './components/main/Main'
 
 function App() {
-  const {
-    theme: { mode },
-  } = useContext(ThemeModeContext)
-  const {
-    state: { width },
-  } = useContext(DrawerContext)
+  const mode = useContext(ThemeModeContext).theme.mode
+  const width = useContext(DrawerContext).state.width
+  const { setCurrentUser } = useContext(UserContext)
+
+  useEffect(() => {
+    decode({ token: localStorage.getItem('x-access-token') })
+      .then((r) => {
+        if (r.data.user) {
+          const { id, name, email, type } = r.data.user
+          setCurrentUser({ id, name, email, type })
+        }
+      })
+      .catch((err) => console.error(err.message))
+  }, [])
 
   const theme = useMemo(() => mainTheme(mode), [mode])
 
@@ -32,7 +48,7 @@ function App() {
           }}
         >
           <Toolbar />
-          some etxt
+          <Main />
         </Box>
       </Box>
     </ThemeProvider>
