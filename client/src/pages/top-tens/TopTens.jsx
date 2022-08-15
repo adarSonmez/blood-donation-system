@@ -1,85 +1,122 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react'
 
-import TopTensTable from '../../components/top-tens-table/TopTensTable';
+import TopTensTable from '../../components/top-tens-table/TopTensTable'
 import {
   getTopTenDonors,
   getTopTenHospitals,
   getTopTenReceptionists,
-} from '../../api/tops.api';
+} from '../../api/tops.api'
+import { useParams } from 'react-router-dom'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+} from '@mui/material'
 
 function TopTens() {
-  const [topDonors, setTopDonors] = useState([{ id: 0, unit: 'Donations' }]);
-  const [topReceps, setTopReceps] = useState([
-    { id: 0, unit: 'Registrations' },
-  ]);
-  const [topHospitals, setTopHospitals] = useState([
-    { id: 0, unit: 'Orders (L)' },
-  ]);
+  const params = useParams()
+  const [tableData, setTableData] = useState([{ id: 0, name: '', amount: 0 }])
+  const [displayData, setDisplayData] = useState({
+    title: '',
+    unit: '',
+  })
 
   useEffect(() => {
-    setStats();
-  }, []);
-
-  const setStats = () => {
-    getTopTenDonors()
-      .then((r) =>
-        setTopDonors(
-          r.data.map(({ donor_id, name, num_of_blood }) => {
-            return {
-              ...topDonors[0],
-              id: donor_id,
-              name: name,
-              num: num_of_blood,
-            };
+    switch (params.type) {
+      case 'donors':
+        getTopTenDonors()
+          .then((r) => {
+            setTableData(
+              r.data.map(({ donor_id, name, num_of_blood }) => {
+                return {
+                  id: donor_id,
+                  name: name,
+                  amount: num_of_blood,
+                }
+              })
+            )
+            setDisplayData({
+              title: 'Top Donors',
+              unit: 'Donations (Units)',
+            })
           })
-        )
-      )
-      .catch((err) => console.error(err.message));
-
-    getTopTenHospitals()
-      .then((r) =>
-        setTopHospitals(
-          r.data.map(({ user_id, full_name, amount_of_blood }) => {
-            return {
-              ...topHospitals[0],
-              id: user_id,
-              name: full_name,
-              num: amount_of_blood / 2,
-            };
+          .catch((err) => console.error(err.message))
+        break
+      case 'receptionists':
+        getTopTenReceptionists()
+          .then((r) => {
+            setTableData(
+              r.data.map(({ user_id, full_name, num_of_registration }) => {
+                return {
+                  id: user_id,
+                  name: full_name,
+                  amount: num_of_registration,
+                }
+              })
+            )
+            setDisplayData({
+              title: 'Top Receptionists',
+              unit: 'Registrations',
+            })
           })
-        )
-      )
-      .catch((err) => console.error(err.message));
-
-    getTopTenReceptionists()
-      .then((r) =>
-        setTopReceps(
-          r.data.map(({ user_id, full_name, num_of_registration }) => {
-            return {
-              ...topReceps[0],
-              id: user_id,
-              name: full_name,
-              num: num_of_registration,
-            };
+          .catch((err) => console.error(err.message))
+        break
+      case 'hospitals':
+        getTopTenHospitals()
+          .then((r) => {
+            setTableData(
+              r.data.map(({ user_id, full_name, amount_of_blood }) => {
+                return {
+                  id: user_id,
+                  name: full_name,
+                  amount: amount_of_blood / 2,
+                }
+              })
+            )
+            setDisplayData({
+              title: 'Top Hospitals',
+              unit: 'Orders (Litters)',
+            })
           })
-        )
-      )
-      .catch((err) => console.error(err.message));
-  };
+          .catch((err) => console.error(err.message))
+        break
+      default:
+        break
+    }
+  }, [params])
 
   return (
-    <main className="top-tens-page">
-      <h2>Top Tens</h2>
-      <div className="top-tens-container">
-        <TopTensTable
-          url="donors"
-          data={topDonors === [] ? { unit: '' } : topDonors}
-        />
-        <TopTensTable url="hospitals" data={topHospitals} />
-        <TopTensTable url="receptionist" data={topReceps} />
-      </div>
-    </main>
-  );
+    <TableContainer sx={{ maxWidth: 700, margin: 'auto' }}>
+      <Typography variant="h5" align="right" component="h3" gutterBottom>
+        {displayData.title}
+      </Typography>
+      <Table aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell>Rank</TableCell>
+            <TableCell align="center">Name</TableCell>
+            <TableCell align="right">{displayData.unit}</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {tableData.map((row, index) => (
+            <TableRow
+              key={row.name}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+              <TableCell>{index}</TableCell>
+              <TableCell align="center">{row.name}</TableCell>
+              <TableCell align="right">{row.amount}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  )
 }
 
-export default TopTens;
+export default TopTens

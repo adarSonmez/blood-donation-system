@@ -82,7 +82,7 @@ function Main() {
               )
             }
           />
-          <Route path="/top-tens" element={<TopTens />} />
+          <Route path="/top-tens/:type" element={<TopTens />} />
           <Route path="/how-to-donate" element={<HowToDonate />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
