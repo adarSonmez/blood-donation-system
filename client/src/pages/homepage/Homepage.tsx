@@ -8,7 +8,6 @@ import {
 } from '@mui/material'
 import StarIcon from '@mui/icons-material/Star'
 import { useState, useEffect, useContext } from 'react'
-import { useNavigate } from 'react-router-dom'
 
 import {
   getLeastAvailableBloodType,
@@ -24,7 +23,6 @@ import {
 import { ThemeModeContext } from '../../contexts/themeMode.context'
 
 function Homepage() {
-  const navigate = useNavigate()
   const mode = useContext(ThemeModeContext).theme.mode
 
   const [totalBlood, setTotalBlood] = useState(1)
@@ -121,7 +119,17 @@ function Homepage() {
 
       <List>
         {LIST_TEXT_DATA.map((item, index) => (
-          <ListItem key={index} sx={{ pl: 1 }}>
+          <ListItem
+            key={index}
+            sx={{
+              pl: {
+                xs: 0,
+                sm: 0,
+                md: 2,
+                lg: 2,
+              },
+            }}
+          >
             <ListItemIcon>
               <StarIcon color={mode === 'light' ? 'primary' : 'inherit'} />
             </ListItemIcon>

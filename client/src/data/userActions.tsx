@@ -39,7 +39,9 @@ const userActions = {
     },
   ],
   common: [
-    { link: 'Top Tens', to: '/top-tens', icon: <EmojiEventsIcon /> },
+    { link: 'Top Donors', to: '/top-donors', icon: <EmojiEventsIcon /> },
+    { link: 'Top Receptionists', to: '/top-donors', icon: <EmojiEventsIcon /> },
+    { link: 'Top Hospitals', to: '/top-donors', icon: <EmojiEventsIcon /> },
     { link: 'How to Donate', to: '/how-to-donate', icon: <HelpIcon /> },
   ],
 }

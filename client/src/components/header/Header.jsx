@@ -36,8 +36,8 @@ function Header() {
     <AppBar
       position="fixed"
       sx={{
-        width: { sm: `calc(100% - ${width}px)` },
-        ml: { sm: `${width}px` },
+        width: { md: `calc(100% - ${width}px)` },
+        ml: { md: `${width}px` },
       }}
     >
       <Toolbar>
@@ -46,7 +46,7 @@ function Header() {
           aria-label="open drawer"
           edge="start"
           onClick={toggleDrawer}
-          sx={{ mr: 2, display: { sm: 'none' } }}
+          sx={{ mr: 2, display: { md: 'none' } }}
         >
           <MenuIcon />
         </IconButton>

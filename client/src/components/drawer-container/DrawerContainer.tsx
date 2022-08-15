@@ -13,7 +13,7 @@ function DrawerContainer() {
   return (
     <Box
       component="nav"
-      sx={{ width: { sm: width }, flexShrink: { sm: 0 } }}
+      sx={{ width: { md: width }, flexShrink: { md: 0 } }}
       aria-label="mailbox folders"
     >
       <Drawer
@@ -25,7 +25,7 @@ function DrawerContainer() {
           keepMounted: true,
         }}
         sx={{
-          display: { xs: 'block', sm: 'none' },
+          display: { xs: 'block', md: 'none' },
           '& .MuiDrawer-paper': {
             boxSizing: 'border-box',
             width: width,
@@ -37,7 +37,7 @@ function DrawerContainer() {
       <Drawer
         variant="permanent"
         sx={{
-          display: { xs: 'none', sm: 'block' },
+          display: { xs: 'none', md: 'block' },
           '& .MuiDrawer-paper': {
             boxSizing: 'border-box',
             width: width,

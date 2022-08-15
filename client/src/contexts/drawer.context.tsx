@@ -11,7 +11,7 @@ export type DrawerState = {
 
 const INITIAL_STATE: DrawerState = {
   open: false,
-  width: 240,
+  width: 250,
 }
 
 const DrawerContext = createContext({
