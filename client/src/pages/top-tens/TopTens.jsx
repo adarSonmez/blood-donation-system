@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 
-import TopTensTable from '../../components/top-tens-table/TopTensTable'
 import {
   getTopTenDonors,
   getTopTenHospitals,
@@ -60,7 +59,7 @@ function TopTens() {
             )
             setDisplayData({
               title: 'Top Receptionists',
-              unit: 'Registrations',
+              unit: 'Registrations (Donors)',
             })
           })
           .catch((err) => console.error(err.message))
@@ -91,15 +90,15 @@ function TopTens() {
 
   return (
     <TableContainer sx={{ maxWidth: 700, margin: 'auto' }}>
-      <Typography variant="h5" align="right" component="h3" gutterBottom>
+      <Typography variant="h5" align="center" component="h3" gutterBottom>
         {displayData.title}
       </Typography>
       <Table aria-label="simple table">
         <TableHead>
-          <TableRow>
-            <TableCell>Rank</TableCell>
+          <TableRow >
+            <TableCell width={110}>Rank</TableCell>
             <TableCell align="center">Name</TableCell>
-            <TableCell align="right">{displayData.unit}</TableCell>
+            <TableCell width={110} align="right">{displayData.unit}</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

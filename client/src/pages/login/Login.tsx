@@ -71,7 +71,7 @@ function Login() {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          padding: 4,
+          padding: '0',
           maxWidth: '500px',
         }}
       >
@@ -82,12 +82,16 @@ function Login() {
           Login
         </Typography>
         <Typography variant="body1" color="textSecondary" align="center">
-          If you are unable to login as a receptionist, hospital or system
-          administrator, please{' '}
+          For security reasons, only system managers can register system users
+          (receptionists, hospitals, system managers).
+          <br />
+          <br />
+          If you wish, click here to use the login options we created for
+          testing purposes, or click{' '}
           <Link href={`mailto:${randomManMail}`} color="secondary">
-            contact us
-          </Link>
-          .
+            here
+          </Link>{' '}
+          to contact one of our system managers to register you to the system.
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           {error && (

@@ -3,8 +3,16 @@ import { getBanks } from '../../api/banks.api'
 import LocationOnIcon from '@mui/icons-material/LocationOn'
 import { Box, List, ListItem, ListItemIcon, Typography } from '@mui/material'
 
+export type Bank = {
+  bank_id: number
+  address: string
+  manager: string
+  capacity: number
+  size: number
+}
+
 function HowToDonate() {
-  const [banks, setBanks] = useState([])
+  const [banks, setBanks] = useState<Bank[]>([])
 
   useEffect(() => {
     getBanks()
@@ -17,12 +25,18 @@ function HowToDonate() {
       <Typography variant="h5" component="h2" align="center" gutterBottom>
         How to Donate
       </Typography>
-      <Typography variant="body1" component="p" align="center" gutterBottom color="textSecondary">
+      <Typography
+        variant="body1"
+        component="p"
+        align="center"
+        gutterBottom
+        color="textSecondary"
+      >
         You can visit one of our listed blood banks at any time and donate
         blood.
       </Typography>
 
-      <List sx={{maxWidth: 500, margin: "auto", marginTop: 2}}>
+      <List sx={{ maxWidth: 500, margin: 'auto', marginTop: 2 }}>
         {banks.map(({ bank_id, address }) => (
           <ListItem
             key={bank_id}

@@ -1,4 +1,18 @@
-function BloodTypesTable({ orders, types }) {
+export type BloodType =
+  | 'A'
+  | 'B'
+  | 'AB'
+  | 'O'
+  | 'A+'
+  | 'A-'
+  | 'B+'
+  | 'B-'
+  | 'AB+'
+  | 'AB-'
+  | 'O+'
+  | 'O-'
+
+function BloodTypesTable({ orders, types }: any) {
   return (
     <table className="blood-types-table">
       <thead>
@@ -12,7 +26,7 @@ function BloodTypesTable({ orders, types }) {
         </tr>
       </thead>
       <tbody>
-        {types.map(({ blood_type, num_of_blood }) => (
+        {types.map(({ blood_type, num_of_blood }: any) => (
           <tr key={blood_type}>
             <td>{blood_type}</td>
             <td>{num_of_blood}</td>
@@ -20,7 +34,7 @@ function BloodTypesTable({ orders, types }) {
         ))}
       </tbody>
     </table>
-  );
+  )
 }
 
-export default BloodTypesTable;
+export default BloodTypesTable

@@ -7,6 +7,12 @@ import LocalShippingIcon from '@mui/icons-material/LocalShipping'
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents'
 import HelpIcon from '@mui/icons-material/Help'
 
+export type SideMenuItem = {
+  link: string
+  to: string
+  icon: JSX.Element
+}
+
 const userActions = {
   system_manager: [
     { link: 'Register User', to: '/register', icon: <AppRegistrationIcon /> },
@@ -40,8 +46,16 @@ const userActions = {
   ],
   common: [
     { link: 'Top Donors', to: 'top-tens/donors', icon: <EmojiEventsIcon /> },
-    { link: 'Top Receptionists', to: 'top-tens/receptionists', icon: <EmojiEventsIcon /> },
-    { link: 'Top Hospitals', to: 'top-tens/hospitals', icon: <EmojiEventsIcon /> },
+    {
+      link: 'Top Receptionists',
+      to: 'top-tens/receptionists',
+      icon: <EmojiEventsIcon />,
+    },
+    {
+      link: 'Top Hospitals',
+      to: 'top-tens/hospitals',
+      icon: <EmojiEventsIcon />,
+    },
     { link: 'How to Donate', to: '/how-to-donate', icon: <HelpIcon /> },
   ],
 }

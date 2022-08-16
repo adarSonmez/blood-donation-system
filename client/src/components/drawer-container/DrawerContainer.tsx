@@ -25,7 +25,7 @@ function DrawerContainer() {
           keepMounted: true,
         }}
         sx={{
-          display: { xs: 'block', md: 'none' },
+          display: { xs: 'block', md: 'flex' },
           '& .MuiDrawer-paper': {
             boxSizing: 'border-box',
             width: width,
@@ -37,7 +37,7 @@ function DrawerContainer() {
       <Drawer
         variant="permanent"
         sx={{
-          display: { xs: 'none', md: 'block' },
+          display: { xs: 'none', md: 'flex' },
           '& .MuiDrawer-paper': {
             boxSizing: 'border-box',
             width: width,

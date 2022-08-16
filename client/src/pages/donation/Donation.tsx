@@ -1,85 +1,87 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { getBanks } from '../../api/banks.api';
-import { checkDonor, postDonation } from '../../api/donations.api';
-import { UserContext } from '../../contexts/user.context';
-import bloodTypes from '../../data/bloodTypes';
+import { ChangeEvent, FormEvent, useContext, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { getBanks } from '../../api/banks.api'
+import { checkDonor, postDonation } from '../../api/donations.api'
+import { UserContext } from '../../contexts/user.context'
+import bloodTypes from '../../data/bloodTypes'
+import { Bank } from '../how-to-donate/HowToDonate'
 
 function Donation() {
-  const navigate = useNavigate();
-  const { user } = useContext(UserContext);
+  const navigate = useNavigate()
+  const { user } = useContext(UserContext)
 
-  const [locked, setLocked] = useState(true);
-  const [searched, setSearched] = useState(false);
-  const [banks, setBanks] = useState([]);
-  const [form1, setFrom1] = useState({ donor_id: '' });
+  const [locked, setLocked] = useState(true)
+  const [searched, setSearched] = useState(false)
+  const [banks, setBanks] = useState<Bank[]>([])
+  const [form1, setFrom1] = useState({ donor_id: 0 })
   const [form2, setForm2] = useState({
     name: '',
     blood_type: '0-',
     bank_id: 1,
-  });
+  })
 
   useEffect(() => {
     getBanks()
       .then((r) => {
         setBanks(
-          r.data.map((bank) =>
+          r.data.map((bank: Bank) =>
             bank.size < bank.capacity
               ? { bank_id: bank.bank_id, address: bank.address }
               : null
           )
-        );
+        )
       })
-      .catch((err) => console.error(err));
-  }, []);
+      .catch((err) => console.error(err))
+  }, [])
 
-  const handleChange = (event, formNo) => {
-    let name = event.target.name;
-    let value = event.target.value;
+  const handleChange = (event: ChangeEvent, formNo: number) => {
+    const element = event.target as HTMLInputElement
+    let name = element.name
+    let value = element.value
 
     if (formNo === 1) {
-      setSearched(false);
-      setFrom1({ ...form1, [name]: value });
-    } else if (formNo === 2) setForm2({ ...form2, [name]: value });
-  };
+      setSearched(false)
+      setFrom1({ ...form1, [name]: value })
+    } else if (formNo === 2) setForm2({ ...form2, [name]: value })
+  }
 
-  const searchSSN = (event) => {
-    event.preventDefault();
-    setSearched(true);
+  const searchSSN = (event: FormEvent) => {
+    event.preventDefault()
+    setSearched(true)
 
     checkDonor({ donor_id: form1.donor_id }).then((r) => {
       if (!r.data.donor) {
         alert(
           `Donor with id ${form1.donor_id} is not registered. Please enter donor information.`
-        );
-        setForm2({ name: '', blood_type: '0-', bank_id: 1 });
-        setLocked(false);
+        )
+        setForm2({ name: '', blood_type: '0-', bank_id: 1 })
+        setLocked(false)
       } else {
-        setLocked(true);
+        setLocked(true)
         setForm2({
           ...form2,
           name: r.data.donor.name,
           blood_type: r.data.donor.blood_type,
-        });
+        })
       }
-    });
-  };
+    })
+  }
 
-  const donateBlood = (event) => {
-    event.preventDefault();
+  const donateBlood = (event: FormEvent) => {
+    event.preventDefault()
 
     if (!searched)
       alert(
         "Please enter the user's SSN first and then click the search button!"
-      );
+      )
     else
       postDonation({ ...form2, ...form1, recep_id: user.id })
         .then(() => {
-          alert('Successfully donated!');
-          navigate('/');
+          alert('Successfully donated!')
+          navigate('/')
         })
-        .catch((err) => console.error(err.message));
-  };
+        .catch((err) => console.error(err.message))
+  }
 
   return (
     <main className="donation-page">
@@ -159,7 +161,7 @@ function Donation() {
         </button>
       </form>
     </main>
-  );
+  )
 }
 
-export default Donation;
+export default Donation
