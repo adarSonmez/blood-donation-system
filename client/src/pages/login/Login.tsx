@@ -43,6 +43,13 @@ function Login() {
   }
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    if (userData.email === '' || userData.password === '') {
+      setError('Please fill all fields')
+      return
+    }
+
     login(userData)
       .then((r) => {
         if (!r.data.success) setError(r.data.message)
@@ -61,7 +68,6 @@ function Login() {
         }
       })
       .catch((e) => setError(e.message))
-    e.preventDefault()
   }
 
   return (

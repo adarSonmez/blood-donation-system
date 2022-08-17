@@ -1,10 +1,12 @@
 import { createContext, ReactNode, useReducer } from 'react'
 
+export type SystemUserType = 'receptionist' | 'hospital' | 'system_manager'
+
 export type User = {
   id: string
   name: string
   email: string
-  type: 'system_manager' | 'receptionist' | 'hospital' | ''
+  type: SystemUserType | ''
 }
 
 export type UserAction = {

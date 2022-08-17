@@ -2,9 +2,12 @@ import { Snackbar } from '@mui/material'
 import { forwardRef, useState } from 'react'
 import MuiAlert, { AlertProps } from '@mui/material/Alert'
 
-type SnackbarMessageProps = {
-  message: string
-  severity: 'success' | 'error' | 'info' | 'warning'
+export type Message = {
+  severity: 'success' | 'info' | 'warning' | 'error'
+  content: string
+}
+
+interface SnackbarMessageProps extends Message {
   clearMessage: () => void
 }
 
@@ -14,7 +17,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => (
 
 function SnackbarMessage({
   severity,
-  message,
+  content,
   clearMessage,
 }: SnackbarMessageProps) {
   const [open, setOpen] = useState(true)
@@ -37,7 +40,7 @@ function SnackbarMessage({
       anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
     >
       <Alert onClose={handleClose} severity={severity} sx={{ width: '100%' }}>
-        {message}
+        {content}
       </Alert>
     </Snackbar>
   )
