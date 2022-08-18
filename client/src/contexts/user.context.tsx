@@ -1,33 +1,27 @@
 import { createContext, ReactNode, useReducer } from 'react'
-
-export type SystemUserType = 'receptionist' | 'hospital' | 'system_manager'
-
-export type User = {
-  id: string
-  name: string
-  email: string
-  type: SystemUserType | ''
-}
+import { SystemUser } from '../api/users.api'
 
 export type UserAction = {
   type: 'SET_CURRENT_USER' | 'CLEAR_CURRENT_USER'
-  payload?: User
+  payload?: SystemUser
 }
 
-const INITIAL_USER: User = {
-  id: '',
-  name: '',
-  email: '',
-  type: '',
+const INITIAL_USER: SystemUser = {
+  user_id: 0,
+  full_name: '',
+  e_mail: '',
+  phone: '',
+  address: '',
+  user_type: '',
 }
 
 const UserContext = createContext({
   user: INITIAL_USER,
-  setCurrentUser: (user: User) => {},
+  setCurrentUser: (user: SystemUser) => {},
   clearCurrentUser: () => {},
 })
 
-const userReducer = (state: User, action: UserAction) => {
+const userReducer = (state: SystemUser, action: UserAction) => {
   const { type, payload } = action
 
   switch (type) {
@@ -43,7 +37,7 @@ const userReducer = (state: User, action: UserAction) => {
 const UserProvider = ({ children }: { children: ReactNode }) => {
   const [user, dispatch] = useReducer(userReducer, INITIAL_USER)
 
-  const setCurrentUser = (user: User) =>
+  const setCurrentUser = (user: SystemUser) =>
     dispatch({ type: 'SET_CURRENT_USER', payload: user })
 
   const clearCurrentUser = () => {

@@ -7,6 +7,6 @@ const {
 const donationsRouter = Router();
 
 donationsRouter.post('/', donation);
-donationsRouter.post('/check-donor', checkDonorId);
+donationsRouter.get('/check', checkDonorId);
 
 module.exports = donationsRouter;

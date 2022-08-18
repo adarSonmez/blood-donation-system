@@ -1,15 +1,7 @@
 import { useState, useEffect } from 'react'
-import { getBanks } from '../../api/banks.api'
+import { Bank, getBanks } from '../../api/banks.api'
 import LocationOnIcon from '@mui/icons-material/LocationOn'
 import { Box, List, ListItem, ListItemIcon, Typography } from '@mui/material'
-
-export type Bank = {
-  bank_id: number
-  address: string
-  manager: string
-  capacity: number
-  size: number
-}
 
 function HowToDonate() {
   const [banks, setBanks] = useState<Bank[]>([])

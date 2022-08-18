@@ -1,17 +1,48 @@
 import axios from 'axios'
+import { BloodType } from '../components/blood-types-table/BloodTypesTable'
+import { ResponseMessage } from '../utils/common.api.types'
 
 const url = 'http://localhost:8000/orders'
 
-const orderBlood = (data: object) => axios.post(url + '/order-blood', data)
-const deleteOrder = (id: number) => axios.delete(url + `?order_id=${id}`)
-const updateOrderState = (data: object) => axios.put(url, data)
-const getOrdersByHospitalId = (id: number) => axios.get(url + `?hospital_id=${id}`)
-const getOrdersForAManager = (id: number) => axios.get(url + `?man_id=${id}`)
-
-export {
-  orderBlood,
-  getOrdersByHospitalId,
-  getOrdersForAManager,
-  deleteOrder,
-  updateOrderState,
+export type OrderBloodRequest = {
+  blood_type: BloodType
+  amount: number
+  hospital_id: number
+  man_id: number
 }
+
+export type UpdateOrderRequest = {
+  order_id: number
+  type: BloodType
+  state: 'approved' | 'rejected'
+}
+
+export type OrderForManagerResponse = {
+  order_id: number
+  order_date: string
+  blood_type: BloodType
+  amount: number
+  full_name: string
+}
+
+export interface OrderForHospitalResponse extends UpdateOrderRequest {
+  order_date: string
+  amount: number
+  hospital_id: number
+  man_id: number
+}
+
+export const orderBlood = (data: OrderBloodRequest) =>
+  axios.post<ResponseMessage>(url + '/order-blood', data)
+
+export const deleteOrder = (id: number) =>
+  axios.delete<ResponseMessage>(url + `?order_id=${id}`)
+
+export const updateOrderState = (data: UpdateOrderRequest) =>
+  axios.put<ResponseMessage>(url, data)
+
+export const getOrdersByHospitalId = (id: number) =>
+  axios.get<OrderForHospitalResponse[]>(url + `?hospital_id=${id}`)
+
+export const getOrdersForAManager = (id: number) =>
+  axios.get<OrderForManagerResponse[]>(url + `?man_id=${id}`)

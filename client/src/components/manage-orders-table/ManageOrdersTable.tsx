@@ -1,23 +1,22 @@
-import React from 'react';
-import { updateOrderState } from '../../api/orders.api';
+import { updateOrderState } from '../../api/orders.api'
 
 function ManageOrdersTable({ updateOrderTable, orders, types }) {
   const approveOrder = (order_id, amount, blood_type) => {
-    const stock = types.filter((t) => t.blood_type === blood_type)[0];
+    const stock = types.filter((t) => t.blood_type === blood_type)[0]
     if (stock.num_of_blood < amount)
-      alert('There is not enough blood available!');
+      alert('There is not enough blood available!')
     else {
       updateOrderState({ order_id, state: 'approved', blood_type, amount })
         .then(() => updateOrderTable())
-        .catch((err) => console.error(err));
+        .catch((err) => console.error(err))
     }
-  };
+  }
 
   const rejectOrder = (order_id, amount, blood_type) => {
     updateOrderState({ order_id, state: 'rejected', blood_type, amount })
       .then(() => updateOrderTable())
-      .catch((err) => console.error(err));
-  };
+      .catch((err) => console.error(err))
+  }
 
   return (
     <table className="manage-orders-table">
@@ -61,7 +60,7 @@ function ManageOrdersTable({ updateOrderTable, orders, types }) {
         )}
       </tbody>
     </table>
-  );
+  )
 }
 
-export default ManageOrdersTable;
+export default ManageOrdersTable

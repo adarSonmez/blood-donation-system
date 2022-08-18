@@ -2,8 +2,30 @@ import axios from 'axios'
 
 const url = 'http://localhost:8000/tops'
 
-const getTopTenReceptionists = () => axios.get(url + '/top-ten-receptionists')
-const getTopTenHospitals = () => axios.get(url + '/top-ten-hospitals')
-const getTopTenDonors = () => axios.get(url + '/top-ten-donors')
+export type TopReceptionistResponse = {
+  user_id: number
+  full_name: string
+  num_of_registration: number
+}
 
-export { getTopTenDonors, getTopTenHospitals, getTopTenReceptionists }
+export type TopHospitalResponse = {
+  user_id: number
+  full_name: string
+  num_of_orders: number
+  amount_of_blood: number
+}
+
+export type TopDonorResponse = {
+  donor_id: number
+  name: string
+  num_of_blood: number
+}
+
+export const getTopTenReceptionists = () =>
+  axios.get<TopReceptionistResponse[]>(url + '/top-ten-receptionists')
+
+export const getTopTenHospitals = () =>
+  axios.get<TopHospitalResponse[]>(url + '/top-ten-hospitals')
+
+export const getTopTenDonors = () =>
+  axios.get<TopDonorResponse[]>(url + '/top-ten-donors')

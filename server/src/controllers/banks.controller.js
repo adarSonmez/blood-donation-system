@@ -1,62 +1,63 @@
-const db = require('../config/db.config');
-const Bank = require('../models/banks.model');
-const { completeMissingBloodTypes } = require('../utils/banks.utils');
+const db = require('../config/db.config')
+const Bank = require('../models/banks.model')
+const { completeMissingBloodTypes } = require('../utils/banks.utils')
+const { internalServerError } = require('../utils/error.utils')
 
 function getBanks(req, res) {
-  const sql = Bank.selectBanks;
+  const sql = Bank.selectBanks
 
   db.query(sql, (err, data) => {
-    if (err) throw err;
-    res.json(data);
-  });
+    if (err) internalServerError(res, err)
+    res.json(data)
+  })
 }
 
 function getTotalDonatedBlood(req, res) {
-  const sql = Bank.selectTotalDonatedBlood;
+  const sql = Bank.selectTotalDonatedBlood
 
   db.query(sql, (err, data) => {
-    if (err) throw err;
-    res.json(data[0]);
-  });
+    if (err) internalServerError(res, err)
+    res.json(data[0])
+  })
 }
 
 function getNumAvailableBlood(req, res) {
-  const sql = Bank.selectNumAvailableBlood;
+  const sql = Bank.selectNumAvailableBlood
 
   db.query(sql, (err, data) => {
-    if (err) throw err;
-    res.json(data[0]);
-  });
+    if (err) internalServerError(res, err)
+    res.json(data[0])
+  })
 }
 
 function getLeastAvailableBloodType(req, res) {
-  const sql = Bank.selectAvailableBloodTypes;
+  const sql = Bank.selectAvailableBloodTypes
 
   db.query(sql, (err, data) => {
-    if (err) throw err;
-    data = completeMissingBloodTypes(data);
-    res.json(data[7]);
-  });
+    if (err) internalServerError(res, err)
+    data = completeMissingBloodTypes(data)
+    res.json(data[7])
+  })
 }
 
 function getMostAvailableBloodType(req, res) {
-  const sql = Bank.selectAvailableBloodTypes;
+  const sql = Bank.selectAvailableBloodTypes
 
   db.query(sql, (err, data) => {
-    if (err) throw err;
-    data = completeMissingBloodTypes(data);
-    res.json(data[0]);
-  });
+    if (err) internalServerError(res, err)
+    data = completeMissingBloodTypes(data)
+    res.json(data[0])
+  })
 }
 
 function getAvailableBloodTypes(req, res) {
-  const sql = Bank.selectAvailableBloodTypes;
+  const sql = Bank.selectAvailableBloodTypes
 
   db.query(sql, (err, data) => {
-    if (err) throw err;
-    data = completeMissingBloodTypes(data);
-    res.json(data);
-  });
+    if (err) internalServerError(res, err)
+    data = completeMissingBloodTypes(data)
+    res.json(data)
+  })
 }
 
 module.exports = {
@@ -66,4 +67,4 @@ module.exports = {
   getLeastAvailableBloodType,
   getMostAvailableBloodType,
   getAvailableBloodTypes,
-};
+}

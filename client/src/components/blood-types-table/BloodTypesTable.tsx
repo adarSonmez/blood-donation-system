@@ -1,16 +1,4 @@
-export type BloodType =
-  | 'A'
-  | 'B'
-  | 'AB'
-  | 'O'
-  | 'A+'
-  | 'A-'
-  | 'B+'
-  | 'B-'
-  | 'AB+'
-  | 'AB-'
-  | 'O+'
-  | 'O-'
+export type BloodType = 'A+' | 'A-' | 'B+' | 'B-' | 'AB+' | 'AB-' | '0+' | '0-'
 
 function BloodTypesTable({ orders, types }: any) {
   return (

@@ -1,10 +1,10 @@
 import { ChangeEvent, FormEvent, useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { getBanks } from '../../api/banks.api'
+import { Bank, getBanks } from '../../api/banks.api'
 import { checkDonor, postDonation } from '../../api/donations.api'
+import { BloodType } from '../../components/blood-types-table/BloodTypesTable'
 import { UserContext } from '../../contexts/user.context'
 import bloodTypes from '../../data/bloodTypes'
-import { Bank } from '../how-to-donate/HowToDonate'
 
 function Donation() {
   const navigate = useNavigate()
@@ -16,20 +16,14 @@ function Donation() {
   const [form1, setFrom1] = useState({ donor_id: 0 })
   const [form2, setForm2] = useState({
     name: '',
-    blood_type: '0-',
+    blood_type: '0-' as BloodType,
     bank_id: 1,
   })
 
   useEffect(() => {
     getBanks()
       .then((r) => {
-        setBanks(
-          r.data.map((bank: Bank) =>
-            bank.size < bank.capacity
-              ? { bank_id: bank.bank_id, address: bank.address }
-              : null
-          )
-        )
+        setBanks(r.data.filter((bank) => bank.size < bank.capacity))
       })
       .catch((err) => console.error(err))
   }, [])
@@ -49,7 +43,7 @@ function Donation() {
     event.preventDefault()
     setSearched(true)
 
-    checkDonor({ donor_id: form1.donor_id }).then((r) => {
+    checkDonor(form1.donor_id).then((r) => {
       if (!r.data.donor) {
         alert(
           `Donor with id ${form1.donor_id} is not registered. Please enter donor information.`

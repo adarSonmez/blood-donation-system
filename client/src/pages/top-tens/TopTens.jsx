@@ -107,7 +107,7 @@ function TopTens() {
               key={row.name}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              <TableCell>{index}</TableCell>
+              <TableCell>{index + 1}</TableCell>
               <TableCell align="center">{row.name}</TableCell>
               <TableCell align="right">{row.amount}</TableCell>
             </TableRow>

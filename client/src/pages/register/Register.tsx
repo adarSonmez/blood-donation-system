@@ -11,9 +11,8 @@ import {
 } from '@mui/material'
 import { Box, Stack } from '@mui/system'
 import { ChangeEvent, FormEvent, useState } from 'react'
-import { register } from '../../api/users.api'
+import { register, SystemUserType } from '../../api/users.api'
 import { Message } from '../../components/snackbar-message/SnackbarMessage'
-import { SystemUserType } from '../../contexts/user.context'
 
 function Register() {
   const INITIAL_MESSAGE: Message = {
@@ -175,7 +174,7 @@ function Register() {
               multiline
               rows={4}
             />
-            <FormControl  fullWidth>
+            <FormControl  fullWidth margin='normal'>
               <InputLabel id="select_user_label">User Type</InputLabel>
               <Select
                 labelId="select_user_label"
