@@ -1,6 +1,5 @@
 import axios from 'axios'
-import { BloodType } from '../components/blood-types-table/BloodTypesTable'
-import { ResponseMessage } from '../utils/common.api.types'
+import { BloodType, ResponseMessage } from '../utils/common.types'
 
 const url = 'http://localhost:8000/orders'
 
@@ -13,8 +12,9 @@ export type OrderBloodRequest = {
 
 export type UpdateOrderRequest = {
   order_id: number
-  type: BloodType
+  blood_type: BloodType
   state: 'approved' | 'rejected'
+  amount: number
 }
 
 export type OrderForManagerResponse = {

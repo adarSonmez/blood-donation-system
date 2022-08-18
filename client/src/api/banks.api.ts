@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { BloodType } from '../components/blood-types-table/BloodTypesTable'
+import { BloodType } from '../utils/common.types'
 
 const url = 'http://localhost:8000/banks'
 

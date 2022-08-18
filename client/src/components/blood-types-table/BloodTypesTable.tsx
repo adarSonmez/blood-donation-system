@@ -1,6 +1,6 @@
-export type BloodType = 'A+' | 'A-' | 'B+' | 'B-' | 'AB+' | 'AB-' | '0+' | '0-'
+import { AmountOfBloodTypeResponse } from '../../api/banks.api'
 
-function BloodTypesTable({ orders, types }: any) {
+function BloodTypesTable({ types }: { types: AmountOfBloodTypeResponse[] }) {
   return (
     <table className="blood-types-table">
       <thead>
@@ -14,7 +14,7 @@ function BloodTypesTable({ orders, types }: any) {
         </tr>
       </thead>
       <tbody>
-        {types.map(({ blood_type, num_of_blood }: any) => (
+        {types.map(({ blood_type, num_of_blood }) => (
           <tr key={blood_type}>
             <td>{blood_type}</td>
             <td>{num_of_blood}</td>

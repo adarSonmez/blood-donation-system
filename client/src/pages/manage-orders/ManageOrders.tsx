@@ -1,7 +1,13 @@
 import { Grid } from '@mui/material'
 import { useContext, useEffect, useState } from 'react'
-import { getAllAvailableBloodTypes } from '../../api/banks.api'
-import { getOrdersForAManager } from '../../api/orders.api'
+import {
+  AmountOfBloodTypeResponse,
+  getAllAvailableBloodTypes,
+} from '../../api/banks.api'
+import {
+  getOrdersForAManager,
+  OrderForManagerResponse,
+} from '../../api/orders.api'
 import BloodTypesTable from '../../components/blood-types-table/BloodTypesTable'
 import ManageOrdersTable from '../../components/manage-orders-table/ManageOrdersTable'
 import { UserContext } from '../../contexts/user.context'
@@ -9,16 +15,16 @@ import { UserContext } from '../../contexts/user.context'
 function ManageOrders() {
   const { user } = useContext(UserContext)
 
-  const [orders, setOrders] = useState([])
-  const [types, setTypes] = useState([])
+  const [orders, setOrders] = useState<OrderForManagerResponse[]>([])
+  const [types, setTypes] = useState<AmountOfBloodTypeResponse[]>([])
 
   useEffect(() => {
-    getOrdersForAManager(user.id)
+    getOrdersForAManager(user.user_id)
       .then((r) => {
         setOrders(r.data)
       })
       .catch((err) => console.error(err))
-  }, [user.id])
+  }, [user.user_id])
 
   useEffect(() => {
     getAllAvailableBloodTypes()
@@ -30,15 +36,29 @@ function ManageOrders() {
 
   return (
     <Grid container spacing={2}>
-      <Grid item xs={12} lg={8} display="flex" alignItems="center" justifyContent={'center'}>
+      <Grid
+        item
+        xs={12}
+        lg={8}
+        display="flex"
+        alignItems="center"
+        justifyContent={'center'}
+      >
         <ManageOrdersTable
           orders={orders}
           updateOrderTable={updateOrderTable}
           types={types}
         />
       </Grid>
-      <Grid item xs={12} lg={4} display="flex" alignItems="center" justifyContent={'center'}>
-        <BloodTypesTable orders={orders} types={types} />
+      <Grid
+        item
+        xs={12}
+        lg={4}
+        display="flex"
+        alignItems="center"
+        justifyContent={'center'}
+      >
+        <BloodTypesTable types={types} />
       </Grid>
     </Grid>
   )

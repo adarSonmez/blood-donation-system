@@ -1,7 +1,21 @@
-import { updateOrderState } from '../../api/orders.api'
+import { AmountOfBloodTypeResponse } from '../../api/banks.api'
+import { OrderForManagerResponse, updateOrderState } from '../../api/orders.api'
+import { BloodType } from '../../utils/common.types'
 
-function ManageOrdersTable({ updateOrderTable, orders, types }) {
-  const approveOrder = (order_id, amount, blood_type) => {
+type ManageOrdersTableProps = {
+  orders: OrderForManagerResponse[]
+  updateOrderTable: () => void
+  types: AmountOfBloodTypeResponse[]
+}
+
+type ChangeOrderStateParams = {
+  order_id: number
+  amount: number
+  blood_type: BloodType
+}
+
+function ManageOrdersTable({ updateOrderTable, orders,types}: ManageOrdersTableProps) {
+  const approveOrder = ({order_id, amount, blood_type}: ChangeOrderStateParams) => {
     const stock = types.filter((t) => t.blood_type === blood_type)[0]
     if (stock.num_of_blood < amount)
       alert('There is not enough blood available!')
@@ -12,7 +26,7 @@ function ManageOrdersTable({ updateOrderTable, orders, types }) {
     }
   }
 
-  const rejectOrder = (order_id, amount, blood_type) => {
+  const rejectOrder = ({order_id, amount, blood_type}: ChangeOrderStateParams) => {
     updateOrderState({ order_id, state: 'rejected', blood_type, amount })
       .then(() => updateOrderTable())
       .catch((err) => console.error(err))
@@ -46,13 +60,13 @@ function ManageOrdersTable({ updateOrderTable, orders, types }) {
               <td>
                 <i
                   className="bi bi-check"
-                  onClick={() => approveOrder(order_id, amount, blood_type)}
+                  onClick={() => approveOrder({ order_id, amount, blood_type })}
                 ></i>
               </td>
               <td>
                 <i
                   className="bi bi-x"
-                  onClick={() => rejectOrder(order_id, amount, blood_type)}
+                  onClick={() => rejectOrder({ order_id, amount, blood_type })}
                 ></i>
               </td>
             </tr>

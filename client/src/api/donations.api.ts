@@ -1,6 +1,5 @@
 import axios from 'axios'
-import { BloodType } from '../components/blood-types-table/BloodTypesTable'
-import { ResponseMessage } from '../utils/common.api.types'
+import { BloodType, ResponseMessage } from '../utils/common.types'
 
 const url = 'http://localhost:8000/donations'
 

@@ -14,7 +14,7 @@ function Header() {
   } = useContext(DrawerContext)
 
   const {
-    user: { id },
+    user: { user_type },
     clearCurrentUser,
   } = useContext(UserContext)
 
@@ -62,7 +62,7 @@ function Header() {
           </Typography>
         </Box>
 
-        {id === '' ? (
+        {user_type === '' ? (
           <Button color="inherit" size="large" onClick={handleLogin}>
             Login
           </Button>

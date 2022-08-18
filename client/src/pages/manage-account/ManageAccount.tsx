@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { ChangeEvent, FormEvent, useContext, useEffect, useState } from 'react';
 import {
   deleteUserById,
   getUserByEmail,
@@ -22,7 +22,7 @@ function ManageAccount() {
   });
 
   useEffect(() => {
-    getUserByEmail(user.email)
+    getUserByEmail(user.e_mail)
       .then((u) =>
         setUpdateForm({
           password: u.data.password,
@@ -33,9 +33,9 @@ function ManageAccount() {
       .catch((err) => console.error(err.message));
   }, [user]);
 
-  const handleTextChange = (event) => {
-    let name = event.target.name;
-    let value = event.target.value;
+  const handleTextChange = (event: ChangeEvent) => {
+    const element = event.target as HTMLInputElement;
+    let { name, value } = element;
 
     setUpdateForm({
       ...updateForm,
@@ -43,8 +43,8 @@ function ManageAccount() {
     });
   };
 
-  const handleCheckedChange = (event) => {
-    let name = event.target.id;
+  const handleCheckedChange = (event: ChangeEvent) => {
+    let name = event.target.id as keyof typeof checked;
 
     setChecked({
       ...checked,
@@ -52,20 +52,20 @@ function ManageAccount() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    updateUser({ ...updateForm, e_mail: user.email })
+    updateUser({ ...updateForm, e_mail: user.e_mail })
       .then(() => alert('User information has been successfully changed!'))
       .catch((err) => console.error(err.message));
   };
 
-  const deleteAccount = (e) => {
+  const deleteAccount = (e: FormEvent) => {
     const deleted = window.confirm(
       'Are you sure you want to delete your account?'
     );
 
     if (deleted)
-      deleteUserById(user.id)
+      deleteUserById(user.user_id)
         .then(() => clearCurrentUser())
         .catch((e) => console.error(e));
   };

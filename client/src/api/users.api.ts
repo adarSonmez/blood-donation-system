@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { ResponseMessage } from '../utils/common.api.types'
+import { ResponseMessage } from '../utils/common.types'
 
 const url = 'http://localhost:8000/users'
 
@@ -11,7 +11,8 @@ export type SystemUser = {
   e_mail: string
   phone: string
   address: string
-  user_type: SystemUserType | ''
+  user_type: SystemUserType | ''  
+  password: string
 }
 
 export type RandomManager = {
@@ -47,7 +48,7 @@ export type UpdateUserRequest = {
 }
 
 export interface DecodeTokenResponse extends ResponseMessage {
-  user: SystemUserType
+  user: SystemUser
 }
 
 export const login = (user: LoginRequest) =>
@@ -65,7 +66,7 @@ export const getUserByEmail = (email: string) =>
 export const updateUser = (data: UpdateUserRequest) =>
   axios.put<ResponseMessage>(url, data)
 
-export const deleteUserById = (id: string) =>
+export const deleteUserById = (id: number) =>
   axios.delete<ResponseMessage>(url + `?user_id=${id}`)
 
 export const getRandomManager = () =>

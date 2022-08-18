@@ -13,6 +13,7 @@ const INITIAL_USER: SystemUser = {
   phone: '',
   address: '',
   user_type: '',
+  password: '',
 }
 
 const UserContext = createContext({

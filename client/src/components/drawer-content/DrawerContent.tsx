@@ -12,20 +12,19 @@ import { UserContext } from '../../contexts/user.context'
 import { useContext, useEffect, useState } from 'react'
 import { Box } from '@mui/system'
 import CopyRight from '../copy-right/Copyright'
-import { Link, Typography } from '@mui/material'
 import InfoForTestLogin from '../InfoForTestLogin/InfoForTestLogin'
 
 function DrawerContent() {
   const navigate = useNavigate()
   const handleListItemClick = (to: string) => navigate(to)
   const {
-    user: { type },
+    user: { user_type },
   } = useContext(UserContext)
   const [privateMenus, setPrivateMenus] = useState<SideMenuItem[]>([])
 
   useEffect(() => {
-    setPrivateMenus(type ? userActions[type] : [])
-  }, [type])
+    setPrivateMenus(user_type ? userActions[user_type] : [])
+  }, [user_type])
 
   return (
     <>

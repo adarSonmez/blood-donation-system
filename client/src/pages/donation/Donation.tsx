@@ -2,9 +2,9 @@ import { ChangeEvent, FormEvent, useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Bank, getBanks } from '../../api/banks.api'
 import { checkDonor, postDonation } from '../../api/donations.api'
-import { BloodType } from '../../components/blood-types-table/BloodTypesTable'
 import { UserContext } from '../../contexts/user.context'
 import bloodTypes from '../../data/bloodTypes'
+import { BloodType } from '../../utils/common.types'
 
 function Donation() {
   const navigate = useNavigate()
@@ -69,7 +69,7 @@ function Donation() {
         "Please enter the user's SSN first and then click the search button!"
       )
     else
-      postDonation({ ...form2, ...form1, recep_id: user.id })
+      postDonation({ ...form2, ...form1, recep_id: user.user_id })
         .then(() => {
           alert('Successfully donated!')
           navigate('/')

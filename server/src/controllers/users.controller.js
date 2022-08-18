@@ -4,10 +4,10 @@ const db = require('../config/db.config')
 const User = require('../models/users.model')
 
 function login(req, res) {
-  const { email, password } = req.body
+  const { e_mail, password } = req.body
   const sql = User.selectUserByEmail
 
-  db.query(sql, [email], (err, data) => {
+  db.query(sql, [e_mail], (err, data) => {
     if (err) internalServerError(res, err)
 
     const user = data[0]
@@ -18,10 +18,8 @@ function login(req, res) {
     else {
       const token = sign(
         {
-          id: user.user_id,
-          name: user.full_name,
-          email: user.e_mail,
-          type: user.user_type,
+          ...user,
+          password: 'ACTUALLY PASSWORD IS NOT SENT!',
         },
         process.env.TOKEN_SECRET,
         {
@@ -65,11 +63,10 @@ function decodeToken(req, res) {
 
   try {
     const decoded = verify(token, process.env.TOKEN_SECRET)
-    const { name, email, type, id } = decoded
     return res.json({
       success: true,
       message: 'Token Verified!',
-      user: { name, email, type, id },
+      user: decoded,
     })
   } catch (err) {
     console.error(err.message)

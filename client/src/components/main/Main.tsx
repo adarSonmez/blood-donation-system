@@ -25,7 +25,7 @@ function Main() {
           <Route
             path="/donation"
             element={
-              user.type === 'receptionist' ? (
+              user.user_type === 'receptionist' ? (
                 <Donation />
               ) : (
                 <Navigate replace to="/" />
@@ -35,7 +35,7 @@ function Main() {
           <Route
             path="/order-blood"
             element={
-              user.type === 'hospital' ? (
+              user.user_type === 'hospital' ? (
                 <OrderBlood />
               ) : (
                 <Navigate replace to="/" />
@@ -45,7 +45,7 @@ function Main() {
           <Route
             path="/my-orders"
             element={
-              user.type === 'hospital' ? (
+              user.user_type === 'hospital' ? (
                 <MyOrders />
               ) : (
                 <Navigate replace to="/" />
@@ -55,7 +55,7 @@ function Main() {
           <Route
             path="/manage-orders"
             element={
-              user.type === 'system_manager' ? (
+              user.user_type === 'system_manager' ? (
                 <ManageOrders />
               ) : (
                 <Navigate replace to="/" />
@@ -65,17 +65,17 @@ function Main() {
           <Route
             path="/manage-account"
             element={
-              user.email ? <ManageAccount /> : <Navigate replace to="/" />
+              user.e_mail ? <ManageAccount /> : <Navigate replace to="/" />
             }
           />
           <Route
             path="/login"
-            element={user.email ? <Navigate replace to="/" /> : <Login />}
+            element={user.e_mail ? <Navigate replace to="/" /> : <Login />}
           />
           <Route
             path="/register"
             element={
-              user.type === 'system_manager' ? (
+              user.user_type === 'system_manager' ? (
                 <Register />
               ) : (
                 <Navigate replace to="/" />

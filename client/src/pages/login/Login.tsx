@@ -1,6 +1,6 @@
 import { ChangeEvent, FormEvent, useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { decode, getRandomManager, login } from '../../api/users.api'
+import { decode, getRandomManager, login, LoginRequest } from '../../api/users.api'
 import { UserContext } from '../../contexts/user.context'
 
 import { Stack } from '@mui/system'
@@ -21,8 +21,8 @@ function Login() {
   const [error, setError] = useState('')
 
   const [randomManMail, setRandomManMail] = useState('adarsonmz@gmail.com')
-  const [userData, setUserData] = useState({
-    email: '',
+  const [userData, setUserData] = useState<LoginRequest>({
+    e_mail: '',
     password: '',
   })
 
@@ -45,8 +45,8 @@ function Login() {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    if (userData.email === '' || userData.password === '') {
-      setError('Please fill all fields')
+    if (userData.e_mail === '' || userData.password === '') {
+      console.log(userData)
       return
     }
 
@@ -59,8 +59,7 @@ function Login() {
           decode({ token: localStorage.getItem('x-access-token') })
             .then((r) => {
               if (r.data.user) {
-                const { id, name, email, type } = r.data.user
-                setCurrentUser({ id, name, email, type })
+                setCurrentUser(r.data.user)
               }
             })
             .catch((err) => setError(err.message))
@@ -109,14 +108,16 @@ function Login() {
             margin="normal"
             required
             fullWidth
-            id="email"
+            id="e_mail"
             label="Email Address"
-            name="email"
-            autoComplete="email"
+            name="e_mail"
+            autoComplete="e_mail"
             autoFocus
             size="small"
             color="secondary"
+            value={userData.e_mail}
             onChange={handleChange}
+            type="email"
           />
           <TextField
             size="small"
@@ -129,6 +130,7 @@ function Login() {
             id="password"
             color="secondary"
             autoComplete="current-password"
+            value={userData.password}
             onChange={handleChange}
           />
           <FormControlLabel

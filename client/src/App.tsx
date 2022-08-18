@@ -12,7 +12,6 @@ import { mainTheme } from './assets/themes/main.theme'
 
 import DrawerContainer from './components/drawer-container/DrawerContainer'
 import Header from './components/header/Header'
-import Footer from './components/footer/Footer'
 import Main from './components/main/Main'
 
 function App() {
@@ -24,8 +23,7 @@ function App() {
     decode({ token: localStorage.getItem('x-access-token') })
       .then((r) => {
         if (r.data.user) {
-          const { id, name, email, type } = r.data.user
-          setCurrentUser({ id, name, email, type })
+          setCurrentUser(r.data.user)
         }
       })
       .catch((err) => console.error(err.message))
