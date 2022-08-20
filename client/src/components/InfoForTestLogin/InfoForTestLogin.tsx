@@ -1,4 +1,5 @@
 import { Box, Typography } from '@mui/material'
+import { Link } from 'react-router-dom'
 
 function InfoForTestLogin() {
   return (
@@ -16,7 +17,7 @@ function InfoForTestLogin() {
       color="text.secondary"
     >
       <Typography variant="body1" color="text.secondary">
-        Please login to access private menus!
+        Please <Link to="/login">login</Link> to access private menus!
       </Typography>
     </Box>
   )

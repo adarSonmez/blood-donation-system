@@ -7,19 +7,24 @@ import HowToDonate from '../../pages/how-to-donate/HowToDonate'
 import Champions from '../../pages/champions/Champions'
 import Login from '../../pages/login/Login'
 import MyOrders from '../../components/my-orders/MyOrders'
+import Spinner from '../spinner/Spinner'
 
 const Register = lazy(() => import('../../pages/register/Register'))
 const Donation = lazy(() => import('../../pages/donation/Donation'))
 const OrderBlood = lazy(() => import('../../pages/order-blood/OrderBlood'))
-const ManageOrders = lazy(() => import('../../pages/manage-orders/ManageOrders'))
-const ManageAccount = lazy(() => import('../../pages/manage-account/ManageAccount'))
+const ManageOrders = lazy(
+  () => import('../../pages/manage-orders/ManageOrders')
+)
+const ManageAccount = lazy(
+  () => import('../../pages/manage-account/ManageAccount')
+)
 
 function Main() {
   const { user } = useContext(UserContext)
 
   return (
     <main>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Spinner />}>
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route
