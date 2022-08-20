@@ -40,7 +40,6 @@ function App() {
           component="main"
           sx={{
             flexGrow: 1,
-            p: 4,
             width: { sm: `calc(100% - ${width}px)` },
           }}
         >

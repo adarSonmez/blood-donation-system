@@ -13,7 +13,7 @@ function HowToDonate() {
   }, [])
 
   return (
-    <Box>
+    <Box pt={4}>
       <Typography variant="h5" component="h2" align="center" gutterBottom>
         How to Donate
       </Typography>

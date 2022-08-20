@@ -4,7 +4,7 @@ import { UserContext } from '../../contexts/user.context'
 
 import Homepage from '../../pages/homepage/Homepage'
 import HowToDonate from '../../pages/how-to-donate/HowToDonate'
-import TopTens from '../../pages/top-tens/TopTens'
+import Champions from '../../pages/champions/Champions'
 import Login from '../../pages/login/Login'
 import MyOrders from '../../components/my-orders/MyOrders'
 
@@ -82,7 +82,7 @@ function Main() {
               )
             }
           />
-          <Route path="/top-tens/:type" element={<TopTens />} />
+          <Route path="/champions" element={<Champions />} />
           <Route path="/how-to-donate" element={<HowToDonate />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>

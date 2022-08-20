@@ -73,7 +73,7 @@ function Register() {
   }
 
   return (
-    <Stack alignItems={'center'}>
+    <Stack alignItems={'center'} pt={4}>
       <Box
         sx={{
           display: 'flex',
