@@ -93,7 +93,7 @@ function TopTens() {
       <Typography variant="h5" align="center" component="h3" gutterBottom>
         {displayData.title}
       </Typography>
-      <Table aria-label="simple table">
+      <Table aria-label="top-tens table">
         <TableHead>
           <TableRow >
             <TableCell width={110}>Rank</TableCell>

@@ -1,10 +1,21 @@
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+} from '@mui/material'
+import CheckCircleIcon from '@mui/icons-material/CheckCircleOutline'
+import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined'
 import { AmountOfBloodTypeResponse } from '../../api/banks.api'
 import { OrderForManagerResponse, updateOrderState } from '../../api/orders.api'
 import { BloodType } from '../../utils/common.types'
 
 type ManageOrdersTableProps = {
   orders: OrderForManagerResponse[]
-  updateOrderTable: () => void
+  updateTables: () => void
   types: AmountOfBloodTypeResponse[]
 }
 
@@ -14,66 +25,99 @@ type ChangeOrderStateParams = {
   blood_type: BloodType
 }
 
-function ManageOrdersTable({ updateOrderTable, orders,types}: ManageOrdersTableProps) {
-  const approveOrder = ({order_id, amount, blood_type}: ChangeOrderStateParams) => {
+function ManageOrdersTable({
+  updateTables,
+  orders,
+  types,
+}: ManageOrdersTableProps) {
+  const approveOrder = ({
+    order_id,
+    amount,
+    blood_type,
+  }: ChangeOrderStateParams) => {
     const stock = types.filter((t) => t.blood_type === blood_type)[0]
     if (stock.num_of_blood < amount)
       alert('There is not enough blood available!')
     else {
       updateOrderState({ order_id, state: 'approved', blood_type, amount })
-        .then(() => updateOrderTable())
+        .then(() => updateTables())
         .catch((err) => console.error(err))
     }
   }
 
-  const rejectOrder = ({order_id, amount, blood_type}: ChangeOrderStateParams) => {
+  const rejectOrder = ({
+    order_id,
+    amount,
+    blood_type,
+  }: ChangeOrderStateParams) => {
     updateOrderState({ order_id, state: 'rejected', blood_type, amount })
-      .then(() => updateOrderTable())
+      .then(() => updateTables())
       .catch((err) => console.error(err))
   }
 
   return (
-    <table className="manage-orders-table">
-      {orders[0] ? (
-        <caption>Please manage orders!</caption>
-      ) : (
-        <caption>No orders to manage.</caption>
-      )}
-      <thead>
-        <tr>
-          <th>Hospital</th>
-          <th>Type</th>
-          <th>Units</th>
-          <th>Order Date</th>
-          <th>Approve</th>
-          <th>Reject</th>
-        </tr>
-      </thead>
-      <tbody>
-        {orders.map(
-          ({ blood_type, amount, order_date, order_id, full_name }) => (
-            <tr key={order_id}>
-              <td>{full_name}</td>
-              <td>{blood_type}</td>
-              <td>{amount}</td>
-              <td>{new Date(order_date).toLocaleDateString()}</td>
-              <td>
-                <i
-                  className="bi bi-check"
-                  onClick={() => approveOrder({ order_id, amount, blood_type })}
-                ></i>
-              </td>
-              <td>
-                <i
-                  className="bi bi-x"
-                  onClick={() => rejectOrder({ order_id, amount, blood_type })}
-                ></i>
-              </td>
-            </tr>
-          )
-        )}
-      </tbody>
-    </table>
+    <TableContainer>
+      <Typography
+        variant="subtitle1"
+        component="h6"
+        align="center"
+        gutterBottom
+      >
+        Manage Orders
+      </Typography>
+      <Table aria-label="manage orders table">
+        <TableHead>
+          <TableRow>
+            <TableCell>Hospital</TableCell>
+            <TableCell>Type</TableCell>
+            <TableCell>Units</TableCell>
+            <TableCell>Order Date</TableCell>
+            <TableCell align="center">Approve</TableCell>
+            <TableCell align="center">Reject</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {orders.length !== 0 ? (
+            orders.map(
+              ({ blood_type, amount, order_date, order_id, full_name }) => (
+                <TableRow key={order_id}>
+                  <TableCell>{full_name}</TableCell>
+                  <TableCell>{blood_type}</TableCell>
+                  <TableCell>{amount}</TableCell>
+                  <TableCell>
+                    {new Date(order_date).toLocaleDateString()}
+                  </TableCell>
+                  <TableCell align="center">
+                    <CheckCircleIcon
+                      cursor="pointer"
+                      color="success"
+                      onClick={() =>
+                        approveOrder({ order_id, amount, blood_type })
+                      }
+                    />
+                  </TableCell>
+                  <TableCell align="center">
+                    <CancelOutlinedIcon
+                      cursor="pointer"
+                      color="error"
+                      onClick={() =>
+                        rejectOrder({ order_id, amount, blood_type })
+                      }
+                    />
+                  </TableCell>
+                </TableRow>
+              )
+            )
+          ) : (
+            <TableRow>
+              <TableCell align="center" colSpan={6}>
+                No orders to manage
+              </TableCell>
+            </TableRow>
+          )}
+        </TableBody>
+      </Table>
+    </TableContainer>
   )
 }
 

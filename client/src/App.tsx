@@ -1,5 +1,4 @@
-import { useEffect, lazy, Suspense, useContext, useMemo } from 'react'
-import { Navigate, Route, Routes } from 'react-router-dom'
+import { useEffect, useContext, useMemo } from 'react'
 
 import { decode } from './api/users.api'
 import { UserContext } from './contexts/user.context'

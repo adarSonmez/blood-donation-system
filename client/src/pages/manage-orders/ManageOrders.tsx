@@ -1,5 +1,5 @@
 import { Grid } from '@mui/material'
-import { useContext, useEffect, useState } from 'react'
+import { useCallback, useContext, useEffect, useState } from 'react'
 import {
   AmountOfBloodTypeResponse,
   getAllAvailableBloodTypes,
@@ -17,6 +17,7 @@ function ManageOrders() {
 
   const [orders, setOrders] = useState<OrderForManagerResponse[]>([])
   const [types, setTypes] = useState<AmountOfBloodTypeResponse[]>([])
+  const [updateNum, setUpdateNum] = useState(0)
 
   useEffect(() => {
     getOrdersForAManager(user.user_id)
@@ -24,36 +25,29 @@ function ManageOrders() {
         setOrders(r.data)
       })
       .catch((err) => console.error(err))
-  }, [user.user_id])
 
-  useEffect(() => {
     getAllAvailableBloodTypes()
       .then((r) => setTypes(r.data))
       .catch((err) => console.error(err))
-  }, [orders])
+  }, [user.user_id, updateNum])
 
-  const updateOrderTable = () => {}
+  const updateTables = () => {
+    setUpdateNum((prev) => prev + 1)
+  }
 
   return (
-    <Grid container spacing={2}>
-      <Grid
-        item
-        xs={12}
-        lg={8}
-        display="flex"
-        alignItems="center"
-        justifyContent={'center'}
-      >
+    <Grid container spacing={4}>
+      <Grid item xs={12} lg={9}>
         <ManageOrdersTable
           orders={orders}
-          updateOrderTable={updateOrderTable}
+          updateTables={updateTables}
           types={types}
         />
       </Grid>
       <Grid
         item
         xs={12}
-        lg={4}
+        lg={3}
         display="flex"
         alignItems="center"
         justifyContent={'center'}

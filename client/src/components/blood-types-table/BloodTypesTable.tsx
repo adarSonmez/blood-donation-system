@@ -1,27 +1,42 @@
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+} from '@mui/material'
 import { AmountOfBloodTypeResponse } from '../../api/banks.api'
 
 function BloodTypesTable({ types }: { types: AmountOfBloodTypeResponse[] }) {
   return (
-    <table className="blood-types-table">
-      <thead>
-        <tr>
-          <th>Type</th>
-          <th>
-            Units
-            <br />
-            (0.5L)
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        {types.map(({ blood_type, num_of_blood }) => (
-          <tr key={blood_type}>
-            <td>{blood_type}</td>
-            <td>{num_of_blood}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <TableContainer sx={{maxWidth: "250px"}}>
+      <Typography
+        variant="subtitle1"
+        component="h6"
+        align="center"
+        gutterBottom
+      >
+        Blood Types
+      </Typography>
+      <Table aria-label="remaining blood types table">
+        <TableHead>
+          <TableRow>
+            <TableCell align='center'>Type</TableCell>
+            <TableCell align='center'>Units (0.5L)</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {types.map((t) => (
+            <TableRow key={t.blood_type}>
+              <TableCell align='center'>{t.blood_type}</TableCell>
+              <TableCell align='center'>{t.num_of_blood}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
   )
 }
 
