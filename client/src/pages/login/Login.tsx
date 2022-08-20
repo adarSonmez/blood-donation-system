@@ -98,7 +98,7 @@ function Login() {
           </Link>{' '}
           to contact one of our system managers to register you to the system.
         </Typography>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
           {error && (
             <Alert severity="error" onClose={() => setError('')}>
               {error}

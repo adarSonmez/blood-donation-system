@@ -73,138 +73,123 @@ function Register() {
   }
 
   return (
-    <>
-      <Stack alignItems={'center'}>
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            padding: '0',
-            maxWidth: '500px',
-          }}
-        >
-          <Typography component="h1" variant="h5" gutterBottom>
-            Register User
-          </Typography>
+    <Stack alignItems={'center'}>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          padding: '0',
+          maxWidth: '500px',
+        }}
+      >
+        <Typography component="h1" variant="h5" gutterBottom>
+          Register User
+        </Typography>
 
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-            sx={{ mt: 1 }}
-          >
-            {message.content && (
-              <Alert
-                severity={message.severity}
-                onClose={() => setMessage(INITIAL_MESSAGE)}
-              >
-                {message.content}
-              </Alert>
-            )}
-            <TextField
-              size="small"
-              margin="normal"
-              required
-              fullWidth
-              name="full_name"
-              label="Full Name"
-              type="text"
-              id="full_name"
-              
-              autoComplete="full_name"
-              value={form.full_name}
-              onChange={handleChange}
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="e_mail"
-              label="Email Address"
-              name="e_mail"
-              autoComplete="e_mail"
-              autoFocus
-              size="small"
-              type="email"
-              
-              value={form.e_mail}
-              onChange={handleChange}
-            />
-            <TextField
-              size="small"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Temporary Password"
-              type="password"
-              id="password"
-              
-              autoComplete="current-password"
-              value={form.password}
-              onChange={handleChange}
-            />
-            <TextField
-              size="small"
-              margin="normal"
-              required
-              fullWidth
-              name="phone"
-              label="Phone Number"
-              type="tel"
-              id="phone"
-              
-              autoComplete="phone"
-              value={form.phone}
-              onChange={handleChange}
-            />
-            <TextField
-              size="small"
-              margin="normal"
-              required
-              fullWidth
-              name="address"
-              label="Address"
-              id="address"
-              
-              autoComplete="address"
-              value={form.address}
-              onChange={handleChange}
-              multiline
-              rows={4}
-            />
-            <FormControl  fullWidth margin='normal'>
-              <InputLabel id="select_user_label">User Type</InputLabel>
-              <Select
-                labelId="select_user_label"
-                id="user_type"
-                name="user_type"
-                onChange={handleChange}
-                required
-                label="User Type"
-                value={form.user_type}
-              >
-                <MenuItem value={'receptionist'}>
-                  Receptionist
-                </MenuItem>
-                <MenuItem value={'hospital'}>Hospital</MenuItem>
-                <MenuItem value={'system_manager'}>System Manager</MenuItem>
-              </Select>
-            </FormControl>
-            <Button
-              
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 1, mb: 2 }}
+        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
+          {message.content && (
+            <Alert
+              severity={message.severity}
+              onClose={() => setMessage(INITIAL_MESSAGE)}
             >
-              Register
-            </Button>
-          </Box>
+              {message.content}
+            </Alert>
+          )}
+          <TextField
+            size="small"
+            margin="normal"
+            required
+            fullWidth
+            name="full_name"
+            label="Full Name"
+            type="text"
+            id="full_name"
+            autoComplete="full_name"
+            value={form.full_name}
+            onChange={handleChange}
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="e_mail"
+            label="Email Address"
+            name="e_mail"
+            autoComplete="e_mail"
+            autoFocus
+            size="small"
+            type="email"
+            value={form.e_mail}
+            onChange={handleChange}
+          />
+          <TextField
+            size="small"
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Temporary Password"
+            type="password"
+            id="password"
+            autoComplete="current-password"
+            value={form.password}
+            onChange={handleChange}
+          />
+          <TextField
+            size="small"
+            margin="normal"
+            required
+            fullWidth
+            name="phone"
+            label="Phone Number"
+            type="tel"
+            id="phone"
+            autoComplete="phone"
+            value={form.phone}
+            onChange={handleChange}
+          />
+          <TextField
+            size="small"
+            margin="normal"
+            required
+            fullWidth
+            name="address"
+            label="Address"
+            id="address"
+            autoComplete="address"
+            value={form.address}
+            onChange={handleChange}
+            multiline
+            rows={4}
+          />
+          <FormControl fullWidth margin="normal">
+            <InputLabel id="select_user_label">User Type</InputLabel>
+            <Select
+              labelId="select_user_label"
+              id="user_type"
+              name="user_type"
+              onChange={handleChange}
+              required
+              label="User Type"
+              value={form.user_type}
+            >
+              <MenuItem value={'receptionist'}>Receptionist</MenuItem>
+              <MenuItem value={'hospital'}>Hospital</MenuItem>
+              <MenuItem value={'system_manager'}>System Manager</MenuItem>
+            </Select>
+          </FormControl>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 1, mb: 2 }}
+          >
+            Register
+          </Button>
         </Box>
-      </Stack>
-    </>
+      </Box>
+    </Stack>
   )
 }
 
