@@ -1,6 +1,12 @@
 import { ChangeEvent, FormEvent, useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { decode, getRandomManager, login, LoginRequest } from '../../api/users.api'
+import {
+  decode,
+  getRandomManager,
+  getUserByEmail,
+  login,
+  LoginRequest,
+} from '../../api/users.api'
 import { UserContext } from '../../contexts/user.context'
 
 import { Stack } from '@mui/system'
@@ -57,9 +63,12 @@ function Login() {
           localStorage.setItem('x-access-token', r.data.token)
           // Make sure token is not broken
           decode({ token: localStorage.getItem('x-access-token') })
-            .then((r) => {
-              if (r.data.user) {
-                setCurrentUser(r.data.user)
+            .then((r1) => {
+              if (r1.data.user.e_mail !== '') {
+                getUserByEmail(r1.data.user.e_mail).then((r2) => {
+                  setCurrentUser(r2.data)
+                  navigate('/')
+                })
               }
             })
             .catch((err) => setError(err.message))
@@ -70,7 +79,7 @@ function Login() {
   }
 
   return (
-    <Stack alignItems={'center'}>
+    <Stack alignItems={'center'} mt={3}>
       <Box
         sx={{
           display: 'flex',

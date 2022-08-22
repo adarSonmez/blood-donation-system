@@ -197,7 +197,7 @@ function ManageAccount() {
             color="error"
             startIcon={<DeleteForeverIcon />}
             onClick={deleteAccount}
-            sx={{ mt: 2, float: 'right' }}
+            sx={{ my: 2, float: 'right' }}
           >
             Delete Account
           </Button>

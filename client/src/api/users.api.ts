@@ -11,7 +11,7 @@ export type SystemUser = {
   e_mail: string
   phone: string
   address: string
-  user_type: SystemUserType | ''  
+  user_type: SystemUserType | ''
   password: string
 }
 
@@ -48,7 +48,10 @@ export type UpdateUserRequest = {
 }
 
 export interface DecodeTokenResponse extends ResponseMessage {
-  user: SystemUser
+  user: {
+    e_mail: string
+    user_type: SystemUserType
+  }
 }
 
 export const login = (user: LoginRequest) =>

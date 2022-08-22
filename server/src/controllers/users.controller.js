@@ -18,8 +18,8 @@ function login(req, res) {
     else {
       const token = sign(
         {
-          ...user,
-          password: 'ACTUALLY PASSWORD IS NOT SENT!',
+          e_mail: user.e_mail,
+          user_type: user.user_type,
         },
         process.env.TOKEN_SECRET,
         {

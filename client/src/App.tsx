@@ -1,6 +1,6 @@
 import { useEffect, useContext, useMemo } from 'react'
 
-import { decode } from './api/users.api'
+import { decode, getUserByEmail } from './api/users.api'
 import { UserContext } from './contexts/user.context'
 import { DrawerContext } from './contexts/drawer.context'
 import { ThemeModeContext } from './contexts/themeMode.context'
@@ -20,13 +20,15 @@ function App() {
 
   useEffect(() => {
     decode({ token: localStorage.getItem('x-access-token') })
-      .then((r) => {
-        if (r.data.user) {
-          setCurrentUser(r.data.user)
+      .then((r1) => {
+        if (r1.data.user) {
+          getUserByEmail(r1.data.user.e_mail).then((r2) => {
+            setCurrentUser(r2.data)
+          })
         }
       })
       .catch((err) => console.error(err.message))
-  }, [])
+  }, [setCurrentUser])
 
   const theme = useMemo(() => mainTheme(mode), [mode])
 
