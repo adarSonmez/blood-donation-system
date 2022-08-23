@@ -112,7 +112,7 @@ function Homepage() {
   ]
 
   return (
-    <Box px={3} py={4}>
+    <Box>
       <Typography variant="h5" component="h2" align="center" gutterBottom>
         Statistics
       </Typography>

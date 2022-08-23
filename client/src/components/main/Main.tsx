@@ -8,6 +8,7 @@ import Champions from '../../pages/champions/Champions'
 import Login from '../../pages/login/Login'
 import MyOrders from '../../components/my-orders/MyOrders'
 import Spinner from '../spinner/Spinner'
+import { Box } from '@mui/material'
 
 const Register = lazy(() => import('../../pages/register/Register'))
 const Donation = lazy(() => import('../../pages/donation/Donation'))
@@ -23,7 +24,7 @@ function Main() {
   const { user } = useContext(UserContext)
 
   return (
-    <main>
+    <Box component="main" p={3}>
       <Suspense fallback={<Spinner />}>
         <Routes>
           <Route path="/" element={<Homepage />} />
@@ -92,7 +93,7 @@ function Main() {
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Suspense>
-    </main>
+    </Box>
   )
 }
 

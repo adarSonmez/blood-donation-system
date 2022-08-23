@@ -94,7 +94,7 @@ function Champions() {
   }
 
   return (
-    <Box pt={1}>
+    <Box>
       <Box
         sx={{ borderBottom: 1, borderColor: 'divider' }}
         alignItems={'center'}

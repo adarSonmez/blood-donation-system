@@ -36,7 +36,7 @@ function ManageOrders() {
   }
 
   return (
-    <Grid container spacing={4} pt={2}>
+    <Grid container spacing={4}>
       <Grid item xs={12} lg={9}>
         <ManageOrdersTable
           orders={orders}

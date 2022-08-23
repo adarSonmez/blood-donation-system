@@ -79,7 +79,7 @@ function Login() {
   }
 
   return (
-    <Stack alignItems={'center'} mt={3}>
+    <Stack alignItems={'center'}>
       <Box
         sx={{
           display: 'flex',

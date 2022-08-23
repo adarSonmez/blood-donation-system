@@ -1,7 +1,23 @@
+import {
+  Alert,
+  Box,
+  Button,
+  Divider,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+  Stack,
+  TextField,
+  Typography,
+} from '@mui/material'
+import SearchIcon from '@mui/icons-material/Search'
 import { ChangeEvent, FormEvent, useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Bank, getBanks } from '../../api/banks.api'
 import { checkDonor, postDonation } from '../../api/donations.api'
+import { Message } from '../../components/snackbar-message/SnackbarMessage'
 import { UserContext } from '../../contexts/user.context'
 import bloodTypes from '../../data/bloodTypes'
 import { BloodType } from '../../utils/common.types'
@@ -9,15 +25,20 @@ import { BloodType } from '../../utils/common.types'
 function Donation() {
   const navigate = useNavigate()
   const { user } = useContext(UserContext)
+  const INITIAL_MESSAGE: Message = {
+    severity: 'success',
+    content: '',
+  }
+  const [message, setMessage] = useState(INITIAL_MESSAGE)
 
   const [locked, setLocked] = useState(true)
   const [searched, setSearched] = useState(false)
   const [banks, setBanks] = useState<Bank[]>([])
-  const [form1, setFrom1] = useState({ donor_id: 0 })
+  const [form1, setFrom1] = useState({ donor_id: undefined })
   const [form2, setForm2] = useState({
     name: '',
     blood_type: '0-' as BloodType,
-    bank_id: 1,
+    bank_id: 0,
   })
 
   useEffect(() => {
@@ -28,7 +49,10 @@ function Donation() {
       .catch((err) => console.error(err))
   }, [])
 
-  const handleChange = (event: ChangeEvent, formNo: number) => {
+  const handleChange = (
+    event: ChangeEvent | SelectChangeEvent<number | BloodType>,
+    formNo: number
+  ) => {
     const element = event.target as HTMLInputElement
     let name = element.name
     let value = element.value
@@ -43,12 +67,13 @@ function Donation() {
     event.preventDefault()
     setSearched(true)
 
-    checkDonor(form1.donor_id).then((r) => {
+    checkDonor(form1.donor_id || 0).then((r) => {
       if (!r.data.donor) {
-        alert(
-          `Donor with id ${form1.donor_id} is not registered. Please enter donor information.`
-        )
-        setForm2({ name: '', blood_type: '0-', bank_id: 1 })
+        setMessage({
+          severity: 'info',
+          content: `Donor is not registered. Please enter donor information.`,
+        })
+        setForm2({ name: '', blood_type: '0-', bank_id: 0 })
         setLocked(false)
       } else {
         setLocked(true)
@@ -65,96 +90,184 @@ function Donation() {
     event.preventDefault()
 
     if (!searched)
-      alert(
-        "Please enter the user's SSN first and then click the search button!"
-      )
+      setMessage({
+        severity: 'warning',
+        content:
+          "Please search user's SSN first and then click the search button!",
+      })
     else
-      postDonation({ ...form2, ...form1, recep_id: user.user_id })
+      postDonation({
+        ...form2,
+        donor_id: form1.donor_id || 0,
+        recep_id: user.user_id,
+      })
         .then(() => {
-          alert('Successfully donated!')
+          alert('Donation successful!')
           navigate('/')
         })
         .catch((err) => console.error(err.message))
   }
 
   return (
-    <main className="donation-page">
-      <form className="check-donor-form" onSubmit={searchSSN}>
-        <input
-          type="text"
-          maxLength={11}
-          minLength={11}
-          name="donor_id"
-          placeholder="Enter SSN of donor"
-          value={form1.donor_id}
-          onChange={(e) => handleChange(e, 1)}
-          required
-        />
-        <button type="submit">Search</button>
-      </form>
-
-      <form className="donate-blood-form" onSubmit={donateBlood}>
-        <label htmlFor="ssn">SSN: </label>
-        <input
-          type="text"
-          maxLength={11}
-          minLength={11}
-          name="donor_id"
-          placeholder="Enter SSN of donor"
-          value={form1.donor_id}
-          disabled={true}
-          required
-          id="ssn"
-        />
-
-        <label htmlFor="full-name">Full Name: </label>
-        <input
-          type="text"
-          name="name"
-          placeholder="Enter full name of donor"
-          value={form2.name}
-          onChange={(e) => handleChange(e, 2)}
-          disabled={locked}
-          required
-          id="full-name"
-        />
-
-        <label htmlFor="blood-type">Blood Type: </label>
-        <select
-          name="blood_type"
-          value={form2.blood_type}
-          onChange={(e) => handleChange(e, 2)}
-          disabled={locked}
-          id="blood_type"
-          required
+    <Stack alignItems={'center'}>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          padding: '0',
+          maxWidth: '350px',
+        }}
+      >
+        <Typography component="h1" variant="h5" gutterBottom>
+          Donate Blood
+        </Typography>
+        <Stack
+          component="form"
+          onSubmit={searchSSN}
+          mt={1}
+          direction="row"
+          width={350}
         >
-          {bloodTypes.map(({ type }) => (
-            <option key={type} value={type}>
-              {type}
-            </option>
-          ))}
-        </select>
+          <TextField
+            size="small"
+            margin="normal"
+            required
+            fullWidth
+            name="donor_id"
+            label="Search SSN"
+            type="text"
+            id="donor_id"
+            autoComplete="donor_id"
+            value={form1.donor_id}
+            onChange={(e) => handleChange(e, 1)}
+            sx={{ flex: 1 }}
+          />
+          <Button
+            aria-label="search-ssn"
+            type="submit"
+            sx={{
+              height: '40px',
+              bottom: '-15px',
+            }}
+          >
+            <SearchIcon />
+          </Button>
+        </Stack>
+      </Box>
 
-        <label htmlFor="bank-address">Bank Address: </label>
-        <select
-          name="bank_id"
-          value={form2.bank_id}
-          onChange={(e) => handleChange(e, 2)}
-          required
-          id="bank-address"
-        >
-          {banks.map(({ bank_id, address }) => (
-            <option key={bank_id} value={bank_id}>
-              {address}
-            </option>
-          ))}
-        </select>
-
-        <button className="donate-btn" type="submit">
-          Donate (500ml)
-        </button>
-      </form>
-    </main>
+      <Box
+        mt={-1}
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          padding: '0',
+          width: '350px',
+        }}
+      >
+        {message.content && (
+          <Alert
+            sx={{
+              marginTop: '1rem',
+            }}
+            severity={message.severity}
+            onClose={() => setMessage(INITIAL_MESSAGE)}
+          >
+            {message.content}
+          </Alert>
+        )}
+        <Box component="form" onSubmit={donateBlood} sx={{ mt: 1 }}>
+          <TextField
+            size="small"
+            margin="normal"
+            required
+            fullWidth
+            name="donor_id"
+            label="SSN of donor"
+            type="text"
+            id="donor_id"
+            autoComplete="donor_id"
+            value={form1.donor_id}
+            disabled={true}
+          />
+          <TextField
+            size="small"
+            margin="normal"
+            required
+            fullWidth
+            name="name"
+            label="Full name"
+            type="text"
+            id="full-name"
+            autoComplete="name"
+            value={form2.name}
+            disabled={locked}
+            onChange={(e) => handleChange(e, 2)}
+          />
+          <FormControl fullWidth margin="normal">
+            <InputLabel id="select_blood_type">Blood Type</InputLabel>
+            <Select
+              size="small"
+              labelId="select_blood_type"
+              id="blood_type"
+              name="blood_type"
+              onChange={(e) => handleChange(e, 2)}
+              required
+              label="Blood Type"
+              value={form2.blood_type}
+              disabled={locked}
+              sx={{
+                maxWidth: '350px',
+              }}
+            >
+              {bloodTypes.map((bloodType) => (
+                <MenuItem key={bloodType} value={bloodType}>
+                  {bloodType}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <FormControl fullWidth margin="normal">
+            <InputLabel id="select_bank">Bank</InputLabel>
+            <Select
+              size="small"
+              labelId="select_bank"
+              id="bank_id"
+              name="bank_id"
+              onChange={(e) => handleChange(e, 2)}
+              required
+              label="Bank"
+              value={banks.length > 0 ? form2.bank_id : 0}
+              sx={{
+                maxWidth: '350px',
+              }}
+            >
+              {banks.map((bank) => (
+                <MenuItem
+                  key={bank.bank_id}
+                  value={bank.bank_id}
+                  sx={{
+                    whiteSpace: 'unset',
+                    wordBreak: 'break-all',
+                  }}
+                >
+                  {bank.address}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 1, mb: 2 }}
+          >
+            Donate Blood
+          </Button>
+        </Box>
+      </Box>
+    </Stack>
   )
 }
 

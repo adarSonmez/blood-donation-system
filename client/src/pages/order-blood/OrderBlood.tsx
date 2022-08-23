@@ -57,7 +57,7 @@ function OrderBlood() {
           id="blood_type"
           required
         >
-          {bloodTypes.map(({ type }) => (
+          {bloodTypes.map((type) => (
             <option key={type} value={type}>
               {type}
             </option>

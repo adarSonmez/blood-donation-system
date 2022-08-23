@@ -28,7 +28,7 @@ function App() {
         }
       })
       .catch((err) => console.error(err.message))
-  }, [setCurrentUser])
+  }, [])
 
   const theme = useMemo(() => mainTheme(mode), [mode])
 

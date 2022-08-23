@@ -23,4 +23,4 @@ export const postDonation = (data: DonationRequest) =>
   axios.post<ResponseMessage>(url, data)
 
 export const checkDonor = (id: number) =>
-  axios.post<CheckDonorResponse>(url + `check/?donor_id=${id}`)
+  axios.get<CheckDonorResponse>(url + `/check/?donor_id=${id}`)
