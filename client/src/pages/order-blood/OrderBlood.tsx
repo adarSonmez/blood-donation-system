@@ -1,84 +1,42 @@
-import { ChangeEvent, FormEvent, useContext, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { orderBlood, OrderBloodRequest } from '../../api/orders.api'
-import { getRandomManager } from '../../api/users.api'
+import { Grid } from '@mui/material'
+import { useContext, useEffect, useState } from 'react'
+import {
+  getOrdersByHospitalId,
+  OrderForHospitalResponse,
+} from '../../api/orders.api'
+import OrderBloodForm from '../../components/order-blood-form/OrderBloodForm'
+import OrderHistory from '../../components/order-history/OrderHistory'
 import { UserContext } from '../../contexts/user.context'
-import bloodTypes from '../../data/bloodTypes'
 
 function OrderBlood() {
-  const navigate = useNavigate()
   const { user } = useContext(UserContext)
+  const [myOrders, setMyOrders] = useState<OrderForHospitalResponse[]>([])
 
-  const [orderForm, setOrderForm] = useState<OrderBloodRequest>({
-    blood_type: '0-',
-    amount: 1,
-    hospital_id: 0,
-    man_id: 0,
-  })
+  useEffect(() => {
+    updateOrderHistory()
+  }, [user])
 
-  const handleChange = (event: ChangeEvent) => {
-    const element = event.target as HTMLInputElement
-    let name = element.name
-    let value = element.value
-
-    setOrderForm({ ...orderForm, [name]: value })
+  const updateOrderHistory = () => {
+    getOrdersByHospitalId(user.user_id)
+      .then((r) => setMyOrders(r.data))
+      .catch((err) => console.error(err.message))
   }
-
-  const handleSubmit = async (event: FormEvent) => {
-    event.preventDefault()
-
-    try {
-      const res = await getRandomManager()
-      const man_id = await res.data.user_id
-
-      await orderBlood({ ...orderForm, hospital_id: user.user_id, man_id })
-      alert('Order Submitted!')
-
-      navigate('/order-history')
-    } catch (err) {
-      console.error(err)
-    }
-
-    try {
-      // TO DO: update my orders on submit
-    } catch (err) {}
-  }
-
   return (
-    <main className="order-page ">
-      <form className="order-blood-form" onSubmit={handleSubmit}>
-        <h3>Order Blood</h3>
-
-        <label htmlFor="blood-type">Blood Type: </label>
-        <select
-          name="blood_type"
-          value={orderForm.blood_type}
-          onChange={handleChange}
-          id="blood_type"
-          required
-        >
-          {bloodTypes.map((type) => (
-            <option key={type} value={type}>
-              {type}
-            </option>
-          ))}
-        </select>
-
-        <label htmlFor="amount">Amount (unit: 500ml): </label>
-        <input
-          type="number"
-          name="amount"
-          min={1}
-          max={50}
-          onChange={handleChange}
-          value={orderForm.amount}
-          required
-          id="amount"
-        />
-
-        <button type="submit">Submit</button>
-      </form>
-    </main>
+    <Grid container spacing={4}>
+      <Grid item xs={12} lg={4}>
+        <OrderBloodForm updateOrders={updateOrderHistory} />
+      </Grid>
+      <Grid
+        item
+        xs={12}
+        lg={8}
+        display="flex"
+        alignItems="center"
+        justifyContent={'center'}
+      >
+        <OrderHistory myOrders={myOrders} updateOrders={updateOrderHistory} />
+      </Grid>
+    </Grid>
   )
 }
 

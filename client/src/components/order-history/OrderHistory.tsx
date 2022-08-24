@@ -9,34 +9,21 @@ import {
 } from '@mui/material'
 import { Box } from '@mui/system'
 import CancelIcon from '@mui/icons-material/Cancel'
-import { useContext, useEffect, useState } from 'react'
-import {
-  deleteOrder,
-  getOrdersByHospitalId,
-  OrderForHospitalResponse,
-} from '../../api/orders.api'
-import { UserContext } from '../../contexts/user.context'
+import { useContext } from 'react'
+import { deleteOrder } from '../../api/orders.api'
 import { ThemeModeContext } from '../../contexts/themeMode.context'
 
-function OrderHistory() {
-  const { user } = useContext(UserContext)
+type OrderHistoryProps = {
+  myOrders: any[]
+  updateOrders: () => void
+}
+
+function OrderHistory({ myOrders, updateOrders }: OrderHistoryProps) {
   const mode = useContext(ThemeModeContext).theme.mode
-
-  const [myOrders, setMyOrders] = useState<OrderForHospitalResponse[]>([])
-
-  useEffect(() => {
-    updateOrderHistory()
-  }, [user])
-
-  const updateOrderHistory = () => {
-    getOrdersByHospitalId(user.user_id)
-      .then((r) => setMyOrders(r.data))
-      .catch((err) => console.error(err.message))
-  }
 
   const cancelOrder = (order_id: number) => {
     deleteOrder(order_id)
-      .then(() => updateOrderHistory())
+      .then(() => updateOrders())
       .catch((err) => console.error(err))
   }
 
@@ -84,6 +71,7 @@ function OrderHistory() {
                     <CancelIcon
                       onClick={() => cancelOrder(order.order_id)}
                       color={'error'}
+                      sx={{ cursor: 'pointer' }}
                     />
                   ) : null}
                 </TableCell>

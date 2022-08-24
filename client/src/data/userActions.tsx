@@ -37,7 +37,6 @@ const userActions = {
     },
   ],
   hospital: [
-    { link: 'Order History', to: '/order-history', icon: <RestoreIcon /> },
     { link: 'Order Blood', to: '/order-blood', icon: <LocalShippingIcon /> },
     {
       link: 'Manage Account',
