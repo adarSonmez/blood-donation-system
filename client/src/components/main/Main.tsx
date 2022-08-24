@@ -6,7 +6,7 @@ import Homepage from '../../pages/homepage/Homepage'
 import HowToDonate from '../../pages/how-to-donate/HowToDonate'
 import Champions from '../../pages/champions/Champions'
 import Login from '../../pages/login/Login'
-import MyOrders from '../../components/my-orders/MyOrders'
+import OrderHistory from '../../pages/order-history/OrderHistory'
 import Spinner from '../spinner/Spinner'
 import { Box } from '@mui/material'
 
@@ -49,10 +49,10 @@ function Main() {
             }
           />
           <Route
-            path="/my-orders"
+            path="/order-history"
             element={
               user.user_type === 'hospital' ? (
-                <MyOrders />
+                <OrderHistory />
               ) : (
                 <Navigate replace to="/" />
               )

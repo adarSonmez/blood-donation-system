@@ -34,7 +34,7 @@ function OrderBlood() {
       await orderBlood({ ...orderForm, hospital_id: user.user_id, man_id })
       alert('Order Submitted!')
 
-      navigate('/my-orders')
+      navigate('/order-history')
     } catch (err) {
       console.error(err)
     }

@@ -10,10 +10,12 @@ export type OrderBloodRequest = {
   man_id: number
 }
 
+export type OrderState = "approved" | "rejected" | "waiting"
+
 export type UpdateOrderRequest = {
   order_id: number
   blood_type: BloodType
-  state: 'approved' | 'rejected'
+  state: OrderState
   amount: number
 }
 

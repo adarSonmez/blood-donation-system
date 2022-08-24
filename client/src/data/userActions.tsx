@@ -6,6 +6,7 @@ import RestoreIcon from '@mui/icons-material/Restore'
 import LocalShippingIcon from '@mui/icons-material/LocalShipping'
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents'
 import HelpIcon from '@mui/icons-material/Help'
+import HomeIcon from '@mui/icons-material/Home'
 
 export type SideMenuItem = {
   link: string
@@ -36,7 +37,7 @@ const userActions = {
     },
   ],
   hospital: [
-    { link: 'My Orders', to: '/my-orders', icon: <RestoreIcon /> },
+    { link: 'Order History', to: '/order-history', icon: <RestoreIcon /> },
     { link: 'Order Blood', to: '/order-blood', icon: <LocalShippingIcon /> },
     {
       link: 'Manage Account',
@@ -45,6 +46,7 @@ const userActions = {
     },
   ],
   common: [
+    { link: 'Homepage', to: '/', icon: <HomeIcon /> },
     { link: 'Champions', to: '/champions', icon: <EmojiEventsIcon /> },
     { link: 'How to Donate', to: '/how-to-donate', icon: <HelpIcon /> },
   ],
