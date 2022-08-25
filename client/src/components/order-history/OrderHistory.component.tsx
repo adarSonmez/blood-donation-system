@@ -39,12 +39,12 @@ function OrderHistory({ myOrders, updateOrders }: OrderHistoryProps) {
   }
 
   return (
-    <Box>
-      <TableContainer sx={{ maxWidth: 600, margin: 'auto' }}>
+    <Box width={"100%"}>
+      <TableContainer sx={{ margin: 'auto'}}>
         <Typography variant="h5" component={'h2'} gutterBottom align="center">
           Order History
         </Typography>
-        <Table aria-label="order history table" sx={{ textAlign: 'center' }}>
+        <Table aria-label="order history table" >
           <TableHead>
             <TableRow>
               <TableCell>Type</TableCell>

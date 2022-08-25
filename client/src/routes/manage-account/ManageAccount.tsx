@@ -13,7 +13,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 
 import { ChangeEvent, FormEvent, useContext, useEffect, useState } from 'react'
 import { deleteUserById, getUserByEmail, updateUser } from '../../api/users.api'
-import { Message } from '../../components/snackbar-message/SnackbarMessage'
+import { Message } from '../../components/snackbar-message/SnackbarMessage.component'
 import { UserContext } from '../../contexts/user.context'
 
 function ManageAccount() {

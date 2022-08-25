@@ -7,8 +7,8 @@ import {
 } from '../../api/tops.api'
 import { Tab, Tabs } from '@mui/material'
 import { Box } from '@mui/system'
-import TabPanel from '../../components/tab-panel/TabPanel'
-import TopTensTable from '../../components/top-tens-table/TopTensTable'
+import TabPanel from '../../components/tab-panel/TabPanel.component'
+import TopTensTable from '../../components/top-tens-table/TopTensTable.component'
 
 function Champions() {
   const [tabNumber, setTabNumber] = useState(0)

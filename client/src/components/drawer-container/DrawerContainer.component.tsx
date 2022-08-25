@@ -2,7 +2,7 @@ import Box from '@mui/material/Box'
 import Drawer from '@mui/material/Drawer'
 import { useContext } from 'react'
 import { DrawerContext } from '../../contexts/drawer.context'
-import DrawerContent from '../drawer-content/DrawerContent'
+import DrawerContent from '../drawer-content/DrawerContent.component'
 
 function DrawerContainer() {
   const {
@@ -17,7 +17,6 @@ function DrawerContainer() {
       aria-label="mailbox folders"
     >
       <Drawer
-        //container={container}
         variant="temporary"
         open={open}
         onClose={toggleDrawer}

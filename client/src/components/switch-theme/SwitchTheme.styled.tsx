@@ -1,29 +1,6 @@
-import { styled } from '@mui/material/styles'
-import FormGroup from '@mui/material/FormGroup'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import Switch from '@mui/material/Switch'
-import { useContext } from 'react'
-import { ThemeModeContext } from '../../contexts/themeMode.context'
+import { styled, Switch } from '@mui/material'
 
-function SwitchTheme() {
-  const { theme, toggleThemeMode } = useContext(ThemeModeContext)
-
-  const handleChange = () => {
-    toggleThemeMode()
-  }
-
-  return (
-    <FormGroup>
-      <FormControlLabel
-        control={<MaterialUISwitch sx={{ m: 1 }} />}
-        label={theme.mode === 'light' ? 'Light Mode' : 'Night Mode'}
-        onChange={handleChange}
-      />
-    </FormGroup>
-  )
-}
-
-const MaterialUISwitch = styled(Switch)(({ theme }) => ({
+export const StyledDarkModeSwitch = styled(Switch)(({ theme }) => ({
   width: 62,
   height: 34,
   padding: 7,
@@ -69,5 +46,3 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     borderRadius: 20 / 2,
   },
 }))
-
-export default SwitchTheme

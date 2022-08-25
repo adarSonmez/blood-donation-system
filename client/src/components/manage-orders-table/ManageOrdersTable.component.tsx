@@ -25,11 +25,9 @@ type ChangeOrderStateParams = {
   blood_type: BloodType
 }
 
-function ManageOrdersTable({
-  updateTables,
-  orders,
-  types,
-}: ManageOrdersTableProps) {
+function ManageOrdersTable(props: ManageOrdersTableProps) {
+  const { updateTables, orders, types } = props
+
   const approveOrder = ({
     order_id,
     amount,

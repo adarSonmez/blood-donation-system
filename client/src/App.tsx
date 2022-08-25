@@ -9,9 +9,9 @@ import { CssBaseline, ThemeProvider, Toolbar } from '@mui/material'
 import { Box } from '@mui/system'
 import { mainTheme } from './assets/themes/main.theme'
 
-import DrawerContainer from './components/drawer-container/DrawerContainer'
-import Header from './components/header/Header'
-import Main from './components/main/Main'
+import DrawerContainer from './components/drawer-container/DrawerContainer.component'
+import Header from './components/header/Header.component'
+import Main from './components/main/Main.component'
 
 function App() {
   const mode = useContext(ThemeModeContext).theme.mode

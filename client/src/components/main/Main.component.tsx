@@ -2,22 +2,18 @@ import { lazy, Suspense, useContext } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { UserContext } from '../../contexts/user.context'
 
-import Homepage from '../../pages/homepage/Homepage'
-import HowToDonate from '../../pages/how-to-donate/HowToDonate'
-import Champions from '../../pages/champions/Champions'
-import Login from '../../pages/login/Login'
-import Spinner from '../spinner/Spinner'
+import Homepage from '../../routes/homepage/Homepage'
+import HowToDonate from '../../routes/how-to-donate/HowToDonate'
+import Champions from '../../routes/champions/Champions.route'
+import Login from '../../routes/login/Login'
+import Spinner from '../spinner/Spinner.component'
 import { Box } from '@mui/material'
 
-const Register = lazy(() => import('../../pages/register/Register'))
-const Donation = lazy(() => import('../../pages/donation/Donation'))
-const OrderBlood = lazy(() => import('../../pages/order-blood/OrderBlood'))
-const ManageOrders = lazy(
-  () => import('../../pages/manage-orders/ManageOrders')
-)
-const ManageAccount = lazy(
-  () => import('../../pages/manage-account/ManageAccount')
-)
+const Register = lazy(() => import('../../routes/register/Register'))
+const Donation = lazy(() => import('../../routes/donation/Donation.route'))
+const OrderBlood = lazy(() => import('../../routes/order-blood/OrderBlood'))
+const ManageOrders = lazy(() => import('../../routes/manage-orders/ManageOrders'))
+const ManageAccount = lazy(() => import('../../routes/manage-account/ManageAccount'))
 
 function Main() {
   const { user } = useContext(UserContext)

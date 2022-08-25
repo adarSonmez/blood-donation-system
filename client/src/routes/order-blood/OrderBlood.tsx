@@ -4,8 +4,8 @@ import {
   getOrdersByHospitalId,
   OrderForHospitalResponse,
 } from '../../api/orders.api'
-import OrderBloodForm from '../../components/order-blood-form/OrderBloodForm'
-import OrderHistory from '../../components/order-history/OrderHistory'
+import OrderBloodForm from '../../components/order-blood-form/OrderBloodForm.component'
+import OrderHistory from '../../components/order-history/OrderHistory.component'
 import { UserContext } from '../../contexts/user.context'
 
 function OrderBlood() {

@@ -16,10 +16,11 @@ import { ChangeEvent, FormEvent, useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Bank, getBanks } from '../../api/banks.api'
 import { checkDonor, postDonation } from '../../api/donations.api'
-import { Message } from '../../components/snackbar-message/SnackbarMessage'
+import { Message } from '../../components/snackbar-message/SnackbarMessage.component'
 import { UserContext } from '../../contexts/user.context'
 import bloodTypes from '../../data/bloodTypes'
 import { BloodType } from '../../utils/common.types'
+import { DonationFormContainer, SearchSSNContainer } from './Donation.styles'
 
 function Donation() {
   const navigate = useNavigate()
@@ -109,15 +110,7 @@ function Donation() {
 
   return (
     <Stack alignItems={'center'}>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          padding: '0',
-          maxWidth: '350px',
-        }}
-      >
+      <SearchSSNContainer>
         <Typography component="h1" variant="h5" gutterBottom>
           Donate Blood
         </Typography>
@@ -140,31 +133,14 @@ function Donation() {
             autoComplete="donor_id"
             value={form1.donor_id}
             onChange={(e) => handleChange(e, 1)}
-            sx={{ flex: 1 }}
           />
-          <Button
-            aria-label="search-ssn"
-            type="submit"
-            sx={{
-              height: '40px',
-              bottom: '-15px',
-            }}
-          >
+          <Button aria-label="search-ssn" type="submit">
             <SearchIcon />
           </Button>
         </Stack>
-      </Box>
+      </SearchSSNContainer>
 
-      <Box
-        mt={-1}
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          padding: '0',
-          width: '350px',
-        }}
-      >
+      <DonationFormContainer>
         {message.content && (
           <Alert
             sx={{
@@ -176,7 +152,7 @@ function Donation() {
             {message.content}
           </Alert>
         )}
-        <Box component="form" onSubmit={donateBlood} sx={{ mt: 1 }}>
+        <Box component="form" onSubmit={donateBlood}>
           <TextField
             size="small"
             margin="normal"
@@ -243,29 +219,17 @@ function Donation() {
               }}
             >
               {banks.map((bank) => (
-                <MenuItem
-                  key={bank.bank_id}
-                  value={bank.bank_id}
-                  sx={{
-                    whiteSpace: 'unset',
-                    wordBreak: 'break-all',
-                  }}
-                >
+                <MenuItem key={bank.bank_id} value={bank.bank_id}>
                   {bank.address}
                 </MenuItem>
               ))}
             </Select>
           </FormControl>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 1, mb: 2 }}
-          >
+          <Button type="submit" fullWidth variant="contained">
             Donate Blood
           </Button>
         </Box>
-      </Box>
+      </DonationFormContainer>
     </Stack>
   )
 }

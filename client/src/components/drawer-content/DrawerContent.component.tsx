@@ -1,3 +1,7 @@
+import { useContext, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+
+import { Box } from '@mui/system'
 import Divider from '@mui/material/Divider'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
@@ -5,21 +9,19 @@ import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import Toolbar from '@mui/material/Toolbar'
+
 import userActions, { SideMenuItem } from '../../data/userActions'
-import { useNavigate } from 'react-router-dom'
-import SwitchTheme from '../switch-theme/SwitchTheme'
+import SwitchTheme from '../switch-theme/SwitchTheme.component'
 import { UserContext } from '../../contexts/user.context'
-import { useContext, useEffect, useState } from 'react'
-import { Box } from '@mui/system'
-import CopyRight from '../copy-right/Copyright'
-import InfoForTestLogin from '../InfoForTestLogin/InfoForTestLogin'
+import CopyRight from '../copy-right/Copyright.component'
+import InfoForTestLogin from '../not-logged-in-message/NotLoggedInMessage.component'
 
 function DrawerContent() {
   const navigate = useNavigate()
+  const user_type = useContext(UserContext).user.user_type
+
   const handleListItemClick = (to: string) => navigate(to)
-  const {
-    user: { user_type },
-  } = useContext(UserContext)
+
   const [privateMenus, setPrivateMenus] = useState<SideMenuItem[]>([])
 
   useEffect(() => {
@@ -67,7 +69,6 @@ function DrawerContent() {
           <InfoForTestLogin />
         )}
       </Box>
-
       <Divider />
       <CopyRight />
     </>

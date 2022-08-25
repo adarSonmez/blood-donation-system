@@ -1,5 +1,5 @@
 import { Grid } from '@mui/material'
-import { useCallback, useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import {
   AmountOfBloodTypeResponse,
   getAllAvailableBloodTypes,
@@ -8,8 +8,8 @@ import {
   getOrdersForAManager,
   OrderForManagerResponse,
 } from '../../api/orders.api'
-import BloodTypesTable from '../../components/blood-types-table/BloodTypesTable'
-import ManageOrdersTable from '../../components/manage-orders-table/ManageOrdersTable'
+import BloodTypesTable from '../../components/blood-types-table/BloodTypesTable.component'
+import ManageOrdersTable from '../../components/manage-orders-table/ManageOrdersTable.component'
 import { UserContext } from '../../contexts/user.context'
 
 function ManageOrders() {

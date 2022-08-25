@@ -2,11 +2,11 @@ import {
   Table,
   TableBody,
   TableCell,
-  TableContainer,
   TableHead,
   TableRow,
   Typography,
 } from '@mui/material'
+import { StyledTableContainer } from './TopTensTable.styles'
 
 type TableData = {
   id: number
@@ -26,7 +26,7 @@ type TopTensTableProps = {
 
 function TopTensTable({ displayData, tableData }: TopTensTableProps) {
   return (
-    <TableContainer sx={{ maxWidth: 600, margin: 'auto' }}>
+    <StyledTableContainer>
       <Typography
         variant="subtitle1"
         component="h6"
@@ -47,10 +47,7 @@ function TopTensTable({ displayData, tableData }: TopTensTableProps) {
         </TableHead>
         <TableBody>
           {tableData.map((row, index) => (
-            <TableRow
-              key={row.name}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
+            <TableRow key={row.name}>
               <TableCell>{index + 1}</TableCell>
               <TableCell align="center">{row.name}</TableCell>
               <TableCell align="right">{row.amount}</TableCell>
@@ -58,7 +55,7 @@ function TopTensTable({ displayData, tableData }: TopTensTableProps) {
           ))}
         </TableBody>
       </Table>
-    </TableContainer>
+    </StyledTableContainer>
   )
 }
 

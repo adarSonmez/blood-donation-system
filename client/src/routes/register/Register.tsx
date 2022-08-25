@@ -12,7 +12,7 @@ import {
 import { Box, Stack } from '@mui/system'
 import { ChangeEvent, FormEvent, useState } from 'react'
 import { register, SystemUserType } from '../../api/users.api'
-import { Message } from '../../components/snackbar-message/SnackbarMessage'
+import { Message } from '../../components/snackbar-message/SnackbarMessage.component'
 
 function Register() {
   const INITIAL_MESSAGE: Message = {

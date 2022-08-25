@@ -1,5 +1,5 @@
 import { createTheme } from '@mui/material'
-import { pink, blue } from '@mui/material/colors'
+import { pink, blue, lightBlue } from '@mui/material/colors'
 import { Mode } from '../../contexts/themeMode.context'
 
 const primaryColor = pink.A700
@@ -20,6 +20,23 @@ export const mainTheme = (mode: Mode) =>
         light: blue['A400'],
         dark: blue['900'],
         contrastText: '#fff',
+      },
+      info: {
+        main: lightBlue['500'],
+        light: lightBlue['300'],
+        dark: lightBlue['900'],
+        contrastText: '#fff',
+      },
+    },
+
+    components: {
+      MuiMenuItem: {
+        styleOverrides: {
+          root: {
+            whiteSpace: 'unset',
+            wordBreak: 'break-all',
+          },
+        },
       },
     },
   })
