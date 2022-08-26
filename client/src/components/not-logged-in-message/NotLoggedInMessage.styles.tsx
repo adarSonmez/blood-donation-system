@@ -10,5 +10,4 @@ export const StyledMessageBox = styled(Box)(({ theme }) => ({
   justifyContent: 'center',
   alignItems: 'center',
   textAlign: 'center',
-  color: theme.palette.text.secondary,
 }))

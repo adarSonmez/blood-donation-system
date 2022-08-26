@@ -114,10 +114,18 @@ function Homepage() {
   return (
     <Box>
       <Typography variant="h5" component="h2" align="center">
-        Donate Blood <FavoriteIcon color="error" fontSize="small" />
+        Donate Blood{' '}
+        <FavoriteIcon
+          color={mode === 'light' ? 'primary' : 'inherit'}
+          fontSize="small"
+        />
       </Typography>
       <Typography variant="h5" component="h2" align="center" gutterBottom>
-        <FavoriteIcon color="error" fontSize="small" /> Save Life{' '}
+        <FavoriteIcon
+          color={mode === 'light' ? 'primary' : 'inherit'}
+          fontSize="small"
+        />{' '}
+        Save Life{' '}
       </Typography>
 
       <List>

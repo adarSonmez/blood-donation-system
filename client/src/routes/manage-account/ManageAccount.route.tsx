@@ -5,7 +5,6 @@ import {
   Checkbox,
   FormControlLabel,
   FormGroup,
-  Stack,
   TextField,
   Typography,
 } from '@mui/material'
@@ -105,7 +104,7 @@ function ManageAccount() {
           <FormControlLabel
             control={
               <Checkbox
-                id="password"
+                id="checkbox-password"
                 checked={checked.password}
                 onChange={handleCheckedChange}
               />
@@ -129,7 +128,7 @@ function ManageAccount() {
           <FormControlLabel
             control={
               <Checkbox
-                id="phone"
+                id="checkbox-phone"
                 checked={checked.phone}
                 onChange={handleCheckedChange}
               />
@@ -153,7 +152,7 @@ function ManageAccount() {
           <FormControlLabel
             control={
               <Checkbox
-                id="address"
+                id="checkbox-address"
                 checked={checked.address}
                 onChange={handleCheckedChange}
               />
