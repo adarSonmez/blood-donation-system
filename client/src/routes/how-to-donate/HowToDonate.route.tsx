@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Bank, getBanks } from '../../api/banks.api'
 import LocationOnIcon from '@mui/icons-material/LocationOn'
 import { Box, List, ListItem, ListItemIcon, Typography } from '@mui/material'
+import { LocationOfBanks } from './HowToDonate.styles'
 
 function HowToDonate() {
   const [banks, setBanks] = useState<Bank[]>([])
@@ -28,26 +29,16 @@ function HowToDonate() {
         blood.
       </Typography>
 
-      <List sx={{ maxWidth: 500, margin: 'auto', marginTop: 2 }}>
+      <LocationOfBanks>
         {banks.map(({ bank_id, address }) => (
-          <ListItem
-            key={bank_id}
-            sx={{
-              pl: {
-                xs: 0,
-                sm: 0,
-                md: 2,
-                lg: 2,
-              },
-            }}
-          >
+          <ListItem key={bank_id}>
             <ListItemIcon>
               <LocationOnIcon />
             </ListItemIcon>
             {address}
           </ListItem>
         ))}
-      </List>
+      </LocationOfBanks>
     </Box>
   )
 }

@@ -10,7 +10,7 @@ function TabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props
 
   return (
-    <div
+    <Box
       role="tabpanel"
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
@@ -22,7 +22,7 @@ function TabPanel(props: TabPanelProps) {
           <Box>{children}</Box>
         </Box>
       )}
-    </div>
+    </Box>
   )
 }
 

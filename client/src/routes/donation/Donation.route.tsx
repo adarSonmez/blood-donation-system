@@ -143,9 +143,6 @@ function Donation() {
       <DonationFormContainer>
         {message.content && (
           <Alert
-            sx={{
-              marginTop: '1rem',
-            }}
             severity={message.severity}
             onClose={() => setMessage(INITIAL_MESSAGE)}
           >
@@ -159,7 +156,7 @@ function Donation() {
             required
             fullWidth
             name="donor_id"
-            label="SSN of donor"
+            placeholder="SSN of donor"
             type="text"
             id="donor_id"
             autoComplete="donor_id"
@@ -192,9 +189,6 @@ function Donation() {
               label="Blood Type"
               value={form2.blood_type}
               disabled={locked}
-              sx={{
-                maxWidth: '350px',
-              }}
             >
               {bloodTypes.map((bloodType) => (
                 <MenuItem key={bloodType} value={bloodType}>
@@ -214,9 +208,6 @@ function Donation() {
               required
               label="Bank"
               value={banks.length > 0 ? form2.bank_id : 0}
-              sx={{
-                maxWidth: '350px',
-              }}
             >
               {banks.map((bank) => (
                 <MenuItem key={bank.bank_id} value={bank.bank_id}>

@@ -6,6 +6,7 @@ import {
   ListItemText,
   ListItemIcon,
 } from '@mui/material'
+import FavoriteIcon from '@mui/icons-material/Favorite'
 import StarIcon from '@mui/icons-material/Star'
 import { useState, useEffect, useContext } from 'react'
 
@@ -87,34 +88,36 @@ function Homepage() {
       {totalBlood / 2} liters of blood have been donated so far.
     </ListItemText>,
     <ListItemText>
-      The most available blood type is
-      {mostAvailable.blood_type} with
+      The most available blood type is {mostAvailable.blood_type} with{' '}
       {((mostAvailable.num_of_blood / numOfAvailable) * 100).toFixed(2)}
-      %. {mostAvailable.num_of_blood / 2} litters
+      %. ({mostAvailable.num_of_blood / 2} litters)
     </ListItemText>,
     <ListItemText>
-      The least available blood type is {leastAvailable.blood_type} with
+      The least available blood type is {leastAvailable.blood_type} with{' '}
       {((leastAvailable.num_of_blood / numOfAvailable) * 100).toFixed(2)}
       %. ({leastAvailable.num_of_blood / 2} litters)
     </ListItemText>,
     <ListItemText>
-      The donor who donated the most blood so far is {topDonor?.name} with
+      The donor who donated the most blood so far is {topDonor?.name} with{' '}
       {topDonor?.num_of_blood} donations ({topDonor?.num_of_blood / 2} litters).
     </ListItemText>,
     <ListItemText>
-      Our receptionist that registers the most donors is {topRecep?.full_name}
+      Our receptionist that registers the most donors is {topRecep?.full_name}{' '}
       with {topRecep?.num_of_registration} registrations.
     </ListItemText>,
     <ListItemText>
-      The hospital we supply the most blood so far is {topHospital?.full_name}
+      The hospital we supply the most blood so far is {topHospital?.full_name}{' '}
       with {topHospital?.amount_of_blood / 2} liters.
     </ListItemText>,
   ]
 
   return (
     <Box>
+      <Typography variant="h5" component="h2" align="center">
+        Donate Blood <FavoriteIcon color="error" fontSize="small" />
+      </Typography>
       <Typography variant="h5" component="h2" align="center" gutterBottom>
-        Statistics
+        <FavoriteIcon color="error" fontSize="small" /> Save Life{' '}
       </Typography>
 
       <List>

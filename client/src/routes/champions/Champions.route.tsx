@@ -9,6 +9,7 @@ import { Tab, Tabs } from '@mui/material'
 import { Box } from '@mui/system'
 import TabPanel from '../../components/tab-panel/TabPanel.component'
 import TopTensTable from '../../components/top-tens-table/TopTensTable.component'
+import { StyledTabsContainer } from './Champions.styles'
 
 function Champions() {
   const [tabNumber, setTabNumber] = useState(0)
@@ -95,21 +96,18 @@ function Champions() {
 
   return (
     <Box>
-      <Box
-        sx={{ borderBottom: 1, borderColor: 'divider' }}
-        alignItems={'center'}
-      >
+      <StyledTabsContainer>
         <Tabs
           value={tabNumber}
           onChange={handleTabChange}
           aria-label="champions tabs"
           centered
         >
-          <Tab label="Top Donors" {...a11yProps(0)} />
-          <Tab label="Top Receptionists" {...a11yProps(1)} />
-          <Tab label="Top Hospitals" {...a11yProps(2)} />
+          <Tab label="Donors" {...a11yProps(0)} />
+          <Tab label="Receptionists" {...a11yProps(1)} />
+          <Tab label="Hospitals" {...a11yProps(2)} />
         </Tabs>
-      </Box>
+      </StyledTabsContainer>
       <TabPanel value={tabNumber} index={0}>
         <TopTensTable displayData={topDonors} tableData={tableData} />
       </TabPanel>

@@ -34,4 +34,12 @@ export const DonationFormContainer = styled(Box)(({ theme }) => ({
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(2),
   },
+
+  '& .MuiAlert-root': {
+    marginTop: theme.spacing(3),
+  },
+
+  '& .MuiSelect-select': {
+    maxWidth: 350,
+  },
 }))

@@ -20,6 +20,7 @@ import Box from '@mui/material/Box'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
 import { Alert } from '@mui/material'
+import { LoginFormContainer } from './Login.styles'
 
 function Login() {
   const { setCurrentUser } = useContext(UserContext)
@@ -80,16 +81,8 @@ function Login() {
 
   return (
     <Stack alignItems={'center'}>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          padding: '0',
-          maxWidth: '500px',
-        }}
-      >
-        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+      <LoginFormContainer>
+        <Avatar>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5" gutterBottom>
@@ -107,7 +100,7 @@ function Login() {
           </Link>{' '}
           to contact one of our system managers to register you to the system.
         </Typography>
-        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
+        <Box component="form" onSubmit={handleSubmit}>
           {error && (
             <Alert severity="error" onClose={() => setError('')}>
               {error}
@@ -146,17 +139,11 @@ function Login() {
             control={<Checkbox value="remember" color="secondary" />}
             label="Remember me"
           />
-          <Button
-            color="secondary"
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
+          <Button color="secondary" type="submit" fullWidth variant="contained">
             Login
           </Button>
         </Box>
-      </Box>
+      </LoginFormContainer>
     </Stack>
   )
 }

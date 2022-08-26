@@ -1,6 +1,7 @@
 import { styled, Switch } from '@mui/material'
 
 export const StyledDarkModeSwitch = styled(Switch)(({ theme }) => ({
+  margin: theme.spacing(1),
   width: 62,
   height: 34,
   padding: 7,

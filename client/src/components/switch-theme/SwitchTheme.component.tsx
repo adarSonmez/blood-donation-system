@@ -14,13 +14,12 @@ function SwitchTheme() {
   return (
     <FormGroup>
       <FormControlLabel
-        control={<StyledDarkModeSwitch sx={{ m: 1 }} />}
+        control={<StyledDarkModeSwitch />}
         label={theme.mode === 'light' ? 'Light Mode' : 'Night Mode'}
         onChange={handleChange}
       />
     </FormGroup>
   )
 }
-
 
 export default SwitchTheme
