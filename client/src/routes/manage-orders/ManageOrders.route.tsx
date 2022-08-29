@@ -2,7 +2,7 @@ import { Grid } from '@mui/material'
 import { useContext, useEffect, useState } from 'react'
 import {
   AmountOfBloodTypeResponse,
-  getAllAvailableBloodTypes,
+  getAllBloodTypes,
 } from '../../api/banks.api'
 import {
   getOrdersForAManager,
@@ -26,7 +26,7 @@ function ManageOrders() {
       })
       .catch((err) => console.error(err))
 
-    getAllAvailableBloodTypes()
+    getAllBloodTypes()
       .then((r) => setTypes(r.data))
       .catch((err) => console.error(err))
   }, [user.user_id, updateNum])

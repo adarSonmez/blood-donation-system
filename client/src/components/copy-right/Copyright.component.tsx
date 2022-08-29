@@ -6,9 +6,7 @@ function CopyRight() {
     <CopyrightContainer>
       <Typography variant="body2" align="center">
         {'Copyright © '}
-        <Link href="https://adarsonmez.software/">
-          Adar Sönmez
-        </Link>{' '}
+        <Link href="https://adarsonmez.com/">Adar Sönmez</Link>{' '}
         {new Date().getFullYear()}
       </Typography>
     </CopyrightContainer>

@@ -25,9 +25,9 @@ function ManageAccount() {
   const { user, clearCurrentUser } = useContext(UserContext)
 
   const [checked, setChecked] = useState({
-    password: false,
-    phone: false,
-    address: false,
+    checkboxPassword: false,
+    checkboxPhone: false,
+    checkboxAddress: false,
   })
 
   const [updateForm, setUpdateForm] = useState({
@@ -71,7 +71,13 @@ function ManageAccount() {
     e.preventDefault()
     updateUser({ ...updateForm, e_mail: user.e_mail })
       .then(() => alert('User information has been successfully changed!'))
-      .then(() => setChecked({ password: false, phone: false, address: false }))
+      .then(() =>
+        setChecked({
+          checkboxPassword: false,
+          checkboxPhone: false,
+          checkboxAddress: false,
+        })
+      )
       .catch((err) => console.error(err.message))
   }
 
@@ -104,8 +110,8 @@ function ManageAccount() {
           <FormControlLabel
             control={
               <Checkbox
-                id="checkbox-password"
-                checked={checked.password}
+                id="checkboxPassword"
+                checked={checked.checkboxPassword}
                 onChange={handleCheckedChange}
               />
             }
@@ -121,15 +127,15 @@ function ManageAccount() {
             onChange={handleTextChange}
             required
             type={'password'}
-            disabled={!checked.password}
+            disabled={!checked.checkboxPassword}
           />
         </FormGroup>
         <FormGroup>
           <FormControlLabel
             control={
               <Checkbox
-                id="checkbox-phone"
-                checked={checked.phone}
+                id="checkboxPhone"
+                checked={checked.checkboxPhone}
                 onChange={handleCheckedChange}
               />
             }
@@ -145,15 +151,15 @@ function ManageAccount() {
             onChange={handleTextChange}
             required
             type={'tel'}
-            disabled={!checked.phone}
+            disabled={!checked.checkboxPhone}
           />
         </FormGroup>
         <FormGroup>
           <FormControlLabel
             control={
               <Checkbox
-                id="checkbox-address"
-                checked={checked.address}
+                id="checkboxAddress"
+                checked={checked.checkboxAddress}
                 onChange={handleCheckedChange}
               />
             }
@@ -170,7 +176,7 @@ function ManageAccount() {
             required
             multiline
             rows={4}
-            disabled={!checked.address}
+            disabled={!checked.checkboxAddress}
           />
         </FormGroup>
 

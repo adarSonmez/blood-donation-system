@@ -20,7 +20,7 @@ type ManageOrdersTableProps = {
 }
 
 type ChangeOrderStateParams = {
-  order_id: number
+  order_id: string
   amount: number
   blood_type: BloodType
 }
@@ -37,18 +37,14 @@ function ManageOrdersTable(props: ManageOrdersTableProps) {
     if (stock.num_of_blood < amount)
       alert('There is not enough blood available!')
     else {
-      updateOrderState({ order_id, state: 'approved', blood_type, amount })
+      updateOrderState({ order_id, state: 'approved' })
         .then(() => updateTables())
         .catch((err) => console.error(err))
     }
   }
 
-  const rejectOrder = ({
-    order_id,
-    amount,
-    blood_type,
-  }: ChangeOrderStateParams) => {
-    updateOrderState({ order_id, state: 'rejected', blood_type, amount })
+  const rejectOrder = ({ order_id }: ChangeOrderStateParams) => {
+    updateOrderState({ order_id, state: 'rejected' })
       .then(() => updateTables())
       .catch((err) => console.error(err))
   }

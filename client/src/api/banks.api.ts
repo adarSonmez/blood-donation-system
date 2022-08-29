@@ -4,7 +4,7 @@ import { BloodType } from '../utils/common.types'
 const url = 'http://localhost:8000/banks'
 
 export type Bank = {
-  bank_id: number
+  bank_id: string
   manager: string
   address: string
   capacity: number
@@ -32,11 +32,5 @@ export const getNumOfTotalAvailableBlood = () =>
 export const getTotalDonatedBlood = () =>
   axios.get<TotalDonatedResponse>(url + '/total-donated-blood')
 
-export const getLeastAvailableBloodType = () =>
-  axios.get<AmountOfBloodTypeResponse>(url + '/least-available-blood-type')
-
-export const getMostAvailableBloodType = () =>
-  axios.get<AmountOfBloodTypeResponse>(url + '/most-available-blood-type')
-
-export const getAllAvailableBloodTypes = () =>
-  axios.get<AmountOfBloodTypeResponse[]>(url + '/all-available-blood-types')
+export const getAllBloodTypes = () =>
+  axios.get<AmountOfBloodTypeResponse[]>(url + '/all-blood-types')

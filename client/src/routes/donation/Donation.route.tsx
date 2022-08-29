@@ -25,20 +25,28 @@ import { DonationFormContainer, SearchSSNContainer } from './Donation.styles'
 function Donation() {
   const navigate = useNavigate()
   const { user } = useContext(UserContext)
-  const INITIAL_MESSAGE: Message = {
-    severity: 'success',
-    content: '',
-  }
-  const [message, setMessage] = useState(INITIAL_MESSAGE)
-
   const [locked, setLocked] = useState(true)
   const [searched, setSearched] = useState(false)
-  const [banks, setBanks] = useState<Bank[]>([])
-  const [form1, setFrom1] = useState({ donor_id: undefined })
+
+  const [banks, setBanks] = useState<Bank[]>([
+    {
+      bank_id: '',
+      manager: '',
+      address: '',
+      capacity: 0,
+      size: 0,
+    },
+  ])
+  const [message, setMessage] = useState<Message>({
+    severity: 'success',
+    content: '',
+  })
+
+  const [form1, setFrom1] = useState({ donor_id: '' })
   const [form2, setForm2] = useState({
     name: '',
     blood_type: '0-' as BloodType,
-    bank_id: 0,
+    bank_id: '',
   })
 
   useEffect(() => {
@@ -50,7 +58,7 @@ function Donation() {
   }, [])
 
   const handleChange = (
-    event: ChangeEvent | SelectChangeEvent<number | BloodType>,
+    event: ChangeEvent | SelectChangeEvent<string | BloodType>,
     formNo: number
   ) => {
     const element = event.target as HTMLInputElement
@@ -67,13 +75,13 @@ function Donation() {
     event.preventDefault()
     setSearched(true)
 
-    checkDonor(form1.donor_id || 0).then((r) => {
+    checkDonor(form1.donor_id || '').then((r) => {
       if (!r.data.donor) {
         setMessage({
           severity: 'info',
           content: `Donor is not registered. Please enter donor information.`,
         })
-        setForm2({ name: '', blood_type: '0-', bank_id: 0 })
+        setForm2({ name: '', blood_type: '0-', bank_id: '' })
         setLocked(false)
       } else {
         setLocked(true)
@@ -98,7 +106,7 @@ function Donation() {
     else
       postDonation({
         ...form2,
-        donor_id: form1.donor_id || 0,
+        donor_id: form1.donor_id,
         recep_id: user.user_id,
       })
         .then(() => {
@@ -144,7 +152,12 @@ function Donation() {
         {message.content && (
           <Alert
             severity={message.severity}
-            onClose={() => setMessage(INITIAL_MESSAGE)}
+            onClose={() =>
+              setMessage({
+                severity: 'success',
+                content: '',
+              })
+            }
           >
             {message.content}
           </Alert>
@@ -208,7 +221,7 @@ function Donation() {
               onChange={(e) => handleChange(e, 2)}
               required
               label="Bank"
-              value={banks.length > 0 ? form2.bank_id : 0}
+              value={form2.bank_id}
             >
               {banks.map((bank) => (
                 <MenuItem key={bank.bank_id} value={bank.bank_id}>
@@ -217,6 +230,7 @@ function Donation() {
               ))}
             </Select>
           </FormControl>
+
           <Button type="submit" fullWidth variant="contained">
             Donate Blood
           </Button>

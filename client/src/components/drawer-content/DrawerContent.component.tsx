@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { UserContext } from '../../contexts/user.context'
 
 import { Box } from '@mui/system'
 import Divider from '@mui/material/Divider'
@@ -12,7 +13,6 @@ import Toolbar from '@mui/material/Toolbar'
 
 import userActions, { SideMenuItem } from '../../data/userActions'
 import SwitchTheme from '../switch-theme/SwitchTheme.component'
-import { UserContext } from '../../contexts/user.context'
 import CopyRight from '../copy-right/Copyright.component'
 import InfoForTestLogin from '../not-logged-in-message/NotLoggedInMessage.component'
 

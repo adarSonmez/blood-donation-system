@@ -13,7 +13,7 @@ import { StyledTabsContainer } from './Champions.styles'
 
 function Champions() {
   const [tabNumber, setTabNumber] = useState(0)
-  const [tableData, setTableData] = useState([{ id: 0, name: '', amount: 0 }])
+  const [tableData, setTableData] = useState([{ id: '', name: '', amount: 0 }])
   const [topDonors, setTopDonors] = useState({
     title: '',
     unit: '',

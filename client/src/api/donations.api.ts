@@ -4,14 +4,14 @@ import { BloodType, ResponseMessage } from '../utils/common.types'
 const url = 'http://localhost:8000/donations'
 
 export type Donor = {
-  donor_id: number
+  donor_id: string
   name: string
   blood_type: BloodType
 }
 
 export interface DonationRequest extends Donor {
-  recep_id: number
-  bank_id: number
+  recep_id: string
+  bank_id: string
 }
 
 export type CheckDonorResponse = {
@@ -22,5 +22,5 @@ export type CheckDonorResponse = {
 export const postDonation = (data: DonationRequest) =>
   axios.post<ResponseMessage>(url, data)
 
-export const checkDonor = (id: number) =>
+export const checkDonor = (id: string) =>
   axios.get<CheckDonorResponse>(url + `/check/?donor_id=${id}`)

@@ -11,8 +11,8 @@ import StarIcon from '@mui/icons-material/Star'
 import { useState, useEffect, useContext } from 'react'
 
 import {
-  getLeastAvailableBloodType,
-  getMostAvailableBloodType,
+  AmountOfBloodTypeResponse,
+  getAllBloodTypes,
   getNumOfTotalAvailableBlood,
   getTotalDonatedBlood,
 } from '../../api/banks.api'
@@ -28,14 +28,9 @@ function Homepage() {
 
   const [totalBlood, setTotalBlood] = useState(1)
   const [numOfAvailable, setNumOfAvailable] = useState(1)
-  const [mostAvailable, setMostAvailable] = useState({
-    num_of_blood: 1,
-    blood_type: '0+',
-  })
-  const [leastAvailable, setLeastAvailable] = useState({
-    num_of_blood: 1,
-    blood_type: '0-',
-  })
+  const [allBloodTypes, setAllBloodTypes] = useState<
+    AmountOfBloodTypeResponse[]
+  >([])
   const [topDonor, setTopDonor] = useState({
     name: 'Loading...',
     num_of_blood: 1,
@@ -62,12 +57,8 @@ function Homepage() {
       .then((r) => setNumOfAvailable(r.data.total_available))
       .catch((err) => console.error(err.message))
 
-    getMostAvailableBloodType()
-      .then((r) => setMostAvailable(r.data))
-      .catch((err) => console.error(err.message))
-
-    getLeastAvailableBloodType()
-      .then((r) => setLeastAvailable(r.data))
+    getAllBloodTypes()
+      .then((r) => setAllBloodTypes(r.data))
       .catch((err) => console.error(err.message))
 
     getTopTenDonors()
@@ -88,14 +79,14 @@ function Homepage() {
       {totalBlood / 2} liters of blood have been donated so far.
     </ListItemText>,
     <ListItemText>
-      The most available blood type is {mostAvailable.blood_type} with{' '}
-      {((mostAvailable.num_of_blood / numOfAvailable) * 100).toFixed(2)}
-      %. ({mostAvailable.num_of_blood / 2} litters)
+      The most available blood type is {allBloodTypes[0]?.blood_type} with{' '}
+      {((allBloodTypes[0]?.num_of_blood / numOfAvailable) * 100).toFixed(2)}
+      %. ({allBloodTypes[0]?.num_of_blood / 2} litters)
     </ListItemText>,
     <ListItemText>
-      The least available blood type is {leastAvailable.blood_type} with{' '}
-      {((leastAvailable.num_of_blood / numOfAvailable) * 100).toFixed(2)}
-      %. ({leastAvailable.num_of_blood / 2} litters)
+      The least available blood type is {allBloodTypes[7]?.blood_type} with{' '}
+      {((allBloodTypes[7]?.num_of_blood / numOfAvailable) * 100).toFixed(2)}
+      %. ({allBloodTypes[7]?.num_of_blood / 2} litters)
     </ListItemText>,
     <ListItemText>
       The donor who donated the most blood so far is {topDonor?.name} with{' '}

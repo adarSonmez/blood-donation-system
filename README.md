@@ -1,33 +1,39 @@
-# BLOOD DONATION SYSTEM
+#  BLOOD DONATION SYSTEM 
 
-__NOTE 1__: Check out the report.pdf file to see all the stages we went through while developing our app.
+## ER Diagram
+![er-diagram](/client/src/assets/plan/er.png)
+## User Types
+The types of users who can log in to our system and what they can do are listed below.
 
-__NOTE 2__: This application was developed with node.js v16.0.0.
-If you do not have this version or higher versions of node.js on your computer, please download it. 
-I may not work in lower node versions.
+### 🖥️ Receptionist
+* Receptionists can register new donors to the system and register the information of donated blood to the system.
 
+### 🏥 Hospitals
+* Hospitals can order blood. And these orders are randomly distributed to the system users to be managed.
 
-## How to Run?
+### 🧑🏻‍💼 System Managers
+* System managers are responsible for managing hospitals' blood orders. (approve or reject)
+* For security reasons, only system managers can register system users (receptionists, hospitals, system managers).
 
-1. First, run the create_db.sql file in your MySQL engine to create the required database on your local host and edit the database information in the .env file in the server folder.
+## Screenshots
 
-2. After making sure your database is up and running, open your terminal in the "application" directory.
+### 🟡 Logged Out Menus
+![homepage](/client/src/assets/screenshoots/home.jpeg)
+![champions](/client/src/assets/screenshoots/tops.jpeg)
+![how-to-donate](/client/src/assets/screenshoots/locs.jpeg)
+![login](/client/src/assets/screenshoots/login.jpeg)
 
-3. Then run the following commands in order to run the node.js server.
+### 🟡 Logged In Common
+![manage-account](/client/src/assets/screenshoots/man_acc.jpeg)
+### 🟡 Logged In as a Receptionist
+![donate](/client/src/assets/screenshoots/donate.jpeg)
 
-```
-cd server
-npm i
-npm start
-```
+### 🟡 Logged In as a Hospital
+![order-blood](/client/src/assets/screenshoots/order.jpeg)
 
-4. To run the React application, open a new terminal in the "application" directory and run the following commands in the following order.
+### 🟡 Logged In as a System Manager
+![register-user](/client/src/assets/screenshoots/reg.jpeg)
+![manage-orders](/client/src/assets/screenshoots/man_or.jpeg)
 
-```
-cd server
-npm i
-npm start
-```
-5. That's it! To open the application, enter the address below in your browser.
-
-http://localhost:3000/
+### 🌚 Night Mode
+![dark-mode](/client/src/assets/screenshoots/dark.jpeg)

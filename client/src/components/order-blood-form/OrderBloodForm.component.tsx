@@ -8,11 +8,11 @@ import {
   TextField,
   Typography,
 } from '@mui/material'
+import bloodTypes from '../../data/bloodTypes'
 import { ChangeEvent, FormEvent, useContext, useState } from 'react'
 import { orderBlood, OrderBloodRequest } from '../../api/orders.api'
 import { getRandomManager } from '../../api/users.api'
 import { UserContext } from '../../contexts/user.context'
-import bloodTypes from '../../data/bloodTypes'
 import { BloodType } from '../../utils/common.types'
 import { StyledOrderForm } from './OrderBloodForm.styles'
 
@@ -22,8 +22,8 @@ function OrderBloodForm({ updateOrders }: { updateOrders: () => void }) {
   const [orderForm, setOrderForm] = useState<OrderBloodRequest>({
     blood_type: '0-' as BloodType,
     amount: 1,
-    hospital_id: 0,
-    man_id: 0,
+    hospital_id: '',
+    man_id: '',
   })
 
   const handleChange = (event: ChangeEvent | SelectChangeEvent<BloodType>) => {
@@ -50,8 +50,6 @@ function OrderBloodForm({ updateOrders }: { updateOrders: () => void }) {
 
   return (
     <StyledOrderForm component="form">
-      {/**TODO: pagination*/}
-
       <Typography variant="h5" gutterBottom component={'h2'}>
         Order Blood
       </Typography>

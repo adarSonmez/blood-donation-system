@@ -9,7 +9,7 @@ import {
 import { StyledTableContainer } from './TopTensTable.styles'
 
 type TableData = {
-  id: number
+  id: string
   name: string
   amount: number
 }

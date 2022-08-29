@@ -6,7 +6,7 @@ const url = 'http://localhost:8000/users'
 export type SystemUserType = 'receptionist' | 'hospital' | 'system_manager'
 
 export type SystemUser = {
-  user_id: number
+  user_id: string
   full_name: string
   e_mail: string
   phone: string
@@ -16,7 +16,7 @@ export type SystemUser = {
 }
 
 export type RandomManager = {
-  user_id: number
+  user_id: string
   e_mail: string
 }
 
@@ -69,7 +69,7 @@ export const getUserByEmail = (email: string) =>
 export const updateUser = (data: UpdateUserRequest) =>
   axios.put<ResponseMessage>(url, data)
 
-export const deleteUserById = (id: number) =>
+export const deleteUserById = (id: string) =>
   axios.delete<ResponseMessage>(url + `?user_id=${id}`)
 
 export const getRandomManager = () =>

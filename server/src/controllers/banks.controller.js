@@ -30,27 +30,7 @@ function getNumAvailableBlood(req, res) {
   })
 }
 
-function getLeastAvailableBloodType(req, res) {
-  const sql = Bank.selectAvailableBloodTypes
-
-  db.query(sql, (err, data) => {
-    if (err) internalServerError(res, err)
-    data = completeMissingBloodTypes(data)
-    res.json(data[7])
-  })
-}
-
-function getMostAvailableBloodType(req, res) {
-  const sql = Bank.selectAvailableBloodTypes
-
-  db.query(sql, (err, data) => {
-    if (err) internalServerError(res, err)
-    data = completeMissingBloodTypes(data)
-    res.json(data[0])
-  })
-}
-
-function getAvailableBloodTypes(req, res) {
+function getAllBloodTypes(req, res) {
   const sql = Bank.selectAvailableBloodTypes
 
   db.query(sql, (err, data) => {
@@ -64,7 +44,5 @@ module.exports = {
   getBanks,
   getTotalDonatedBlood,
   getNumAvailableBlood,
-  getLeastAvailableBloodType,
-  getMostAvailableBloodType,
-  getAvailableBloodTypes,
+  getAllBloodTypes,
 }

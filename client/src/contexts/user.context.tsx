@@ -7,7 +7,7 @@ export type UserAction = {
 }
 
 const INITIAL_USER: SystemUser = {
-  user_id: 0,
+  user_id: '',
   full_name: '',
   e_mail: '',
   phone: '',
