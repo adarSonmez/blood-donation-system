@@ -29,6 +29,6 @@ const Top = {
     ORDER BY num_of_blood DESC
     LIMIT 10
   `,
-};
+}
 
-module.exports = Top;
+module.exports = Top

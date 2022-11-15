@@ -8,7 +8,8 @@ function login(req, res) {
   const sql = User.selectUserByEmail
 
   db.query(sql, [e_mail], (err, data) => {
-    if (err) internalServerError(res, err)
+    if (err)  return res.json({ error: true, success: false, message: err.message })
+(res, err)
 
     const user = data[0]
 
@@ -36,7 +37,8 @@ function register(req, res) {
   const selectUser = User.selectUserByEmail
 
   db.query(selectUser, [e_mail], (err, data) => {
-    if (err) internalServerError(res, err)
+    if (err)  return res.json({ error: true, success: false, message: err.message })
+(res, err)
 
     if (data[0])
       return res.json({ success: false, message: 'User already registered!' })
@@ -47,7 +49,8 @@ function register(req, res) {
         regUser,
         [full_name, e_mail, password, phone, address, user_type],
         (err, data) => {
-          if (err) internalServerError(res, err)
+          if (err)  return res.json({ error: true, success: false, message: err.message })
+(res, err)
 
           res.json({ success: true, message: 'Successfully registered!' })
         }
@@ -77,7 +80,8 @@ function getRandomManager(req, res) {
   const sql = User.selectRandomManager
 
   db.query(sql, (err, data) => {
-    if (err) internalServerError(res, err)
+    if (err)  return res.json({ error: true, success: false, message: err.message })
+(res, err)
 
     res.json(data[0])
   })
@@ -91,7 +95,8 @@ function getUserByEmail(req, res) {
     return res.json({ success: false, message: 'Email is not specified' })
 
   db.query(sql, [e_mail], (err, data) => {
-    if (err) internalServerError(res, err)
+    if (err)  return res.json({ error: true, success: false, message: err.message })
+(res, err)
 
     res.json(data[0])
   })
@@ -102,7 +107,8 @@ function updateUser(req, res) {
   const { password, phone, address, e_mail } = req.body
 
   db.query(sql, [password, phone, address, e_mail], (err, data) => {
-    if (err) internalServerError(res, err)
+    if (err)  return res.json({ error: true, success: false, message: err.message })
+(res, err)
 
     res.json({ success: true, message: 'User updated!' })
   })
@@ -113,7 +119,8 @@ function deleteUser(req, res) {
   const { user_id } = req.query
 
   db.query(sql, [user_id], (err, data) => {
-    if (err) internalServerError(res, err)
+    if (err)  return res.json({ error: true, success: false, message: err.message })
+(res, err)
 
     res.json({ success: true, message: 'User deleted!' })
   })

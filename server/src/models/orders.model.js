@@ -1,4 +1,8 @@
 const Order = {
+  selectOrderByOrderId: `
+    SELECT * FROM orders WHERE order_id = (?)
+  `,
+
   insertOrder: `
     INSERT INTO orders
     (blood_type, amount, hospital_id, man_id)
@@ -36,6 +40,6 @@ const Order = {
     ORDER BY blood.donated_date
     LIMIT ?
   `,
-};
+}
 
-module.exports = Order;
+module.exports = Order

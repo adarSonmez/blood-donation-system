@@ -27,6 +27,6 @@ const Bank = {
     GROUP BY blood_type
     ORDER BY num_of_blood DESC
   `,
-};
+}
 
-module.exports = Bank;
+module.exports = Bank

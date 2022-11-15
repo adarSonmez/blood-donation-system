@@ -25,6 +25,6 @@ const User = {
     DELETE FROM sys_user 
     WHERE user_id = ?
   `,
-};
+}
 
-module.exports = User;
+module.exports = User

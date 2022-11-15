@@ -6,8 +6,7 @@ function checkDonorId(req, res) {
   const sql = Donation.selectDonor
 
   db.query(sql, [donor_id], (err, data) => {
-    if (err) internalServerError(res, err)
-
+    if (err) return res.json({ error: true, success: false, message: err.message })
     if (!data[0]) return res.json({ registered: false, donor: null })
 
     res.json({ registered: true, donor: data[0] })
@@ -22,16 +21,16 @@ function donation(req, res) {
   const insBlood = Donation.insertBlood
 
   db.query(searchDonor, [donor_id], (err, data) => {
-    if (err) internalServerError(res, err)
+    if (err) return res.json({ error: true, success: false, message: err.message })
     if (!data[0])
       db.query(
         insDonor,
         [donor_id, name, blood_type, recep_id],
         (err, data) => {
-          if (err) internalServerError(res, err)
+          if (err) return res.json({ error: true, success: false, message: err.message })
 
           db.query(insBlood, [donor_id, bank_id], (err, data) => {
-            if (err) internalServerError(res, err)
+            if (err) return res.json({ error: true, success: false, message: err.message })
 
             res.json({ success: true, message: 'Successfully donated!' })
           })
@@ -39,7 +38,7 @@ function donation(req, res) {
       )
     else
       db.query(insBlood, [donor_id, bank_id], (err, data) => {
-        if (err) internalServerError(res, err)
+        if (err) return res.json({ error: true, success: false, message: err.message })
 
         res.json({ success: true, message: 'Successfully donated!' })
       })
